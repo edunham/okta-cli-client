@@ -1,0 +1,1 @@
+run `go build -o push push.go` to compile the minimal push script then `./push` to push the user data from userdata.json to the org configured in `.okta/okta.yaml` or whatever you have configured for the cli itself

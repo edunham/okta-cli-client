@@ -1,0 +1,70 @@
+{
+ "_links": {
+  "deactivate": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/lifecycle/deactivate",
+   "method": "POST"
+  },
+  "expirePassword": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/lifecycle/expire_password",
+   "method": "POST"
+  },
+  "forgotPassword": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/credentials/forgot_password",
+   "method": "POST"
+  },
+  "resetFactors": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/lifecycle/reset_factors",
+   "method": "POST"
+  },
+  "resetPassword": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/lifecycle/reset_password",
+   "method": "POST"
+  },
+  "schema": {
+   "href": "https://dev-00000000.okta.com/api/v1/meta/schemas/user/osc9m2wvwuQktV8605d7"
+  },
+  "self": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7"
+  },
+  "suspend": {
+   "href": "https://dev-00000000.okta.com/api/v1/users/00u9m2ww1xFbxFXnC5d7/lifecycle/suspend",
+   "method": "POST"
+  },
+  "type": {
+   "href": "https://dev-00000000.okta.com/api/v1/meta/types/user/oty9m2wvwuQktV8605d7"
+  }
+ },
+ "activated": null,
+ "created": "2023-05-18T14:57:23.000Z",
+ "credentials": {
+  "emails": [
+   {
+    "status": "VERIFIED",
+    "type": "PRIMARY",
+    "value": "github@testuser.net"
+   }
+  ],
+  "password": {},
+  "provider": {
+   "name": "OKTA",
+   "type": "OKTA"
+  }
+ },
+ "id": "00u9m2ww1xFbxFXnC5d7",
+ "lastLogin": "2024-12-03T16:38:25.000Z",
+ "lastUpdated": "2023-05-18T18:35:28.000Z",
+ "passwordChanged": "2023-05-18T18:35:28.000Z",
+ "profile": {
+  "email": "github@testuser.net",
+  "firstName": "test",
+  "lastName": "user",
+  "login": "testuser@github.oktaidp",
+  "mobilePhone": null,
+  "secondEmail": null
+ },
+ "status": "RECOVERY",
+ "statusChanged": "2023-05-18T18:35:26.000Z",
+ "type": {
+  "id": "oty9m2wvwuQktV8605d7"
+ }
+}
