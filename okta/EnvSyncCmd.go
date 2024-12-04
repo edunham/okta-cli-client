@@ -74,21 +74,16 @@ func NewEnvSyncPullUserCmd() *cobra.Command {
 			if homePath == "" {
 				homePath = os.Getenv("HOME") // Used in Unix-like systems
 			}
-			//fmt.Println("Home Directory:", homePath)
 
 			oktaDomain := apiClient.GetConfig().Host // Adjust this line to get the Okta domain correctly
 			filePath := fmt.Sprintf("%s/.okta/%s/users/%s.json", homePath, oktaDomain, user.Profile.Login)
 			cmd.Println(filePath)
-			// DO NOT LEAVE THIS  HERE LONG TERM
-			// THIS SHOULD MOVE TO WHEREVER WE CALL THE FUNCTION FROM A BUNCH
 			dirPath := filepath.Dir(filePath)
 			err = os.MkdirAll(dirPath, 0755)
 			if err != nil {
 				return err
 			}
 			//END OF PART THAT NEEDS TO MOVE OUT
-
-			// Write to file
 			err = os.WriteFile(filePath, d, 0644)
 			if err != nil {
 				return err
@@ -163,4 +158,61 @@ func NewEnvSyncPushUserCmd() *cobra.Command {
 func init() {
 	EnvSyncPushUserCmd := NewEnvSyncPushUserCmd()
 	EnvSyncCmd.AddCommand(EnvSyncPushUserCmd)
+}
+
+type SyncUser struct {
+    ID string `json:"id"`
+}
+
+func ProcessUserIDs(v []byte) error {
+    var users []SyncUser
+    err := json.Unmarshal(v, &users)
+    if err != nil {
+        return err
+    }
+
+    cmd := NewEnvSyncPullUserCmd()
+    for _, user := range users {
+        if err := cmd.Flags().Set("userId", user.ID); err != nil {
+            return fmt.Errorf("failed to set userId flag for %s: %w", user.ID, err)
+        }
+        
+        if err := cmd.RunE(cmd, []string{}); err != nil {
+            return fmt.Errorf("failed to process user %s: %w", user.ID, err)
+        }
+    }
+    return nil
+}
+func NewPullAllUsersCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "pullAllUsers",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.UserAPI.ListUsers(apiClient.GetConfig().Context)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			ProcessUserIDs(d)
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func init() {
+	PullAllUsersCmd := NewPullAllUsersCmd()
+	EnvSyncCmd.AddCommand(PullAllUsersCmd)
 }
