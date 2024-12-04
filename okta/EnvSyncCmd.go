@@ -108,6 +108,7 @@ func init() {
 	EnvSyncPullUserCmd := NewEnvSyncPullUserCmd()
 	EnvSyncCmd.AddCommand(EnvSyncPullUserCmd)
 }
+
 func NewEnvSyncPushUserCmd() *cobra.Command {
 	createCmd := &cobra.Command{
 		Use: "pushUser",

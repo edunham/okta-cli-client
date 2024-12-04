@@ -1,4 +1,4 @@
-$ okta-cli-client envsync pulluser -userId abc123
+$ okta-cli-client envsync pullUser --userId abc123
 
 # user is created in ~/.okta/orgid/user@host.json
 
