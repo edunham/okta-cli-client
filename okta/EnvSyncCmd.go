@@ -305,10 +305,23 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 		Use: "pushGroup",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
-			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
+			// Read and parse the userdata file
+			groupBackupData, err := os.ReadFile(SyncGroupdata)
 
-			if SyncGroupdata != "" {
-				req = req.Data(SyncGroupdata)
+			if err != nil {
+				return fmt.Errorf("error reading group data file: %w", err)
+			}
+
+			var group Group
+
+			if err = json.Unmarshal(groupBackupData, &group); err != nil {
+				return fmt.Errorf("error parsing group data file: %w", err)
+			}
+
+			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
+			createData := string(groupBackupData)
+			if createData != "" {
+				req = req.Data(createData)
 			}
 
 			resp, err := req.Execute()
@@ -321,12 +334,17 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 				}
 				return err
 			}
-			d, err := io.ReadAll(resp.Body)
+
+			_, err = io.ReadAll(resp.Body)
+
 			if err != nil {
 				return err
 			}
+
+			fmt.Println("Group restored successfully:", group.Profile.Name)
+
 			//FIXME
-			utils.PrettyPrintByte(d)
+			//utils.PrettyPrintByte(d)
 			// cmd.Println(string(d))
 			return nil
 		},
