@@ -42,6 +42,35 @@ type User struct {
 	} `json:"profile"`
 }
 
+func NewEnvSyncCleanCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "clean",
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			homePath := os.Getenv("USERPROFILE") // Default for Windows
+			if homePath == "" {
+				homePath = os.Getenv("HOME") // Used in Unix-like systems
+			}
+
+			oktaDomain := apiClient.GetConfig().Host
+			dirPath := fmt.Sprintf("%s/.okta/%s/", homePath, oktaDomain)
+			err := os.RemoveAll(dirPath)
+			if err != nil {
+				return err
+			}
+			return nil
+		},
+	}
+	return cmd
+}
+
+func init() {
+	EnvSyncCleanCmd := NewEnvSyncCleanCmd()
+	EnvSyncCmd.AddCommand(EnvSyncCleanCmd)
+}
+
+
+
 func NewEnvSyncPullUserCmd() *cobra.Command {
 	var GetUseruserId string
 
@@ -274,7 +303,7 @@ var SyncGroupdata string
 
 func NewEnvSyncPushGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "create",
+		Use: "pushGroup",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
@@ -412,18 +441,7 @@ func NewPullAllGroupsCmd() *cobra.Command {
 	return cmd
 }
 
-// func ProcessGroups(v []byte) error {
-// 	var groups []Group
-// 	err := json.Unmarshal(v, &groups)
-// 	if err != nil {
-// 		return err
-// 	}
 
-// 	for _, group := range groups {
-
-// 	}
-// 	return nil
-// }
 
 func backupSchemaInFile(filePath string, jsonData []byte) error {
 	// Create directory structure if it doesn't exist
@@ -589,7 +607,7 @@ var SyncPolicydata string
 
 func NewSyncPolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "create",
+		Use: "pushPolicy",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.CreatePolicy(apiClient.GetConfig().Context)
@@ -631,7 +649,7 @@ func init() {
 
 func NewGetAllPoliciesCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "listPolicies",
+		Use: "pullAllPolicies",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.ListPolicies(apiClient.GetConfig().Context)
@@ -668,7 +686,7 @@ var GetSyncpolicyId string
 
 func NewGetSyncPolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "get",
+		Use: "pullPolicy",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.GetPolicy(apiClient.GetConfig().Context, GetSyncpolicyId)
@@ -714,7 +732,7 @@ var (
 
 func NewSyncResourceToPolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "mapResourceTo",
+		Use: "pushResourcePolicy",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.MapResourceToPolicy(apiClient.GetConfig().Context, SyncResourceToPolicypolicyId)
@@ -761,7 +779,7 @@ var SyncPolicyMappingspolicyId string
 
 func NewSyncPolicyMappingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "listMappings",
+		Use: "pullAllMappings",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.ListPolicyMappings(apiClient.GetConfig().Context, SyncPolicyMappingspolicyId)
@@ -805,7 +823,7 @@ var (
 
 func NewGetSyncPolicyMappingCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "getMapping",
+		Use: "pullMapping",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.GetPolicyMapping(apiClient.GetConfig().Context, GetSyncPolicyMappingpolicyId, GetSyncPolicyMappingmappingId)
@@ -854,7 +872,7 @@ var (
 
 func NewSyncPolicyRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "createRule",
+		Use: "pushRule",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.CreatePolicyRule(apiClient.GetConfig().Context, SyncPolicyRulepolicyId)
@@ -901,7 +919,7 @@ var GetAllPolicyRulespolicyId string
 
 func NewGetAllPolicyRulesCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "listRules",
+		Use: "pullAllRules",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.ListPolicyRules(apiClient.GetConfig().Context, GetAllPolicyRulespolicyId)
@@ -945,7 +963,7 @@ var (
 
 func NewPullPolicyRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "getRule",
+		Use: "pullRule",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.PolicyAPI.GetPolicyRule(apiClient.GetConfig().Context, PullPolicyRulepolicyId, PullPolicyRuleruleId)
