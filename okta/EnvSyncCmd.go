@@ -216,3 +216,178 @@ func init() {
 	PullAllUsersCmd := NewPullAllUsersCmd()
 	EnvSyncCmd.AddCommand(PullAllUsersCmd)
 }
+
+var PushFromDir string
+
+func NewPushAllUsersCmd() *cobra.Command {
+    cmd := &cobra.Command{
+        Use: "pushAllUsers",
+        RunE: func(cmd *cobra.Command, args []string) error {
+            // Construct the full path to the users directory
+            usersDir := filepath.Join(PushFromDir, "users")
+            
+            // Read all files in the users directory
+            files, err := os.ReadDir(usersDir)
+            if err != nil {
+                return fmt.Errorf("failed to read users directory: %w", err)
+            }
+
+            // Get the single-user push command
+            pushUserCmd := NewEnvSyncPushUserCmd()
+            
+            // Process each .json file
+            for _, file := range files {
+                if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
+                    fullPath := filepath.Join(usersDir, file.Name())
+                    
+                    // Set the UserdataPath flag for this file
+                    if err := pushUserCmd.Flags().Set("UserdataPath", fullPath); err != nil {
+                        return fmt.Errorf("failed to set UserdataPath for %s: %w", file.Name(), err)
+                    }
+                    
+                    // Execute the push command for this user
+                    if err := pushUserCmd.RunE(pushUserCmd, []string{}); err != nil {
+                        return fmt.Errorf("failed to push user %s: %w", file.Name(), err)
+                    }
+                }
+            }
+            
+            return nil
+        },
+    }
+
+    cmd.Flags().StringVarP(&PushFromDir, "dir", "", "", "")
+    cmd.MarkFlagRequired("dir")
+
+    return cmd
+}
+
+func init() {
+	PushAllUsersCmd := NewPushAllUsersCmd()
+	EnvSyncCmd.AddCommand(PushAllUsersCmd)
+}
+
+
+
+var SyncGroupdata string
+
+func NewEnvSyncPushGroupCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "create",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
+
+			if SyncGroupdata != "" {
+				req = req.Data(SyncGroupdata)
+			}
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			//FIXME 
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncGroupdata, "data", "", "", "")
+	cmd.MarkFlagRequired("data")
+
+	return cmd
+}
+
+func init() {
+	EnvSyncPushGroupCmd := NewEnvSyncPushGroupCmd()
+	EnvSyncCmd.AddCommand(EnvSyncPushGroupCmd)
+}
+
+var SyncGroupgroupId string
+
+func NewEnvSyncPullGroupCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "get",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.GroupAPI.GetGroup(apiClient.GetConfig().Context, SyncGroupgroupId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			//FIXME 
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncGroupgroupId, "groupId", "", "", "")
+	cmd.MarkFlagRequired("groupId")
+
+	return cmd
+}
+
+func init() {
+	EnvSyncPullGroupCmd := NewEnvSyncPullGroupCmd()
+	EnvSyncCmd.AddCommand(EnvSyncPullGroupCmd)
+}
+
+
+func NewPullAllGroupsCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "lists",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.GroupAPI.ListGroups(apiClient.GetConfig().Context)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			//FIXME
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func init() {
+	PullAllGroupsCmd := NewPullAllGroupsCmd()
+	EnvSyncCmd.AddCommand(PullAllGroupsCmd)
+}
