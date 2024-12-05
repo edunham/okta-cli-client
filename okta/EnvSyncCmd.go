@@ -17,6 +17,15 @@ import (
 /* COMMON functions                                            */
 /***************************************************************/
 
+// Define ANSI color codes
+const (
+	Reset  = "\033[0m"
+	Red    = "\033[31m"
+	Green  = "\033[32m"
+	Yellow = "\033[33m"
+	Blue   = "\033[34m"
+)
+
 func backupSchemaInFile(filePath string, jsonData []byte) error {
 	// Create directory structure if it doesn't exist
 	dirPath := filepath.Dir(filePath)
@@ -60,6 +69,7 @@ func init() {
 /* DEMO commands                                               */
 /***************************************************************/
 
+// PULL
 var PullSchemas []string
 
 func NewPullCmd() *cobra.Command {
@@ -72,25 +82,25 @@ func NewPullCmd() *cobra.Command {
 			for _, value := range PullSchemas {
 				switch value {
 				case "user":
-					fmt.Println("Pulling users")
+					fmt.Println("[INFO] Pulling users")
 					pullAllUsersCmd := NewPullAllUsersCmd()
 
 					if err := pullAllUsersCmd.RunE(pullAllUsersCmd, []string{}); err != nil {
-						return fmt.Errorf("failed to pull users %w", err)
+						return fmt.Errorf(Red+"[ERROR]"+Reset+"failed to pull users %w", err)
 					} else {
-						fmt.Println("Users backed up successfully")
+						fmt.Println(Green + "[SUCCESS] Users were backed up successfully" + Reset)
 					}
 				case "group":
-					fmt.Println("Pulling groups")
+					fmt.Println("[INFO] Pulling groups")
 					pullAllGroupsCmd := NewPullAllGroupsCmd()
 
 					if err := pullAllGroupsCmd.RunE(pullAllGroupsCmd, []string{}); err != nil {
-						return fmt.Errorf("failed to pull groups %w", err)
+						return fmt.Errorf(Red+"failed to pull groups %w"+Reset, err)
 					} else {
-						fmt.Println("Groups backed up successfully")
+						fmt.Println(Green + "[SUCCESS] Groups were backed up successfully" + Reset)
 					}
 				default:
-					fmt.Println("Unsupported schema:", value)
+					fmt.Println(Red+"[ERROR]"+Reset+"Unsupported schema:", value)
 				}
 			}
 
@@ -108,6 +118,70 @@ func NewPullCmd() *cobra.Command {
 func init() {
 	PullCmd := NewPullCmd()
 	EnvSyncCmd.AddCommand(PullCmd)
+}
+
+// PUSH
+var PushSchemas []string
+var BackupFolderPath string
+
+func NewPushCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "push",
+		Short: "A command that pushes your Okta resources data from your local system to your Okta org.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			// Iterate over the list of values and perform a switch
+			for _, value := range PushSchemas {
+				switch value {
+				case "user":
+					fmt.Println("[INFO] Pushing users")
+					pushAllUsersCmd := NewPushAllUsersCmd()
+
+					// Set the dir flag for this file
+					if err := pushAllUsersCmd.Flags().Set("dir", BackupFolderPath); err != nil {
+						return fmt.Errorf(Red+"[ERROR]"+Reset+"failed to set dir for %s: %w", BackupFolderPath, err)
+					}
+
+					if err := pushAllUsersCmd.RunE(pushAllUsersCmd, []string{}); err != nil {
+						return fmt.Errorf(Red+"[ERROR]"+Reset+"failed to push users %w", err)
+					} else {
+						fmt.Println(Green + "[SUCCESS] Users were restored successfully" + Reset)
+					}
+				case "group":
+					fmt.Println("[INFO] Pushing groups")
+					pushAllGroupsCmd := NewPushAllGroupsCmd()
+
+					// Set the dir flag for this file
+					if err := pushAllGroupsCmd.Flags().Set("dir", BackupFolderPath); err != nil {
+						return fmt.Errorf(Red+"[ERROR]"+Reset+"failed to set dir for %s: %w", BackupFolderPath, err)
+					}
+
+					if err := pushAllGroupsCmd.RunE(pushAllGroupsCmd, []string{}); err != nil {
+						return fmt.Errorf(Red+"[ERROR]"+Reset+"failed to push groups %w", err)
+					} else {
+						fmt.Println(Green + "[SUCCESS] Groups were restored successfully" + Reset)
+					}
+				default:
+					fmt.Println(Red+"[ERROR]"+Reset+"Unsupported schema:", value)
+				}
+			}
+
+			return nil
+		},
+	}
+
+	// Define the --schemas flag to accept a comma-separated list of strings
+	cmd.Flags().StringSliceVar(&PushSchemas, "schemas", []string{}, "Comma-separated list of schemas")
+	cmd.Flags().StringVarP(&BackupFolderPath, "dir", "", "", "The path to the folder where your backup files are stored")
+	cmd.MarkFlagRequired("schemas")
+	cmd.MarkFlagRequired("dir")
+
+	return cmd
+}
+
+func init() {
+	PushCmd := NewPushCmd()
+	EnvSyncCmd.AddCommand(PushCmd)
 }
 
 /***************************************************************/
@@ -362,8 +436,8 @@ func NewPushAllUsersCmd() *cobra.Command {
 					fullPath := filepath.Join(usersDir, file.Name())
 
 					// Set the UserdataPath flag for this file
-					if err := pushUserCmd.Flags().Set("UserdataPath", fullPath); err != nil {
-						return fmt.Errorf("failed to set UserdataPath for %s: %w", file.Name(), err)
+					if err := pushUserCmd.Flags().Set("userdata", fullPath); err != nil {
+						return fmt.Errorf("failed to set dir for %s: %w", file.Name(), err)
 					}
 
 					// Execute the push command for this user
@@ -401,13 +475,13 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 			groupBackupData, err := os.ReadFile(SyncGroupdata)
 
 			if err != nil {
-				return fmt.Errorf("error reading group data file: %w", err)
+				return fmt.Errorf(Red+"[ERROR]"+Reset+"error reading group data file: %w", err)
 			}
 
 			var group Group
 
 			if err = json.Unmarshal(groupBackupData, &group); err != nil {
-				return fmt.Errorf("error parsing group data file: %w", err)
+				return fmt.Errorf(Red+"[ERROR]"+Reset+"error parsing group data file: %w", err)
 			}
 
 			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
@@ -433,7 +507,7 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 				return err
 			}
 
-			fmt.Println("Group restored successfully:", group.Profile.Name)
+			fmt.Println(Green+"[SUCCESS]"+Reset+"Group restored successfully:", group.Profile.Name)
 
 			//FIXME
 			//utils.PrettyPrintByte(d)
@@ -508,7 +582,7 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			} else {
-				fmt.Println("Group backed up successfully: %s", group.Profile.Name)
+				fmt.Println(Green+"[SUCCESS] Group was backed up successfully: %s"+Reset, group.Profile.Name)
 			}
 
 			return nil
@@ -574,7 +648,7 @@ func NewPullAllGroupsCmd() *cobra.Command {
 				if err != nil {
 					log.Fatal(err)
 				} else {
-					fmt.Println("Group backed up successfully: %s", group.Profile.Name)
+					fmt.Println(Green+"[SUCCESS] "+Reset+"Group was backed up successfully:", group.Profile.Name)
 				}
 			}
 
