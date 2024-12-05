@@ -458,9 +458,6 @@ func NewPullAllGroupsCmd() *cobra.Command {
 				}
 			}
 
-			//FIXME
-			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
