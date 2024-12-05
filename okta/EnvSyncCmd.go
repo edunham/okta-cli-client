@@ -411,7 +411,15 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 				return err
 			}
 
-			return backupSchemaInFile(filePath, groupJsonData)
+			err = backupSchemaInFile(filePath, groupJsonData)
+
+			if err != nil {
+				return err
+			} else {
+				fmt.Println("Group backed up successfully: %s", group.Profile.Name)
+			}
+
+			return nil
 		},
 	}
 
@@ -473,6 +481,8 @@ func NewPullAllGroupsCmd() *cobra.Command {
 
 				if err != nil {
 					log.Fatal(err)
+				} else {
+					fmt.Println("Group backed up successfully: %s", group.Profile.Name)
 				}
 			}
 
@@ -512,6 +522,56 @@ func getHomePath() string {
 func init() {
 	PullAllGroupsCmd := NewPullAllGroupsCmd()
 	EnvSyncCmd.AddCommand(PullAllGroupsCmd)
+}
+
+var GroupsPushFromDir string
+
+func NewPushAllGroupsCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "pushAllGroups",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			// Construct the full path to the users directory
+			groupsDir := filepath.Join(GroupsPushFromDir, "groups")
+
+			// Read all files in the users directory
+			files, err := os.ReadDir(groupsDir)
+			if err != nil {
+				return fmt.Errorf("failed to read groups directory: %w", err)
+			}
+
+			// Get the single-group push command
+			pushGroupCmd := NewEnvSyncPushGroupCmd()
+
+			// Process each .json file
+			for _, file := range files {
+				if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
+					fullPath := filepath.Join(groupsDir, file.Name())
+
+					// Set the UserdataPath flag for this file
+					if err := pushGroupCmd.Flags().Set("data", fullPath); err != nil {
+						return fmt.Errorf("failed to set data for %s: %w", file.Name(), err)
+					}
+
+					// Execute the push command for this user
+					if err := pushGroupCmd.RunE(pushGroupCmd, []string{}); err != nil {
+						return fmt.Errorf("failed to push group %s: %w", file.Name(), err)
+					}
+				}
+			}
+
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&GroupsPushFromDir, "dir", "", "", "")
+	cmd.MarkFlagRequired("dir")
+
+	return cmd
+}
+
+func init() {
+	PushAllGroupsCmd := NewPushAllGroupsCmd()
+	EnvSyncCmd.AddCommand(PushAllGroupsCmd)
 }
 
 ///////////////////// group membership stuff
