@@ -268,7 +268,7 @@ func init() {
 	EnvSyncCmd.AddCommand(PushAllUsersCmd)
 }
 
-
+///////////////// group stuff
 
 var SyncGroupdata string
 
@@ -317,9 +317,15 @@ func init() {
 
 var SyncGroupgroupId string
 
+type Group struct {
+	Profile struct {
+		Name string `json:"name"`
+	} `json:"profile"`
+}
+
 func NewEnvSyncPullGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "get",
+		Use: "pullGroup",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.GroupAPI.GetGroup(apiClient.GetConfig().Context, SyncGroupgroupId)
@@ -338,9 +344,36 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			//FIXME 
-			utils.PrettyPrintByte(d)
+			//utils.PrettyPrintByte(d)
 			// cmd.Println(string(d))
+			group := &Group{}
+
+			err = json.Unmarshal(d, group)
+			if err != nil {
+				return err
+			}
+
+			homePath := os.Getenv("USERPROFILE") // Default for Windows
+			if homePath == "" {
+				homePath = os.Getenv("HOME") // Used in Unix-like systems
+			}
+
+			oktaDomain := apiClient.GetConfig().Host // Adjust this line to get the Okta domain correctly
+			filePath := fmt.Sprintf("%s/.okta/%s/groups/%s.json", homePath, oktaDomain, group.Profile.Name)
+			cmd.Println(filePath)
+			dirPath := filepath.Dir(filePath)
+			err = os.MkdirAll(dirPath, 0755)
+			if err != nil {
+				return err
+			}
+			err = os.WriteFile(filePath, d, 0644)
+			if err != nil {
+				return err
+			}
+
+
+
+
 			return nil
 		},
 	}
@@ -359,7 +392,7 @@ func init() {
 
 func NewPullAllGroupsCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "lists",
+		Use: "pullAllGroups",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.GroupAPI.ListGroups(apiClient.GetConfig().Context)
@@ -392,6 +425,101 @@ func init() {
 	PullAllGroupsCmd := NewPullAllGroupsCmd()
 	EnvSyncCmd.AddCommand(PullAllGroupsCmd)
 }
+
+///////////////////// group membership stuff
+
+
+var ListGroupUsersSyncgroupId string
+
+func NewSyncAllGroupUsersCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "listUsers",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.GroupAPI.ListGroupUsers(apiClient.GetConfig().Context, ListGroupUsersSyncgroupId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&ListGroupUsersSyncgroupId, "groupId", "", "", "")
+	cmd.MarkFlagRequired("groupId")
+
+	return cmd
+}
+
+func init() {
+	SyncAllGroupUsersCmd := NewSyncAllGroupUsersCmd()
+	GroupCmd.AddCommand(SyncAllGroupUsersCmd)
+}
+
+var (
+	AssignUserToGroupSyncgroupId string
+
+	AssignUserToSyncGroupuserId string
+)
+
+func NewSyncUserToGroupCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "assignUserTo",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.GroupAPI.AssignUserToGroup(apiClient.GetConfig().Context, AssignUserToGroupSyncgroupId, AssignUserToSyncGroupuserId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&AssignUserToGroupSyncgroupId, "groupId", "", "", "")
+	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().StringVarP(&AssignUserToSyncGroupuserId, "userId", "", "", "")
+	cmd.MarkFlagRequired("userId")
+
+	return cmd
+}
+
+func init() {
+	SyncUserToGroupCmd := NewSyncUserToGroupCmd()
+	GroupCmd.AddCommand(SyncUserToGroupCmd)
+}
+
+
+
+
+
 
 ///////////////////// policy stubs
 
