@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	
+
 	"github.com/okta/okta-cli-client/utils"
 	"github.com/spf13/cobra"
 )
@@ -162,27 +162,27 @@ func init() {
 }
 
 type SyncUser struct {
-    ID string `json:"id"`
+	ID string `json:"id"`
 }
 
 func ProcessUserIDs(v []byte) error {
-    var users []SyncUser
-    err := json.Unmarshal(v, &users)
-    if err != nil {
-        return err
-    }
+	var users []SyncUser
+	err := json.Unmarshal(v, &users)
+	if err != nil {
+		return err
+	}
 
-    cmd := NewEnvSyncPullUserCmd()
-    for _, user := range users {
-        if err := cmd.Flags().Set("userId", user.ID); err != nil {
-            return fmt.Errorf("failed to set userId flag for %s: %w", user.ID, err)
-        }
-        
-        if err := cmd.RunE(cmd, []string{}); err != nil {
-            return fmt.Errorf("failed to process user %s: %w", user.ID, err)
-        }
-    }
-    return nil
+	cmd := NewEnvSyncPullUserCmd()
+	for _, user := range users {
+		if err := cmd.Flags().Set("userId", user.ID); err != nil {
+			return fmt.Errorf("failed to set userId flag for %s: %w", user.ID, err)
+		}
+
+		if err := cmd.RunE(cmd, []string{}); err != nil {
+			return fmt.Errorf("failed to process user %s: %w", user.ID, err)
+		}
+	}
+	return nil
 }
 func NewPullAllUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -221,46 +221,46 @@ func init() {
 var PushFromDir string
 
 func NewPushAllUsersCmd() *cobra.Command {
-    cmd := &cobra.Command{
-        Use: "pushAllUsers",
-        RunE: func(cmd *cobra.Command, args []string) error {
-            // Construct the full path to the users directory
-            usersDir := filepath.Join(PushFromDir, "users")
-            
-            // Read all files in the users directory
-            files, err := os.ReadDir(usersDir)
-            if err != nil {
-                return fmt.Errorf("failed to read users directory: %w", err)
-            }
+	cmd := &cobra.Command{
+		Use: "pushAllUsers",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			// Construct the full path to the users directory
+			usersDir := filepath.Join(PushFromDir, "users")
 
-            // Get the single-user push command
-            pushUserCmd := NewEnvSyncPushUserCmd()
-            
-            // Process each .json file
-            for _, file := range files {
-                if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
-                    fullPath := filepath.Join(usersDir, file.Name())
-                    
-                    // Set the UserdataPath flag for this file
-                    if err := pushUserCmd.Flags().Set("UserdataPath", fullPath); err != nil {
-                        return fmt.Errorf("failed to set UserdataPath for %s: %w", file.Name(), err)
-                    }
-                    
-                    // Execute the push command for this user
-                    if err := pushUserCmd.RunE(pushUserCmd, []string{}); err != nil {
-                        return fmt.Errorf("failed to push user %s: %w", file.Name(), err)
-                    }
-                }
-            }
-            
-            return nil
-        },
-    }
+			// Read all files in the users directory
+			files, err := os.ReadDir(usersDir)
+			if err != nil {
+				return fmt.Errorf("failed to read users directory: %w", err)
+			}
 
-    cmd.Flags().StringVarP(&PushFromDir, "dir", "", "", "")
-    cmd.MarkFlagRequired("dir")
+			// Get the single-user push command
+			pushUserCmd := NewEnvSyncPushUserCmd()
 
-    return cmd
+			// Process each .json file
+			for _, file := range files {
+				if !file.IsDir() && strings.HasSuffix(file.Name(), ".json") {
+					fullPath := filepath.Join(usersDir, file.Name())
+
+					// Set the UserdataPath flag for this file
+					if err := pushUserCmd.Flags().Set("UserdataPath", fullPath); err != nil {
+						return fmt.Errorf("failed to set UserdataPath for %s: %w", file.Name(), err)
+					}
+
+					// Execute the push command for this user
+					if err := pushUserCmd.RunE(pushUserCmd, []string{}); err != nil {
+						return fmt.Errorf("failed to push user %s: %w", file.Name(), err)
+					}
+				}
+			}
+
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&PushFromDir, "dir", "", "", "")
+	cmd.MarkFlagRequired("dir")
+
+	return cmd
 }
 
 func init() {
@@ -297,7 +297,7 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			//FIXME 
+			//FIXME
 			utils.PrettyPrintByte(d)
 			// cmd.Println(string(d))
 			return nil
@@ -371,9 +371,6 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 				return err
 			}
 
-
-
-
 			return nil
 		},
 	}
@@ -388,7 +385,6 @@ func init() {
 	EnvSyncPullGroupCmd := NewEnvSyncPullGroupCmd()
 	EnvSyncCmd.AddCommand(EnvSyncPullGroupCmd)
 }
-
 
 func NewPullAllGroupsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -428,15 +424,50 @@ func init() {
 
 ///////////////////// group membership stuff
 
-
 var ListGroupUsersSyncgroupId string
 
-func NewSyncAllGroupUsersCmd() *cobra.Command {
+func NewPullGroupUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "listUsers",
+		Use: "pullGroupUsers",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
 			req := apiClient.GroupAPI.ListGroupUsers(apiClient.GetConfig().Context, ListGroupUsersSyncgroupId)
+			rxq := apiClient.GroupAPI.GetGroup(apiClient.GetConfig().Context, ListGroupUsersSyncgroupId)
+
+			rxsp, err := rxq.Execute()
+			if err != nil {
+				if rxsp != nil && rxsp.Body != nil {
+					b, err := io.ReadAll(rxsp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(b)
+					}
+				}
+				return err
+			}
+			b, err := io.ReadAll(rxsp.Body)
+			if err != nil {
+				return err
+			}
+			group := &Group{}
+
+			err = json.Unmarshal(b, group)
+			if err != nil {
+				return err
+			}
+
+			homePath := os.Getenv("USERPROFILE") // Default for Windows
+			if homePath == "" {
+				homePath = os.Getenv("HOME") // Used in Unix-like systems
+			}
+
+			oktaDomain := apiClient.GetConfig().Host // Adjust this line to get the Okta domain correctly
+			filePath := fmt.Sprintf("%s/.okta/%s/groups_users/%s.json", homePath, oktaDomain, group.Profile.Name)
+			cmd.Println(filePath)
+			dirPath := filepath.Dir(filePath)
+			err = os.MkdirAll(dirPath, 0755)
+			if err != nil {
+				return err
+			}
 
 			resp, err := req.Execute()
 			if err != nil {
@@ -452,8 +483,10 @@ func NewSyncAllGroupUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
+			err = os.WriteFile(filePath, d, 0644)
+			if err != nil {
+				return err
+			}
 			return nil
 		},
 	}
@@ -465,8 +498,8 @@ func NewSyncAllGroupUsersCmd() *cobra.Command {
 }
 
 func init() {
-	SyncAllGroupUsersCmd := NewSyncAllGroupUsersCmd()
-	GroupCmd.AddCommand(SyncAllGroupUsersCmd)
+	PullGroupUsersCmd := NewPullGroupUsersCmd()
+	EnvSyncCmd.AddCommand(PullGroupUsersCmd)
 }
 
 var (
@@ -516,13 +549,7 @@ func init() {
 	GroupCmd.AddCommand(SyncUserToGroupCmd)
 }
 
-
-
-
-
-
 ///////////////////// policy stubs
-
 
 var SyncPolicydata string
 
@@ -642,8 +669,6 @@ func init() {
 	GetSyncPolicyCmd := NewGetSyncPolicyCmd()
 	EnvSyncCmd.AddCommand(GetSyncPolicyCmd)
 }
-
-
 
 ///////////////////// policy mapping stubs
 
@@ -786,7 +811,6 @@ func init() {
 }
 
 ///////////////////// policy rule stubs
-
 
 var (
 	SyncPolicyRulepolicyId string
