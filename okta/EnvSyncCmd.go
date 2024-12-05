@@ -318,8 +318,10 @@ func init() {
 var SyncGroupgroupId string
 
 type Group struct {
+	Type    string `json:"type"`
 	Profile struct {
-		Name string `json:"name"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
 	} `json:"profile"`
 }
 
@@ -366,7 +368,14 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			err = os.WriteFile(filePath, d, 0644)
+
+			groupJsonData, err := json.Marshal(group)
+
+			if err != nil {
+				return err
+			}
+
+			err = os.WriteFile(filePath, groupJsonData, 0644)
 			if err != nil {
 				return err
 			}
@@ -416,6 +425,23 @@ func NewPullAllGroupsCmd() *cobra.Command {
 
 	return cmd
 }
+
+// func ProcessGroups(v []byte) error {
+// 	var groups []Group
+// 	err := json.Unmarshal(v, &groups)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	for _, group := range groups {
+
+// 	}
+// 	return nil
+// }
+
+// func backupSchemaInFile(){
+
+// }
 
 func init() {
 	PullAllGroupsCmd := NewPullAllGroupsCmd()
