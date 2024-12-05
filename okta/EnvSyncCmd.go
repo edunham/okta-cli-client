@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -68,8 +69,6 @@ func init() {
 	EnvSyncCleanCmd := NewEnvSyncCleanCmd()
 	EnvSyncCmd.AddCommand(EnvSyncCleanCmd)
 }
-
-
 
 func NewEnvSyncPullUserCmd() *cobra.Command {
 	var GetUseruserId string
@@ -375,8 +374,7 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			//utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
+
 			group := &Group{}
 
 			err = json.Unmarshal(d, group)
@@ -427,10 +425,39 @@ func NewPullAllGroupsCmd() *cobra.Command {
 				}
 				return err
 			}
+
 			d, err := io.ReadAll(resp.Body)
 			if err != nil {
 				return err
 			}
+
+			var groups []Group
+
+			// Unmarshal the JSON byte slice into the slice of structs
+			err = json.Unmarshal(d, &groups)
+			if err != nil {
+				log.Fatal(err)
+				return err
+			}
+
+			oktaDomain := apiClient.GetConfig().Host // Adjust this line to get the Okta domain correctly
+
+			// Backup groups
+			for _, group := range groups {
+				filePath := fmt.Sprintf("%s/.okta/%s/groups/%s.json", getHomePath(), oktaDomain, group.Profile.Name)
+				groupJsonData, err := json.Marshal(group)
+
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				err = backupSchemaInFile(filePath, groupJsonData)
+
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+
 			//FIXME
 			utils.PrettyPrintByte(d)
 			// cmd.Println(string(d))
@@ -440,8 +467,6 @@ func NewPullAllGroupsCmd() *cobra.Command {
 
 	return cmd
 }
-
-
 
 func backupSchemaInFile(filePath string, jsonData []byte) error {
 	// Create directory structure if it doesn't exist
