@@ -6,7 +6,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-
+	"strings"
+	
 	"github.com/okta/okta-cli-client/utils"
 	"github.com/spf13/cobra"
 )
@@ -390,4 +391,409 @@ func NewPullAllGroupsCmd() *cobra.Command {
 func init() {
 	PullAllGroupsCmd := NewPullAllGroupsCmd()
 	EnvSyncCmd.AddCommand(PullAllGroupsCmd)
+}
+
+///////////////////// policy stubs
+
+
+var SyncPolicydata string
+
+func NewSyncPolicyCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "create",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.CreatePolicy(apiClient.GetConfig().Context)
+
+			if SyncPolicydata != "" {
+				req = req.Data(SyncPolicydata)
+			}
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncPolicydata, "data", "", "", "")
+	cmd.MarkFlagRequired("data")
+
+	return cmd
+}
+
+func init() {
+	SyncPolicyCmd := NewSyncPolicyCmd()
+	EnvSyncCmd.AddCommand(SyncPolicyCmd)
+}
+
+func NewGetAllPoliciesCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "listPolicies",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.ListPolicies(apiClient.GetConfig().Context)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func init() {
+	GetAllPoliciesCmd := NewGetAllPoliciesCmd()
+	EnvSyncCmd.AddCommand(GetAllPoliciesCmd)
+}
+
+var GetSyncpolicyId string
+
+func NewGetSyncPolicyCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "get",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.GetPolicy(apiClient.GetConfig().Context, GetSyncpolicyId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&GetSyncpolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	return cmd
+}
+
+func init() {
+	GetSyncPolicyCmd := NewGetSyncPolicyCmd()
+	EnvSyncCmd.AddCommand(GetSyncPolicyCmd)
+}
+
+
+
+///////////////////// policy mapping stubs
+
+var (
+	SyncResourceToPolicypolicyId string
+
+	SyncResourceToPolicydata string
+)
+
+func NewSyncResourceToPolicyCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "mapResourceTo",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.MapResourceToPolicy(apiClient.GetConfig().Context, SyncResourceToPolicypolicyId)
+
+			if SyncResourceToPolicydata != "" {
+				req = req.Data(SyncResourceToPolicydata)
+			}
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncResourceToPolicypolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().StringVarP(&SyncResourceToPolicydata, "data", "", "", "")
+	cmd.MarkFlagRequired("data")
+
+	return cmd
+}
+
+func init() {
+	SyncResourceToPolicyCmd := NewSyncResourceToPolicyCmd()
+	EnvSyncCmd.AddCommand(SyncResourceToPolicyCmd)
+}
+
+var SyncPolicyMappingspolicyId string
+
+func NewSyncPolicyMappingsCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "listMappings",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.ListPolicyMappings(apiClient.GetConfig().Context, SyncPolicyMappingspolicyId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncPolicyMappingspolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	return cmd
+}
+
+func init() {
+	SyncPolicyMappingsCmd := NewSyncPolicyMappingsCmd()
+	EnvSyncCmd.AddCommand(SyncPolicyMappingsCmd)
+}
+
+var (
+	GetSyncPolicyMappingpolicyId string
+
+	GetSyncPolicyMappingmappingId string
+)
+
+func NewGetSyncPolicyMappingCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "getMapping",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.GetPolicyMapping(apiClient.GetConfig().Context, GetSyncPolicyMappingpolicyId, GetSyncPolicyMappingmappingId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&GetSyncPolicyMappingpolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().StringVarP(&GetSyncPolicyMappingmappingId, "mappingId", "", "", "")
+	cmd.MarkFlagRequired("mappingId")
+
+	return cmd
+}
+
+func init() {
+	GetSyncPolicyMappingCmd := NewGetSyncPolicyMappingCmd()
+	EnvSyncCmd.AddCommand(GetSyncPolicyMappingCmd)
+}
+
+///////////////////// policy rule stubs
+
+
+var (
+	SyncPolicyRulepolicyId string
+
+	SyncPolicyRuledata string
+)
+
+func NewSyncPolicyRuleCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "createRule",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.CreatePolicyRule(apiClient.GetConfig().Context, SyncPolicyRulepolicyId)
+
+			if SyncPolicyRuledata != "" {
+				req = req.Data(SyncPolicyRuledata)
+			}
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&SyncPolicyRulepolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().StringVarP(&SyncPolicyRuledata, "data", "", "", "")
+	cmd.MarkFlagRequired("data")
+
+	return cmd
+}
+
+func init() {
+	SyncPolicyRuleCmd := NewSyncPolicyRuleCmd()
+	EnvSyncCmd.AddCommand(SyncPolicyRuleCmd)
+}
+
+var GetAllPolicyRulespolicyId string
+
+func NewGetAllPolicyRulesCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "listRules",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.ListPolicyRules(apiClient.GetConfig().Context, GetAllPolicyRulespolicyId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&GetAllPolicyRulespolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	return cmd
+}
+
+func init() {
+	GetAllPolicyRulesCmd := NewGetAllPolicyRulesCmd()
+	EnvSyncCmd.AddCommand(GetAllPolicyRulesCmd)
+}
+
+var (
+	PullPolicyRulepolicyId string
+
+	PullPolicyRuleruleId string
+)
+
+func NewPullPolicyRuleCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "getRule",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.PolicyAPI.GetPolicyRule(apiClient.GetConfig().Context, PullPolicyRulepolicyId, PullPolicyRuleruleId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&PullPolicyRulepolicyId, "policyId", "", "", "")
+	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().StringVarP(&PullPolicyRuleruleId, "ruleId", "", "", "")
+	cmd.MarkFlagRequired("ruleId")
+
+	return cmd
+}
+
+func init() {
+	PullPolicyRuleCmd := NewPullPolicyRuleCmd()
+	EnvSyncCmd.AddCommand(PullPolicyRuleCmd)
 }
