@@ -13,10 +13,106 @@ import (
 	"github.com/spf13/cobra"
 )
 
+/***************************************************************/
+/* COMMON functions                                            */
+/***************************************************************/
+
+func backupSchemaInFile(filePath string, jsonData []byte) error {
+	// Create directory structure if it doesn't exist
+	dirPath := filepath.Dir(filePath)
+	err := os.MkdirAll(dirPath, 0755)
+	if err != nil {
+		return err // Return the error if directory creation fails
+	}
+
+	// Write the JSON data to the specified file
+	err = os.WriteFile(filePath, jsonData, 0644)
+	if err != nil {
+		return err // Return the error if file writing fails
+	}
+
+	return nil // Return nil if everything succeeds
+}
+
+func getHomePath() string {
+	homePath := os.Getenv("USERPROFILE") // Default for Windows
+	if homePath == "" {
+		homePath = os.Getenv("HOME") // Used in Unix-like systems
+	}
+
+	return homePath
+}
+
 var EnvSyncCmd = &cobra.Command{
 	Use:  "envsync",
 	Long: "backup and restore okta environments",
 }
+
+func init() {
+	rootCmd.AddCommand(EnvSyncCmd)
+}
+
+/***************************************************************/
+/* END COMMON functions                                        */
+/***************************************************************/
+
+/***************************************************************/
+/* DEMO commands                                               */
+/***************************************************************/
+
+var PullSchemas []string
+
+func NewPullCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "pull",
+		Short: "A command that pulls selected schemas into your local system",
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			// Iterate over the list of values and perform a switch
+			for _, value := range PullSchemas {
+				switch value {
+				case "user":
+					fmt.Println("Pulling users")
+					pullAllUsersCmd := NewPullAllUsersCmd()
+
+					if err := pullAllUsersCmd.RunE(pullAllUsersCmd, []string{}); err != nil {
+						return fmt.Errorf("failed to pull users %w", err)
+					} else {
+						fmt.Println("Users backed up successfully")
+					}
+				case "group":
+					fmt.Println("Pulling groups")
+					pullAllGroupsCmd := NewPullAllGroupsCmd()
+
+					if err := pullAllGroupsCmd.RunE(pullAllGroupsCmd, []string{}); err != nil {
+						return fmt.Errorf("failed to pull groups %w", err)
+					} else {
+						fmt.Println("Groups backed up successfully")
+					}
+				default:
+					fmt.Println("Unsupported schema:", value)
+				}
+			}
+
+			return nil
+		},
+	}
+
+	// Define the --schemas flag to accept a comma-separated list of strings
+	cmd.Flags().StringSliceVar(&PullSchemas, "schemas", []string{}, "Comma-separated list of schemas")
+	cmd.MarkFlagRequired("schemas")
+
+	return cmd
+}
+
+func init() {
+	PullCmd := NewPullCmd()
+	EnvSyncCmd.AddCommand(PullCmd)
+}
+
+/***************************************************************/
+/* END DEMO commands                                           */
+/***************************************************************/
 
 var UserdataPath string
 
@@ -31,10 +127,6 @@ type UserProfile struct {
 
 type UserData struct {
 	Profile UserProfile `json:"profile"`
-}
-
-func init() {
-	rootCmd.AddCommand(EnvSyncCmd)
 }
 
 type User struct {
@@ -491,32 +583,6 @@ func NewPullAllGroupsCmd() *cobra.Command {
 	}
 
 	return cmd
-}
-
-func backupSchemaInFile(filePath string, jsonData []byte) error {
-	// Create directory structure if it doesn't exist
-	dirPath := filepath.Dir(filePath)
-	err := os.MkdirAll(dirPath, 0755)
-	if err != nil {
-		return err // Return the error if directory creation fails
-	}
-
-	// Write the JSON data to the specified file
-	err = os.WriteFile(filePath, jsonData, 0644)
-	if err != nil {
-		return err // Return the error if file writing fails
-	}
-
-	return nil // Return nil if everything succeeds
-}
-
-func getHomePath() string {
-	homePath := os.Getenv("USERPROFILE") // Default for Windows
-	if homePath == "" {
-		homePath = os.Getenv("HOME") // Used in Unix-like systems
-	}
-
-	return homePath
 }
 
 func init() {
