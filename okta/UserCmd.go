@@ -1,10 +1,10 @@
 package okta
 
 import (
-    "io"
+	"io"
 
 	"github.com/okta/okta-cli-client/utils"
-    "github.com/spf13/cobra"
+	"github.com/spf13/cobra"
 )
 
 var UserCmd = &cobra.Command{
@@ -1721,4 +1721,3 @@ func init() {
 	RevokeUserSessionsCmd := NewRevokeUserSessionsCmd()
 	UserCmd.AddCommand(RevokeUserSessionsCmd)
 }
-
