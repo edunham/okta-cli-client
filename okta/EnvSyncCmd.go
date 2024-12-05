@@ -355,19 +355,10 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 				return err
 			}
 
-			homePath := os.Getenv("USERPROFILE") // Default for Windows
-			if homePath == "" {
-				homePath = os.Getenv("HOME") // Used in Unix-like systems
-			}
-
 			oktaDomain := apiClient.GetConfig().Host // Adjust this line to get the Okta domain correctly
-			filePath := fmt.Sprintf("%s/.okta/%s/groups/%s.json", homePath, oktaDomain, group.Profile.Name)
+			filePath := fmt.Sprintf("%s/.okta/%s/groups/%s.json", getHomePath(), oktaDomain, group.Profile.Name)
+
 			cmd.Println(filePath)
-			dirPath := filepath.Dir(filePath)
-			err = os.MkdirAll(dirPath, 0755)
-			if err != nil {
-				return err
-			}
 
 			groupJsonData, err := json.Marshal(group)
 
@@ -375,12 +366,7 @@ func NewEnvSyncPullGroupCmd() *cobra.Command {
 				return err
 			}
 
-			err = os.WriteFile(filePath, groupJsonData, 0644)
-			if err != nil {
-				return err
-			}
-
-			return nil
+			return backupSchemaInFile(filePath, groupJsonData)
 		},
 	}
 
@@ -439,9 +425,31 @@ func NewPullAllGroupsCmd() *cobra.Command {
 // 	return nil
 // }
 
-// func backupSchemaInFile(){
+func backupSchemaInFile(filePath string, jsonData []byte) error {
+	// Create directory structure if it doesn't exist
+	dirPath := filepath.Dir(filePath)
+	err := os.MkdirAll(dirPath, 0755)
+	if err != nil {
+		return err // Return the error if directory creation fails
+	}
 
-// }
+	// Write the JSON data to the specified file
+	err = os.WriteFile(filePath, jsonData, 0644)
+	if err != nil {
+		return err // Return the error if file writing fails
+	}
+
+	return nil // Return nil if everything succeeds
+}
+
+func getHomePath() string {
+	homePath := os.Getenv("USERPROFILE") // Default for Windows
+	if homePath == "" {
+		homePath = os.Getenv("HOME") // Used in Unix-like systems
+	}
+
+	return homePath
+}
 
 func init() {
 	PullAllGroupsCmd := NewPullAllGroupsCmd()
