@@ -467,7 +467,7 @@ func init() {
 var SyncGroupdata string
 var skipGroups = map[string]bool{
 	"Okta Administrators.json": true,
-	"Everyone.json": true,
+	"Everyone.json":            true,
 }
 
 func NewEnvSyncPushGroupCmd() *cobra.Command {
@@ -542,6 +542,7 @@ var SyncGroupgroupId string
 
 type Group struct {
 	Type    string `json:"type"`
+	Id      string `json:"id"`
 	Profile struct {
 		Name        string `json:"name"`
 		Description string `json:"description"`
@@ -661,8 +662,38 @@ func NewPullAllGroupsCmd() *cobra.Command {
 				} else {
 					fmt.Println(Green+"[SUCCESS] "+Reset+"Group was backed up successfully:", group.Profile.Name)
 				}
-			}
 
+				// Then pull and backup the group's users
+				usersReq := apiClient.GroupAPI.ListGroupUsers(apiClient.GetConfig().Context, group.Id)
+				usersResp, err := usersReq.Execute()
+				if err != nil {
+					log.Printf("Failed to fetch users for group %s: %v", group.Profile.Name, err)
+					continue
+				}
+
+				if usersResp.Body != nil {
+					usersData, err := io.ReadAll(usersResp.Body)
+					if err != nil {
+						log.Printf("Failed to read users response for group %s: %v", group.Profile.Name, err)
+						continue
+					}
+
+					// Create users directory if it doesn't exist
+					usersFilePath := fmt.Sprintf("%s/.okta/%s/groups/%s/users.json", getHomePath(), oktaDomain, group.Profile.Name)
+					err = os.MkdirAll(filepath.Dir(usersFilePath), 0755)
+					if err != nil {
+						log.Printf("Failed to create directory for group %s: %v", group.Profile.Name, err)
+						continue
+					}
+
+					err = backupSchemaInFile(usersFilePath, usersData)
+					if err != nil {
+						log.Printf("Failed to backup users for group %s: %v", group.Profile.Name, err)
+					} else {
+						fmt.Println(Green+"[SUCCESS] "+Reset+"Group users were backed up successfully:", group.Profile.Name)
+					}
+				}
+			}
 			return nil
 		},
 	}
