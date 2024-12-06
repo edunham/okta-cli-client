@@ -494,7 +494,7 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 			if err = json.Unmarshal(groupBackupData, &group); err != nil {
 				return fmt.Errorf(Red+"[ERROR]"+Reset+"error parsing group data file: %w", err)
 			}
-
+			//create group
 			req := apiClient.GroupAPI.CreateGroup(apiClient.GetConfig().Context)
 			createData := string(groupBackupData)
 			if createData != "" {
@@ -512,14 +512,50 @@ func NewEnvSyncPushGroupCmd() *cobra.Command {
 				return err
 			}
 
-			_, err = io.ReadAll(resp.Body)
-
+			// Read the response to get the new group ID
+			respBody, err := io.ReadAll(resp.Body)
 			if err != nil {
 				return err
 			}
+			var newGroup Group
+			if err = json.Unmarshal(respBody, &newGroup); err != nil {
+				return fmt.Errorf(Red+"[ERROR]"+Reset+"error parsing created group response: %w", err)
+			}
 
 			fmt.Println(Green+"[SUCCESS]"+Reset+"Group restored successfully:", group.Profile.Name)
+			// Now handle the users
+			// Construct the path to users.json in the same directory as the group file
+			usersFilePath := filepath.Join(filepath.Dir(SyncGroupdata), "users.json")
+			usersData, err := os.ReadFile(usersFilePath)
+			if err != nil {
+				if os.IsNotExist(err) {
+					// No users file, which is fine - just return
+					return nil
+				}
+				return fmt.Errorf(Red+"[ERROR]"+Reset+"error reading users file: %w", err)
+			}
 
+			var users []UserData
+			if err = json.Unmarshal(usersData, &users); err != nil {
+				return fmt.Errorf(Red+"[ERROR]"+Reset+"error parsing users file: %w", err)
+			}
+
+			// Add each user to the group
+			for _, user := range users {
+				req := apiClient.GroupAPI.AssignUserToGroup(apiClient.GetConfig().Context, newGroup.Id, user.Profile.Login)
+				resp, err := req.Execute()
+				if err != nil {
+					fmt.Printf(Yellow+"[WARN]"+Reset+"Failed to add user %s to group: %v\n", user.Profile.Login, err)
+					if resp != nil && resp.Body != nil {
+						d, err := io.ReadAll(resp.Body)
+						if err == nil {
+							utils.PrettyPrintByte(d)
+						}
+					}
+					continue // Continue with next user even if this one fails
+				}
+				fmt.Printf(Green+"[SUCCESS]"+Reset+"Added user %s to group %s\n", user.Profile.Login, group.Profile.Name)
+			}
 			//FIXME
 			//utils.PrettyPrintByte(d)
 			// cmd.Println(string(d))
