@@ -465,12 +465,23 @@ func init() {
 ///////////////// group stuff
 
 var SyncGroupdata string
+var skipGroups = map[string]bool{
+	"Okta Administrators.json": true,
+	"Everyone.json": true,
+}
 
 func NewEnvSyncPushGroupCmd() *cobra.Command {
+
 	cmd := &cobra.Command{
 		Use: "pushGroup",
 
 		RunE: func(cmd *cobra.Command, args []string) error {
+			baseFileName := filepath.Base(SyncGroupdata)
+			if skipGroups[baseFileName] {
+				fmt.Printf(Yellow+"[SKIP]"+Reset+"Skipping file: %s\n", baseFileName)
+				return nil
+			}
+
 			// Read and parse the userdata file
 			groupBackupData, err := os.ReadFile(SyncGroupdata)
 
