@@ -1319,3 +1319,126 @@ func init() {
 	PullPolicyRuleCmd := NewPullPolicyRuleCmd()
 	EnvSyncCmd.AddCommand(PullPolicyRuleCmd)
 }
+
+// auth server stubs
+
+
+var CreateAuthorizationServerdata string
+
+func NewCreateAuthorizationServerCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "create",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.AuthorizationServerAPI.CreateAuthorizationServer(apiClient.GetConfig().Context)
+
+			if CreateAuthorizationServerdata != "" {
+				req = req.Data(CreateAuthorizationServerdata)
+			}
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&CreateAuthorizationServerdata, "data", "", "", "")
+	cmd.MarkFlagRequired("data")
+
+	return cmd
+}
+
+func init() {
+	CreateAuthorizationServerCmd := NewCreateAuthorizationServerCmd()
+	EnvSyncCmd.AddCommand(CreateAuthorizationServerCmd)
+}
+
+func NewListAuthorizationServersCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "lists",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.AuthorizationServerAPI.ListAuthorizationServers(apiClient.GetConfig().Context)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func init() {
+	ListAuthorizationServersCmd := NewListAuthorizationServersCmd()
+	EnvSyncCmd.AddCommand(ListAuthorizationServersCmd)
+}
+
+var GetAuthorizationServerauthServerId string
+
+func NewGetAuthorizationServerCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use: "get",
+
+		RunE: func(cmd *cobra.Command, args []string) error {
+			req := apiClient.AuthorizationServerAPI.GetAuthorizationServer(apiClient.GetConfig().Context, GetAuthorizationServerauthServerId)
+
+			resp, err := req.Execute()
+			if err != nil {
+				if resp != nil && resp.Body != nil {
+					d, err := io.ReadAll(resp.Body)
+					if err == nil {
+						utils.PrettyPrintByte(d)
+					}
+				}
+				return err
+			}
+			d, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return err
+			}
+			utils.PrettyPrintByte(d)
+			// cmd.Println(string(d))
+			return nil
+		},
+	}
+
+	cmd.Flags().StringVarP(&GetAuthorizationServerauthServerId, "authServerId", "", "", "")
+	cmd.MarkFlagRequired("authServerId")
+
+	return cmd
+}
+
+func init() {
+	GetAuthorizationServerCmd := NewGetAuthorizationServerCmd()
+	EnvSyncCmd.AddCommand(GetAuthorizationServerCmd)
+}
+
