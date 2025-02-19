@@ -3,93 +3,48 @@ version: 2.1
 orbs:
   go: circleci/go@2.2.4
 
-parameters:
-  go-version:
-    type: string
-    default: "1.23"
-
 jobs:
-  setup:
-    docker:
-      - image: cimg/go:<<pipeline.parameters.go-version>>
-    steps:
-      - checkout
-      - go/setup:
-          version-file: go.mod
-      - run:
-          name: Install Go Tools
-          command: make tools
-      - run:
-          name: Download Dependencies
-          command: make dep
-      - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
-
-  generate:
-    docker:
-      - image: cimg/go:<<pipeline.parameters.go-version>>
-    steps:
-      - checkout
-      - go/setup:
-          version-file: go.mod
-      - run:
-          name: Generate Command Files
-          command: make generate-cmd
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
   build:
-    docker:
-      - image: cimg/go:<<pipeline.parameters.go-version>>
+    executor:
+      name: go/default
+      tag: '1.23'
     steps:
       - checkout
-      - go/setup:
-          version-file: go.mod
-      - restore_cache:
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
-      - attach_workspace:
-          at: .
-      - run:
-          name: Format Check
-          command: make fmt
-      - run:
-          name: Build
-          command: make build
-
+      - go/with-cache:
+          steps:
+            - go/mod-download
+            - run:
+                name: Generate Command Files
+                command: make generate-cmd
+            - run:
+                name: Format Check
+                command: make fmt
+            - run:
+                name: Build
+                command: make build
+            - run: 
+                name: Install
+                command: make install
+            
   test:
-    docker:
-      - image: cimg/go:<<pipeline.parameters.go-version>>
+    executor:
+      name: go/default
+      tag: '1.23'
     steps:
       - checkout
-      - go/setup:
-          version-file: go.mod
-      - restore_cache:
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
-      - attach_workspace:
-          at: .
-      - run:
-          name: Run Tests
-          command: make test
-          environment:
-            TEST: ./...
+      - go/with-cache:
+          steps:
+            - go/mod-download
+            - go/test:
+                covermode: atomic
+                race: true
+                verbose: true
 
 workflows:
   version: 2
   build-test:
     jobs:
-      - setup
-      - generate:
-          requires:
-            - setup
-      - build:
-          requires:
-            - generate
+      - build
       - test:
           requires:
             - build
