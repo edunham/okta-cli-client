@@ -1,15 +1,12 @@
 version: 2.1
 
 orbs:
-  go: circleci/go@2.2.4  # This orb helps manage Go versions
+  go: circleci/go@2.2.4
 
-commands:
-  install_go_tools:
-    description: "Install required Go development tools"
-    steps:
-      - run:
-          name: Install Go Tools
-          command: make tools
+parameters:
+  go-version:
+    type: string
+    default: "1.23"
 
 jobs:
   setup:
@@ -17,19 +14,26 @@ jobs:
       - image: cimg/go:<<pipeline.parameters.go-version>>
     steps:
       - checkout
-      - go/load-cache  # Orb command to restore module cache
-      - install_go_tools
+      - go/setup:
+          version-file: go.mod
+      - run:
+          name: Install Go Tools
+          command: make tools
       - run:
           name: Download Dependencies
           command: make dep
-      - go/mod-download
-      - go/save-cache  # Orb command to save module cache
+      - save_cache:
+          key: go-mod-v1-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
 
   generate:
     docker:
       - image: cimg/go:<<pipeline.parameters.go-version>>
     steps:
       - checkout
+      - go/setup:
+          version-file: go.mod
       - run:
           name: Generate Command Files
           command: make generate-cmd
@@ -43,7 +47,11 @@ jobs:
       - image: cimg/go:<<pipeline.parameters.go-version>>
     steps:
       - checkout
-      - go/load-cache
+      - go/setup:
+          version-file: go.mod
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
       - attach_workspace:
           at: .
       - run:
@@ -58,7 +66,11 @@ jobs:
       - image: cimg/go:<<pipeline.parameters.go-version>>
     steps:
       - checkout
-      - go/load-cache
+      - go/setup:
+          version-file: go.mod
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
       - attach_workspace:
           at: .
       - run:
@@ -66,11 +78,6 @@ jobs:
           command: make test
           environment:
             TEST: ./...
-
-parameters:
-  go-version:
-    type: string
-    default: "1.23"  # This gets overridden by the orb based on go.mod
 
 workflows:
   version: 2
