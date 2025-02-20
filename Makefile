@@ -12,11 +12,12 @@ dep: # Download required dependencies
 build:
 	go build -o $(GOBIN)/okta-cli-client okta-cli-client
 
-install:
+install: generate-cmd fmt
 	go install .
 
 generate-cmd:
 	go run ./cmdTools
+	rm okta/SSFReceiverCmd.go okta/SSFSecurityEventTokenCmd.go okta/SubscriptionCmd.go
 
 generate-sdk:
 	openapi-generator-cli version-manager set 7.0.1 \
