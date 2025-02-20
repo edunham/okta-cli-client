@@ -8,6 +8,7 @@ var (
             {{ $operationId }}{{ . }} string
         {{ end }}
     {{end}}
+    {{ $operationId }}Backup bool
 )
 
 func New{{ .operationId }}Cmd() *cobra.Command {
@@ -42,9 +43,20 @@ func New{{ .operationId }}Cmd() *cobra.Command {
 		    if err != nil {
 			    return err
 		    }
-		    utils.PrettyPrintByte(d)
-            // cmd.Println(string(d))
-		    return nil
+            if {{ .operationId }}Backup {
+                {{if .pathParams}}
+                idParam := {{index .pathParams 0}}
+                err := utils.BackupObject(d, "{{ .name }}", idParam)
+                {{else}}
+
+                err := utils.BackupObject(d, "{{ .name }}", "hasNoIdParam")
+                {{end}}
+                if err != nil {
+                    return err
+                }
+            }
+            utils.PrettyPrintByte(d)
+            return nil
         },
     }
 
@@ -56,6 +68,7 @@ func New{{ .operationId }}Cmd() *cobra.Command {
         cmd.MarkFlagRequired("{{ . }}")
         {{ end }}
     {{end}}
+    cmd.Flags().BoolVarP(&{{ $operationId }}Backup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

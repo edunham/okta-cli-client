@@ -111,3 +111,16 @@ func ExtractMap(payload string) (map[string]interface{}, error) {
 	err := json.Unmarshal([]byte(payload), &m)
 	return m, err
 }
+
+func BackupObject(data []byte, objectType, idParam string) error {
+	fileName := fmt.Sprintf("%s_%s.json", objectType, idParam)
+	filePath := fmt.Sprintf("~/.okta/testbackup/%s", fileName)
+
+	err := os.WriteFile(filePath, data, 0o644)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("Object backed up to %s\n", filePath)
+	return nil
+}
