@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(RoleCmd)
 }
 
-var CreateRoledata string
+var (
+	CreateRoledata string
+
+	CreateRoleBackup bool
+)
 
 func NewCreateRoleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateRoleBackup {
+
+				err := utils.BackupObject(d, "Role", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateRoledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateRoleCmd := NewCreateRoleCmd()
 	RoleCmd.AddCommand(CreateRoleCmd)
 }
+
+var ListRolesBackup bool
 
 func NewListRolesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListRolesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRolesBackup {
+
+				err := utils.BackupObject(d, "Role", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListRolesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	RoleCmd.AddCommand(ListRolesCmd)
 }
 
-var GetRoleroleIdOrLabel string
+var (
+	GetRoleroleIdOrLabel string
+
+	GetRoleBackup bool
+)
 
 func NewGetRoleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRoleBackup {
+
+				idParam := GetRoleroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetRoleroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&GetRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceRoleroleIdOrLabel string
 
 	ReplaceRoledata string
+
+	ReplaceRoleBackup bool
 )
 
 func NewReplaceRoleCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRoleBackup {
+
+				idParam := ReplaceRoleroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceRoleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceRoledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceRoleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	RoleCmd.AddCommand(ReplaceRoleCmd)
 }
 
-var DeleteRoleroleIdOrLabel string
+var (
+	DeleteRoleroleIdOrLabel string
+
+	DeleteRoleBackup bool
+)
 
 func NewDeleteRoleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteRoleBackup {
+
+				idParam := DeleteRoleroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteRoleroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&DeleteRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	RoleCmd.AddCommand(DeleteRoleCmd)
 }
 
-var ListRolePermissionsroleIdOrLabel string
+var (
+	ListRolePermissionsroleIdOrLabel string
+
+	ListRolePermissionsBackup bool
+)
 
 func NewListRolePermissionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewListRolePermissionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRolePermissionsBackup {
+
+				idParam := ListRolePermissionsroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListRolePermissionsroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&ListRolePermissionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -272,6 +344,8 @@ var (
 	CreateRolePermissionpermissionType string
 
 	CreateRolePermissiondata string
+
+	CreateRolePermissionBackup bool
 )
 
 func NewCreateRolePermissionCmd() *cobra.Command {
@@ -299,8 +373,15 @@ func NewCreateRolePermissionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateRolePermissionBackup {
+
+				idParam := CreateRolePermissionroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -314,6 +395,8 @@ func NewCreateRolePermissionCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateRolePermissiondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateRolePermissionBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -326,6 +409,8 @@ var (
 	GetRolePermissionroleIdOrLabel string
 
 	GetRolePermissionpermissionType string
+
+	GetRolePermissionBackup bool
 )
 
 func NewGetRolePermissionCmd() *cobra.Command {
@@ -349,8 +434,15 @@ func NewGetRolePermissionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRolePermissionBackup {
+
+				idParam := GetRolePermissionroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -360,6 +452,8 @@ func NewGetRolePermissionCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetRolePermissionpermissionType, "permissionType", "", "", "")
 	cmd.MarkFlagRequired("permissionType")
+
+	cmd.Flags().BoolVarP(&GetRolePermissionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -375,6 +469,8 @@ var (
 	ReplaceRolePermissionpermissionType string
 
 	ReplaceRolePermissiondata string
+
+	ReplaceRolePermissionBackup bool
 )
 
 func NewReplaceRolePermissionCmd() *cobra.Command {
@@ -402,8 +498,15 @@ func NewReplaceRolePermissionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRolePermissionBackup {
+
+				idParam := ReplaceRolePermissionroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -417,6 +520,8 @@ func NewReplaceRolePermissionCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceRolePermissiondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceRolePermissionBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -429,6 +534,8 @@ var (
 	DeleteRolePermissionroleIdOrLabel string
 
 	DeleteRolePermissionpermissionType string
+
+	DeleteRolePermissionBackup bool
 )
 
 func NewDeleteRolePermissionCmd() *cobra.Command {
@@ -452,8 +559,15 @@ func NewDeleteRolePermissionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteRolePermissionBackup {
+
+				idParam := DeleteRolePermissionroleIdOrLabel
+				err := utils.BackupObject(d, "Role", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -463,6 +577,8 @@ func NewDeleteRolePermissionCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteRolePermissionpermissionType, "permissionType", "", "", "")
 	cmd.MarkFlagRequired("permissionType")
+
+	cmd.Flags().BoolVarP(&DeleteRolePermissionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

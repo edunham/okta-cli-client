@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(GroupCmd)
 }
 
-var CreateGroupdata string
+var (
+	CreateGroupdata string
+
+	CreateGroupBackup bool
+)
 
 func NewCreateGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateGroupBackup {
+
+				err := utils.BackupObject(d, "Group", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateGroupdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateGroupCmd := NewCreateGroupCmd()
 	GroupCmd.AddCommand(CreateGroupCmd)
 }
+
+var ListGroupsBackup bool
 
 func NewListGroupsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListGroupsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupsBackup {
+
+				err := utils.BackupObject(d, "Group", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListGroupsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	GroupCmd.AddCommand(ListGroupsCmd)
 }
 
-var CreateGroupRuledata string
+var (
+	CreateGroupRuledata string
+
+	CreateGroupRuleBackup bool
+)
 
 func NewCreateGroupRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -122,14 +148,22 @@ func NewCreateGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateGroupRuleBackup {
+
+				err := utils.BackupObject(d, "Group", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateGroupRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -138,6 +172,8 @@ func init() {
 	CreateGroupRuleCmd := NewCreateGroupRuleCmd()
 	GroupCmd.AddCommand(CreateGroupRuleCmd)
 }
+
+var ListGroupRulesBackup bool
 
 func NewListGroupRulesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -160,11 +196,19 @@ func NewListGroupRulesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupRulesBackup {
+
+				err := utils.BackupObject(d, "Group", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListGroupRulesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -174,7 +218,11 @@ func init() {
 	GroupCmd.AddCommand(ListGroupRulesCmd)
 }
 
-var GetGroupRulegroupRuleId string
+var (
+	GetGroupRulegroupRuleId string
+
+	GetGroupRuleBackup bool
+)
 
 func NewGetGroupRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -197,14 +245,23 @@ func NewGetGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetGroupRuleBackup {
+
+				idParam := GetGroupRulegroupRuleId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetGroupRulegroupRuleId, "groupRuleId", "", "", "")
 	cmd.MarkFlagRequired("groupRuleId")
+
+	cmd.Flags().BoolVarP(&GetGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -218,6 +275,8 @@ var (
 	ReplaceGroupRulegroupRuleId string
 
 	ReplaceGroupRuledata string
+
+	ReplaceGroupRuleBackup bool
 )
 
 func NewReplaceGroupRuleCmd() *cobra.Command {
@@ -245,8 +304,15 @@ func NewReplaceGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceGroupRuleBackup {
+
+				idParam := ReplaceGroupRulegroupRuleId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -257,6 +323,8 @@ func NewReplaceGroupRuleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceGroupRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -265,7 +333,11 @@ func init() {
 	GroupCmd.AddCommand(ReplaceGroupRuleCmd)
 }
 
-var DeleteGroupRulegroupRuleId string
+var (
+	DeleteGroupRulegroupRuleId string
+
+	DeleteGroupRuleBackup bool
+)
 
 func NewDeleteGroupRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -288,14 +360,23 @@ func NewDeleteGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteGroupRuleBackup {
+
+				idParam := DeleteGroupRulegroupRuleId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteGroupRulegroupRuleId, "groupRuleId", "", "", "")
 	cmd.MarkFlagRequired("groupRuleId")
+
+	cmd.Flags().BoolVarP(&DeleteGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -305,7 +386,11 @@ func init() {
 	GroupCmd.AddCommand(DeleteGroupRuleCmd)
 }
 
-var ActivateGroupRulegroupRuleId string
+var (
+	ActivateGroupRulegroupRuleId string
+
+	ActivateGroupRuleBackup bool
+)
 
 func NewActivateGroupRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -328,14 +413,23 @@ func NewActivateGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateGroupRuleBackup {
+
+				idParam := ActivateGroupRulegroupRuleId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateGroupRulegroupRuleId, "groupRuleId", "", "", "")
 	cmd.MarkFlagRequired("groupRuleId")
+
+	cmd.Flags().BoolVarP(&ActivateGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -345,7 +439,11 @@ func init() {
 	GroupCmd.AddCommand(ActivateGroupRuleCmd)
 }
 
-var DeactivateGroupRulegroupRuleId string
+var (
+	DeactivateGroupRulegroupRuleId string
+
+	DeactivateGroupRuleBackup bool
+)
 
 func NewDeactivateGroupRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -368,14 +466,23 @@ func NewDeactivateGroupRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateGroupRuleBackup {
+
+				idParam := DeactivateGroupRulegroupRuleId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateGroupRulegroupRuleId, "groupRuleId", "", "", "")
 	cmd.MarkFlagRequired("groupRuleId")
+
+	cmd.Flags().BoolVarP(&DeactivateGroupRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -385,7 +492,11 @@ func init() {
 	GroupCmd.AddCommand(DeactivateGroupRuleCmd)
 }
 
-var GetGroupgroupId string
+var (
+	GetGroupgroupId string
+
+	GetGroupBackup bool
+)
 
 func NewGetGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -408,14 +519,23 @@ func NewGetGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetGroupBackup {
+
+				idParam := GetGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetGroupgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&GetGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -429,6 +549,8 @@ var (
 	ReplaceGroupgroupId string
 
 	ReplaceGroupdata string
+
+	ReplaceGroupBackup bool
 )
 
 func NewReplaceGroupCmd() *cobra.Command {
@@ -456,8 +578,15 @@ func NewReplaceGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceGroupBackup {
+
+				idParam := ReplaceGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -468,6 +597,8 @@ func NewReplaceGroupCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceGroupdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceGroupBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -476,7 +607,11 @@ func init() {
 	GroupCmd.AddCommand(ReplaceGroupCmd)
 }
 
-var DeleteGroupgroupId string
+var (
+	DeleteGroupgroupId string
+
+	DeleteGroupBackup bool
+)
 
 func NewDeleteGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -499,14 +634,23 @@ func NewDeleteGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteGroupBackup {
+
+				idParam := DeleteGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteGroupgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&DeleteGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -516,7 +660,11 @@ func init() {
 	GroupCmd.AddCommand(DeleteGroupCmd)
 }
 
-var ListAssignedApplicationsForGroupgroupId string
+var (
+	ListAssignedApplicationsForGroupgroupId string
+
+	ListAssignedApplicationsForGroupBackup bool
+)
 
 func NewListAssignedApplicationsForGroupCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -539,14 +687,23 @@ func NewListAssignedApplicationsForGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAssignedApplicationsForGroupBackup {
+
+				idParam := ListAssignedApplicationsForGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAssignedApplicationsForGroupgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&ListAssignedApplicationsForGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -556,7 +713,11 @@ func init() {
 	GroupCmd.AddCommand(ListAssignedApplicationsForGroupCmd)
 }
 
-var ListGroupUsersgroupId string
+var (
+	ListGroupUsersgroupId string
+
+	ListGroupUsersBackup bool
+)
 
 func NewListGroupUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -579,14 +740,23 @@ func NewListGroupUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupUsersBackup {
+
+				idParam := ListGroupUsersgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListGroupUsersgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&ListGroupUsersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -600,6 +770,8 @@ var (
 	AssignUserToGroupgroupId string
 
 	AssignUserToGroupuserId string
+
+	AssignUserToGroupBackup bool
 )
 
 func NewAssignUserToGroupCmd() *cobra.Command {
@@ -623,8 +795,15 @@ func NewAssignUserToGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignUserToGroupBackup {
+
+				idParam := AssignUserToGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -634,6 +813,8 @@ func NewAssignUserToGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignUserToGroupuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&AssignUserToGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -647,6 +828,8 @@ var (
 	UnassignUserFromGroupgroupId string
 
 	UnassignUserFromGroupuserId string
+
+	UnassignUserFromGroupBackup bool
 )
 
 func NewUnassignUserFromGroupCmd() *cobra.Command {
@@ -670,8 +853,15 @@ func NewUnassignUserFromGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignUserFromGroupBackup {
+
+				idParam := UnassignUserFromGroupgroupId
+				err := utils.BackupObject(d, "Group", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -681,6 +871,8 @@ func NewUnassignUserFromGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignUserFromGroupuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&UnassignUserFromGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

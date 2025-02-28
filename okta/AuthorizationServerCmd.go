@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(AuthorizationServerCmd)
 }
 
-var CreateAuthorizationServerdata string
+var (
+	CreateAuthorizationServerdata string
+
+	CreateAuthorizationServerBackup bool
+)
 
 func NewCreateAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateAuthorizationServerBackup {
+
+				err := utils.BackupObject(d, "AuthorizationServer", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateAuthorizationServerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateAuthorizationServerCmd := NewCreateAuthorizationServerCmd()
 	AuthorizationServerCmd.AddCommand(CreateAuthorizationServerCmd)
 }
+
+var ListAuthorizationServersBackup bool
 
 func NewListAuthorizationServersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListAuthorizationServersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAuthorizationServersBackup {
+
+				err := utils.BackupObject(d, "AuthorizationServer", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListAuthorizationServersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	AuthorizationServerCmd.AddCommand(ListAuthorizationServersCmd)
 }
 
-var GetAuthorizationServerauthServerId string
+var (
+	GetAuthorizationServerauthServerId string
+
+	GetAuthorizationServerBackup bool
+)
 
 func NewGetAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAuthorizationServerBackup {
+
+				idParam := GetAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetAuthorizationServerauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&GetAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceAuthorizationServerauthServerId string
 
 	ReplaceAuthorizationServerdata string
+
+	ReplaceAuthorizationServerBackup bool
 )
 
 func NewReplaceAuthorizationServerCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceAuthorizationServerBackup {
+
+				idParam := ReplaceAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceAuthorizationServerCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceAuthorizationServerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	AuthorizationServerCmd.AddCommand(ReplaceAuthorizationServerCmd)
 }
 
-var DeleteAuthorizationServerauthServerId string
+var (
+	DeleteAuthorizationServerauthServerId string
+
+	DeleteAuthorizationServerBackup bool
+)
 
 func NewDeleteAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteAuthorizationServerBackup {
+
+				idParam := DeleteAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteAuthorizationServerauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&DeleteAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	AuthorizationServerCmd.AddCommand(DeleteAuthorizationServerCmd)
 }
 
-var ActivateAuthorizationServerauthServerId string
+var (
+	ActivateAuthorizationServerauthServerId string
+
+	ActivateAuthorizationServerBackup bool
+)
 
 func NewActivateAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateAuthorizationServerBackup {
+
+				idParam := ActivateAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateAuthorizationServerauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ActivateAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	AuthorizationServerCmd.AddCommand(ActivateAuthorizationServerCmd)
 }
 
-var DeactivateAuthorizationServerauthServerId string
+var (
+	DeactivateAuthorizationServerauthServerId string
+
+	DeactivateAuthorizationServerBackup bool
+)
 
 func NewDeactivateAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateAuthorizationServerBackup {
+
+				idParam := DeactivateAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateAuthorizationServerauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&DeactivateAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

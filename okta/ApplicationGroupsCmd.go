@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApplicationGroupsCmd)
 }
 
-var ListApplicationGroupAssignmentsappId string
+var (
+	ListApplicationGroupAssignmentsappId string
+
+	ListApplicationGroupAssignmentsBackup bool
+)
 
 func NewListApplicationGroupAssignmentsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewListApplicationGroupAssignmentsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApplicationGroupAssignmentsBackup {
+
+				idParam := ListApplicationGroupAssignmentsappId
+				err := utils.BackupObject(d, "ApplicationGroups", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListApplicationGroupAssignmentsappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListApplicationGroupAssignmentsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -60,6 +73,8 @@ var (
 	GetApplicationGroupAssignmentappId string
 
 	GetApplicationGroupAssignmentgroupId string
+
+	GetApplicationGroupAssignmentBackup bool
 )
 
 func NewGetApplicationGroupAssignmentCmd() *cobra.Command {
@@ -83,8 +98,15 @@ func NewGetApplicationGroupAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApplicationGroupAssignmentBackup {
+
+				idParam := GetApplicationGroupAssignmentappId
+				err := utils.BackupObject(d, "ApplicationGroups", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -94,6 +116,8 @@ func NewGetApplicationGroupAssignmentCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetApplicationGroupAssignmentgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&GetApplicationGroupAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -109,6 +133,8 @@ var (
 	AssignGroupToApplicationgroupId string
 
 	AssignGroupToApplicationdata string
+
+	AssignGroupToApplicationBackup bool
 )
 
 func NewAssignGroupToApplicationCmd() *cobra.Command {
@@ -136,8 +162,15 @@ func NewAssignGroupToApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignGroupToApplicationBackup {
+
+				idParam := AssignGroupToApplicationappId
+				err := utils.BackupObject(d, "ApplicationGroups", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -151,6 +184,8 @@ func NewAssignGroupToApplicationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&AssignGroupToApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&AssignGroupToApplicationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -163,6 +198,8 @@ var (
 	UnassignApplicationFromGroupappId string
 
 	UnassignApplicationFromGroupgroupId string
+
+	UnassignApplicationFromGroupBackup bool
 )
 
 func NewUnassignApplicationFromGroupCmd() *cobra.Command {
@@ -186,8 +223,15 @@ func NewUnassignApplicationFromGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignApplicationFromGroupBackup {
+
+				idParam := UnassignApplicationFromGroupappId
+				err := utils.BackupObject(d, "ApplicationGroups", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -197,6 +241,8 @@ func NewUnassignApplicationFromGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignApplicationFromGroupgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&UnassignApplicationFromGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

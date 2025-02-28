@@ -20,6 +20,8 @@ var (
 	AssignRoleToGroupgroupId string
 
 	AssignRoleToGroupdata string
+
+	AssignRoleToGroupBackup bool
 )
 
 func NewAssignRoleToGroupCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewAssignRoleToGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignRoleToGroupBackup {
+
+				idParam := AssignRoleToGroupgroupId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewAssignRoleToGroupCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&AssignRoleToGroupdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&AssignRoleToGroupBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	RoleAssignmentCmd.AddCommand(AssignRoleToGroupCmd)
 }
 
-var ListGroupAssignedRolesgroupId string
+var (
+	ListGroupAssignedRolesgroupId string
+
+	ListGroupAssignedRolesBackup bool
+)
 
 func NewListGroupAssignedRolesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListGroupAssignedRolesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupAssignedRolesBackup {
+
+				idParam := ListGroupAssignedRolesgroupId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListGroupAssignedRolesgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&ListGroupAssignedRolesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetGroupAssignedRolegroupId string
 
 	GetGroupAssignedRoleroleId string
+
+	GetGroupAssignedRoleBackup bool
 )
 
 func NewGetGroupAssignedRoleCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetGroupAssignedRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetGroupAssignedRoleBackup {
+
+				idParam := GetGroupAssignedRolegroupId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetGroupAssignedRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetGroupAssignedRoleroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&GetGroupAssignedRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -158,6 +193,8 @@ var (
 	UnassignRoleFromGroupgroupId string
 
 	UnassignRoleFromGrouproleId string
+
+	UnassignRoleFromGroupBackup bool
 )
 
 func NewUnassignRoleFromGroupCmd() *cobra.Command {
@@ -181,8 +218,15 @@ func NewUnassignRoleFromGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignRoleFromGroupBackup {
+
+				idParam := UnassignRoleFromGroupgroupId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -193,6 +237,8 @@ func NewUnassignRoleFromGroupCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UnassignRoleFromGrouproleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
 
+	cmd.Flags().BoolVarP(&UnassignRoleFromGroupBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -200,6 +246,8 @@ func init() {
 	UnassignRoleFromGroupCmd := NewUnassignRoleFromGroupCmd()
 	RoleAssignmentCmd.AddCommand(UnassignRoleFromGroupCmd)
 }
+
+var ListUsersWithRoleAssignmentsBackup bool
 
 func NewListUsersWithRoleAssignmentsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -222,11 +270,19 @@ func NewListUsersWithRoleAssignmentsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUsersWithRoleAssignmentsBackup {
+
+				err := utils.BackupObject(d, "RoleAssignment", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListUsersWithRoleAssignmentsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -240,6 +296,8 @@ var (
 	AssignRoleToUseruserId string
 
 	AssignRoleToUserdata string
+
+	AssignRoleToUserBackup bool
 )
 
 func NewAssignRoleToUserCmd() *cobra.Command {
@@ -267,8 +325,15 @@ func NewAssignRoleToUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignRoleToUserBackup {
+
+				idParam := AssignRoleToUseruserId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -279,6 +344,8 @@ func NewAssignRoleToUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&AssignRoleToUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&AssignRoleToUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -287,7 +354,11 @@ func init() {
 	RoleAssignmentCmd.AddCommand(AssignRoleToUserCmd)
 }
 
-var ListAssignedRolesForUseruserId string
+var (
+	ListAssignedRolesForUseruserId string
+
+	ListAssignedRolesForUserBackup bool
+)
 
 func NewListAssignedRolesForUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -310,14 +381,23 @@ func NewListAssignedRolesForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAssignedRolesForUserBackup {
+
+				idParam := ListAssignedRolesForUseruserId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAssignedRolesForUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListAssignedRolesForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -331,6 +411,8 @@ var (
 	GetUserAssignedRoleuserId string
 
 	GetUserAssignedRoleroleId string
+
+	GetUserAssignedRoleBackup bool
 )
 
 func NewGetUserAssignedRoleCmd() *cobra.Command {
@@ -354,8 +436,15 @@ func NewGetUserAssignedRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserAssignedRoleBackup {
+
+				idParam := GetUserAssignedRoleuserId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -365,6 +454,8 @@ func NewGetUserAssignedRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetUserAssignedRoleroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&GetUserAssignedRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -378,6 +469,8 @@ var (
 	UnassignRoleFromUseruserId string
 
 	UnassignRoleFromUserroleId string
+
+	UnassignRoleFromUserBackup bool
 )
 
 func NewUnassignRoleFromUserCmd() *cobra.Command {
@@ -401,8 +494,15 @@ func NewUnassignRoleFromUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignRoleFromUserBackup {
+
+				idParam := UnassignRoleFromUseruserId
+				err := utils.BackupObject(d, "RoleAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -412,6 +512,8 @@ func NewUnassignRoleFromUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignRoleFromUserroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&UnassignRoleFromUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

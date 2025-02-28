@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(PolicyCmd)
 }
 
-var CreatePolicydata string
+var (
+	CreatePolicydata string
+
+	CreatePolicyBackup bool
+)
 
 func NewCreatePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreatePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreatePolicyBackup {
+
+				err := utils.BackupObject(d, "Policy", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreatePolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreatePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreatePolicyCmd := NewCreatePolicyCmd()
 	PolicyCmd.AddCommand(CreatePolicyCmd)
 }
+
+var ListPoliciesBackup bool
 
 func NewListPoliciesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListPoliciesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPoliciesBackup {
+
+				err := utils.BackupObject(d, "Policy", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListPoliciesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	PolicyCmd.AddCommand(ListPoliciesCmd)
 }
 
-var CreatePolicySimulationdata string
+var (
+	CreatePolicySimulationdata string
+
+	CreatePolicySimulationBackup bool
+)
 
 func NewCreatePolicySimulationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -122,14 +148,22 @@ func NewCreatePolicySimulationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreatePolicySimulationBackup {
+
+				err := utils.BackupObject(d, "Policy", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreatePolicySimulationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreatePolicySimulationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,7 +173,11 @@ func init() {
 	PolicyCmd.AddCommand(CreatePolicySimulationCmd)
 }
 
-var GetPolicypolicyId string
+var (
+	GetPolicypolicyId string
+
+	GetPolicyBackup bool
+)
 
 func NewGetPolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -162,14 +200,23 @@ func NewGetPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPolicyBackup {
+
+				idParam := GetPolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&GetPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -183,6 +230,8 @@ var (
 	ReplacePolicypolicyId string
 
 	ReplacePolicydata string
+
+	ReplacePolicyBackup bool
 )
 
 func NewReplacePolicyCmd() *cobra.Command {
@@ -210,8 +259,15 @@ func NewReplacePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePolicyBackup {
+
+				idParam := ReplacePolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -222,6 +278,8 @@ func NewReplacePolicyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplacePolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplacePolicyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -230,7 +288,11 @@ func init() {
 	PolicyCmd.AddCommand(ReplacePolicyCmd)
 }
 
-var DeletePolicypolicyId string
+var (
+	DeletePolicypolicyId string
+
+	DeletePolicyBackup bool
+)
 
 func NewDeletePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -253,14 +315,23 @@ func NewDeletePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePolicyBackup {
+
+				idParam := DeletePolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeletePolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&DeletePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -270,7 +341,11 @@ func init() {
 	PolicyCmd.AddCommand(DeletePolicyCmd)
 }
 
-var ListPolicyAppspolicyId string
+var (
+	ListPolicyAppspolicyId string
+
+	ListPolicyAppsBackup bool
+)
 
 func NewListPolicyAppsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -293,14 +368,23 @@ func NewListPolicyAppsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPolicyAppsBackup {
+
+				idParam := ListPolicyAppspolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListPolicyAppspolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ListPolicyAppsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -310,7 +394,11 @@ func init() {
 	PolicyCmd.AddCommand(ListPolicyAppsCmd)
 }
 
-var ClonePolicypolicyId string
+var (
+	ClonePolicypolicyId string
+
+	ClonePolicyBackup bool
+)
 
 func NewClonePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -333,14 +421,23 @@ func NewClonePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ClonePolicyBackup {
+
+				idParam := ClonePolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ClonePolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ClonePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -350,7 +447,11 @@ func init() {
 	PolicyCmd.AddCommand(ClonePolicyCmd)
 }
 
-var ActivatePolicypolicyId string
+var (
+	ActivatePolicypolicyId string
+
+	ActivatePolicyBackup bool
+)
 
 func NewActivatePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -373,14 +474,23 @@ func NewActivatePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivatePolicyBackup {
+
+				idParam := ActivatePolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivatePolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ActivatePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -390,7 +500,11 @@ func init() {
 	PolicyCmd.AddCommand(ActivatePolicyCmd)
 }
 
-var DeactivatePolicypolicyId string
+var (
+	DeactivatePolicypolicyId string
+
+	DeactivatePolicyBackup bool
+)
 
 func NewDeactivatePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -413,14 +527,23 @@ func NewDeactivatePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivatePolicyBackup {
+
+				idParam := DeactivatePolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivatePolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&DeactivatePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -434,6 +557,8 @@ var (
 	MapResourceToPolicypolicyId string
 
 	MapResourceToPolicydata string
+
+	MapResourceToPolicyBackup bool
 )
 
 func NewMapResourceToPolicyCmd() *cobra.Command {
@@ -461,8 +586,15 @@ func NewMapResourceToPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if MapResourceToPolicyBackup {
+
+				idParam := MapResourceToPolicypolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -473,6 +605,8 @@ func NewMapResourceToPolicyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&MapResourceToPolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&MapResourceToPolicyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -481,7 +615,11 @@ func init() {
 	PolicyCmd.AddCommand(MapResourceToPolicyCmd)
 }
 
-var ListPolicyMappingspolicyId string
+var (
+	ListPolicyMappingspolicyId string
+
+	ListPolicyMappingsBackup bool
+)
 
 func NewListPolicyMappingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -504,14 +642,23 @@ func NewListPolicyMappingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPolicyMappingsBackup {
+
+				idParam := ListPolicyMappingspolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListPolicyMappingspolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ListPolicyMappingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -525,6 +672,8 @@ var (
 	GetPolicyMappingpolicyId string
 
 	GetPolicyMappingmappingId string
+
+	GetPolicyMappingBackup bool
 )
 
 func NewGetPolicyMappingCmd() *cobra.Command {
@@ -548,8 +697,15 @@ func NewGetPolicyMappingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPolicyMappingBackup {
+
+				idParam := GetPolicyMappingpolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -559,6 +715,8 @@ func NewGetPolicyMappingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetPolicyMappingmappingId, "mappingId", "", "", "")
 	cmd.MarkFlagRequired("mappingId")
+
+	cmd.Flags().BoolVarP(&GetPolicyMappingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -572,6 +730,8 @@ var (
 	DeletePolicyResourceMappingpolicyId string
 
 	DeletePolicyResourceMappingmappingId string
+
+	DeletePolicyResourceMappingBackup bool
 )
 
 func NewDeletePolicyResourceMappingCmd() *cobra.Command {
@@ -595,8 +755,15 @@ func NewDeletePolicyResourceMappingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePolicyResourceMappingBackup {
+
+				idParam := DeletePolicyResourceMappingpolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -606,6 +773,8 @@ func NewDeletePolicyResourceMappingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeletePolicyResourceMappingmappingId, "mappingId", "", "", "")
 	cmd.MarkFlagRequired("mappingId")
+
+	cmd.Flags().BoolVarP(&DeletePolicyResourceMappingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -619,6 +788,8 @@ var (
 	CreatePolicyRulepolicyId string
 
 	CreatePolicyRuledata string
+
+	CreatePolicyRuleBackup bool
 )
 
 func NewCreatePolicyRuleCmd() *cobra.Command {
@@ -646,8 +817,15 @@ func NewCreatePolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreatePolicyRuleBackup {
+
+				idParam := CreatePolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -658,6 +836,8 @@ func NewCreatePolicyRuleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreatePolicyRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreatePolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -666,7 +846,11 @@ func init() {
 	PolicyCmd.AddCommand(CreatePolicyRuleCmd)
 }
 
-var ListPolicyRulespolicyId string
+var (
+	ListPolicyRulespolicyId string
+
+	ListPolicyRulesBackup bool
+)
 
 func NewListPolicyRulesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -689,14 +873,23 @@ func NewListPolicyRulesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPolicyRulesBackup {
+
+				idParam := ListPolicyRulespolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListPolicyRulespolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ListPolicyRulesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -710,6 +903,8 @@ var (
 	GetPolicyRulepolicyId string
 
 	GetPolicyRuleruleId string
+
+	GetPolicyRuleBackup bool
 )
 
 func NewGetPolicyRuleCmd() *cobra.Command {
@@ -733,8 +928,15 @@ func NewGetPolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPolicyRuleBackup {
+
+				idParam := GetPolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -744,6 +946,8 @@ func NewGetPolicyRuleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetPolicyRuleruleId, "ruleId", "", "", "")
 	cmd.MarkFlagRequired("ruleId")
+
+	cmd.Flags().BoolVarP(&GetPolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -759,6 +963,8 @@ var (
 	ReplacePolicyRuleruleId string
 
 	ReplacePolicyRuledata string
+
+	ReplacePolicyRuleBackup bool
 )
 
 func NewReplacePolicyRuleCmd() *cobra.Command {
@@ -786,8 +992,15 @@ func NewReplacePolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePolicyRuleBackup {
+
+				idParam := ReplacePolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -801,6 +1014,8 @@ func NewReplacePolicyRuleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplacePolicyRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplacePolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -813,6 +1028,8 @@ var (
 	DeletePolicyRulepolicyId string
 
 	DeletePolicyRuleruleId string
+
+	DeletePolicyRuleBackup bool
 )
 
 func NewDeletePolicyRuleCmd() *cobra.Command {
@@ -836,8 +1053,15 @@ func NewDeletePolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePolicyRuleBackup {
+
+				idParam := DeletePolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -847,6 +1071,8 @@ func NewDeletePolicyRuleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeletePolicyRuleruleId, "ruleId", "", "", "")
 	cmd.MarkFlagRequired("ruleId")
+
+	cmd.Flags().BoolVarP(&DeletePolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -860,6 +1086,8 @@ var (
 	ActivatePolicyRulepolicyId string
 
 	ActivatePolicyRuleruleId string
+
+	ActivatePolicyRuleBackup bool
 )
 
 func NewActivatePolicyRuleCmd() *cobra.Command {
@@ -883,8 +1111,15 @@ func NewActivatePolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivatePolicyRuleBackup {
+
+				idParam := ActivatePolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -894,6 +1129,8 @@ func NewActivatePolicyRuleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivatePolicyRuleruleId, "ruleId", "", "", "")
 	cmd.MarkFlagRequired("ruleId")
+
+	cmd.Flags().BoolVarP(&ActivatePolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -907,6 +1144,8 @@ var (
 	DeactivatePolicyRulepolicyId string
 
 	DeactivatePolicyRuleruleId string
+
+	DeactivatePolicyRuleBackup bool
 )
 
 func NewDeactivatePolicyRuleCmd() *cobra.Command {
@@ -930,8 +1169,15 @@ func NewDeactivatePolicyRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivatePolicyRuleBackup {
+
+				idParam := DeactivatePolicyRulepolicyId
+				err := utils.BackupObject(d, "Policy", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -941,6 +1187,8 @@ func NewDeactivatePolicyRuleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeactivatePolicyRuleruleId, "ruleId", "", "", "")
 	cmd.MarkFlagRequired("ruleId")
+
+	cmd.Flags().BoolVarP(&DeactivatePolicyRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

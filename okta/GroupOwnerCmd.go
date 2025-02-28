@@ -20,6 +20,8 @@ var (
 	AssignGroupOwnergroupId string
 
 	AssignGroupOwnerdata string
+
+	AssignGroupOwnerBackup bool
 )
 
 func NewAssignGroupOwnerCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewAssignGroupOwnerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignGroupOwnerBackup {
+
+				idParam := AssignGroupOwnergroupId
+				err := utils.BackupObject(d, "GroupOwner", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewAssignGroupOwnerCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&AssignGroupOwnerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&AssignGroupOwnerBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	GroupOwnerCmd.AddCommand(AssignGroupOwnerCmd)
 }
 
-var ListGroupOwnersgroupId string
+var (
+	ListGroupOwnersgroupId string
+
+	ListGroupOwnersBackup bool
+)
 
 func NewListGroupOwnersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListGroupOwnersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupOwnersBackup {
+
+				idParam := ListGroupOwnersgroupId
+				err := utils.BackupObject(d, "GroupOwner", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListGroupOwnersgroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&ListGroupOwnersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	DeleteGroupOwnergroupId string
 
 	DeleteGroupOwnerownerId string
+
+	DeleteGroupOwnerBackup bool
 )
 
 func NewDeleteGroupOwnerCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewDeleteGroupOwnerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteGroupOwnerBackup {
+
+				idParam := DeleteGroupOwnergroupId
+				err := utils.BackupObject(d, "GroupOwner", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewDeleteGroupOwnerCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteGroupOwnerownerId, "ownerId", "", "", "")
 	cmd.MarkFlagRequired("ownerId")
+
+	cmd.Flags().BoolVarP(&DeleteGroupOwnerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

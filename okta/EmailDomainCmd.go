@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(EmailDomainCmd)
 }
 
-var CreateEmailDomaindata string
+var (
+	CreateEmailDomaindata string
+
+	CreateEmailDomainBackup bool
+)
 
 func NewCreateEmailDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateEmailDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateEmailDomainBackup {
+
+				err := utils.BackupObject(d, "EmailDomain", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateEmailDomaindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateEmailDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateEmailDomainCmd := NewCreateEmailDomainCmd()
 	EmailDomainCmd.AddCommand(CreateEmailDomainCmd)
 }
+
+var ListEmailDomainsBackup bool
 
 func NewListEmailDomainsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListEmailDomainsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListEmailDomainsBackup {
+
+				err := utils.BackupObject(d, "EmailDomain", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListEmailDomainsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	EmailDomainCmd.AddCommand(ListEmailDomainsCmd)
 }
 
-var GetEmailDomainemailDomainId string
+var (
+	GetEmailDomainemailDomainId string
+
+	GetEmailDomainBackup bool
+)
 
 func NewGetEmailDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetEmailDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailDomainBackup {
+
+				idParam := GetEmailDomainemailDomainId
+				err := utils.BackupObject(d, "EmailDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetEmailDomainemailDomainId, "emailDomainId", "", "", "")
 	cmd.MarkFlagRequired("emailDomainId")
+
+	cmd.Flags().BoolVarP(&GetEmailDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceEmailDomainemailDomainId string
 
 	ReplaceEmailDomaindata string
+
+	ReplaceEmailDomainBackup bool
 )
 
 func NewReplaceEmailDomainCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceEmailDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceEmailDomainBackup {
+
+				idParam := ReplaceEmailDomainemailDomainId
+				err := utils.BackupObject(d, "EmailDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceEmailDomainCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceEmailDomaindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceEmailDomainBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	EmailDomainCmd.AddCommand(ReplaceEmailDomainCmd)
 }
 
-var DeleteEmailDomainemailDomainId string
+var (
+	DeleteEmailDomainemailDomainId string
+
+	DeleteEmailDomainBackup bool
+)
 
 func NewDeleteEmailDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteEmailDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteEmailDomainBackup {
+
+				idParam := DeleteEmailDomainemailDomainId
+				err := utils.BackupObject(d, "EmailDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteEmailDomainemailDomainId, "emailDomainId", "", "", "")
 	cmd.MarkFlagRequired("emailDomainId")
+
+	cmd.Flags().BoolVarP(&DeleteEmailDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	EmailDomainCmd.AddCommand(DeleteEmailDomainCmd)
 }
 
-var VerifyEmailDomainemailDomainId string
+var (
+	VerifyEmailDomainemailDomainId string
+
+	VerifyEmailDomainBackup bool
+)
 
 func NewVerifyEmailDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewVerifyEmailDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if VerifyEmailDomainBackup {
+
+				idParam := VerifyEmailDomainemailDomainId
+				err := utils.BackupObject(d, "EmailDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&VerifyEmailDomainemailDomainId, "emailDomainId", "", "", "")
 	cmd.MarkFlagRequired("emailDomainId")
+
+	cmd.Flags().BoolVarP(&VerifyEmailDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

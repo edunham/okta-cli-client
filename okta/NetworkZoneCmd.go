@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(NetworkZoneCmd)
 }
 
-var CreateNetworkZonedata string
+var (
+	CreateNetworkZonedata string
+
+	CreateNetworkZoneBackup bool
+)
 
 func NewCreateNetworkZoneCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateNetworkZoneBackup {
+
+				err := utils.BackupObject(d, "NetworkZone", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateNetworkZonedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateNetworkZoneCmd := NewCreateNetworkZoneCmd()
 	NetworkZoneCmd.AddCommand(CreateNetworkZoneCmd)
 }
+
+var ListNetworkZonesBackup bool
 
 func NewListNetworkZonesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListNetworkZonesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListNetworkZonesBackup {
+
+				err := utils.BackupObject(d, "NetworkZone", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListNetworkZonesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	NetworkZoneCmd.AddCommand(ListNetworkZonesCmd)
 }
 
-var GetNetworkZonezoneId string
+var (
+	GetNetworkZonezoneId string
+
+	GetNetworkZoneBackup bool
+)
 
 func NewGetNetworkZoneCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetNetworkZoneBackup {
+
+				idParam := GetNetworkZonezoneId
+				err := utils.BackupObject(d, "NetworkZone", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetNetworkZonezoneId, "zoneId", "", "", "")
 	cmd.MarkFlagRequired("zoneId")
+
+	cmd.Flags().BoolVarP(&GetNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceNetworkZonezoneId string
 
 	ReplaceNetworkZonedata string
+
+	ReplaceNetworkZoneBackup bool
 )
 
 func NewReplaceNetworkZoneCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceNetworkZoneBackup {
+
+				idParam := ReplaceNetworkZonezoneId
+				err := utils.BackupObject(d, "NetworkZone", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceNetworkZoneCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceNetworkZonedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	NetworkZoneCmd.AddCommand(ReplaceNetworkZoneCmd)
 }
 
-var DeleteNetworkZonezoneId string
+var (
+	DeleteNetworkZonezoneId string
+
+	DeleteNetworkZoneBackup bool
+)
 
 func NewDeleteNetworkZoneCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteNetworkZoneBackup {
+
+				idParam := DeleteNetworkZonezoneId
+				err := utils.BackupObject(d, "NetworkZone", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteNetworkZonezoneId, "zoneId", "", "", "")
 	cmd.MarkFlagRequired("zoneId")
+
+	cmd.Flags().BoolVarP(&DeleteNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	NetworkZoneCmd.AddCommand(DeleteNetworkZoneCmd)
 }
 
-var ActivateNetworkZonezoneId string
+var (
+	ActivateNetworkZonezoneId string
+
+	ActivateNetworkZoneBackup bool
+)
 
 func NewActivateNetworkZoneCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateNetworkZoneBackup {
+
+				idParam := ActivateNetworkZonezoneId
+				err := utils.BackupObject(d, "NetworkZone", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateNetworkZonezoneId, "zoneId", "", "", "")
 	cmd.MarkFlagRequired("zoneId")
+
+	cmd.Flags().BoolVarP(&ActivateNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	NetworkZoneCmd.AddCommand(ActivateNetworkZoneCmd)
 }
 
-var DeactivateNetworkZonezoneId string
+var (
+	DeactivateNetworkZonezoneId string
+
+	DeactivateNetworkZoneBackup bool
+)
 
 func NewDeactivateNetworkZoneCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateNetworkZoneCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateNetworkZoneBackup {
+
+				idParam := DeactivateNetworkZonezoneId
+				err := utils.BackupObject(d, "NetworkZone", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateNetworkZonezoneId, "zoneId", "", "", "")
 	cmd.MarkFlagRequired("zoneId")
+
+	cmd.Flags().BoolVarP(&DeactivateNetworkZoneBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

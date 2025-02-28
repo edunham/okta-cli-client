@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ThreatInsightCmd)
 }
 
-var UpdateConfigurationdata string
+var (
+	UpdateConfigurationdata string
+
+	UpdateConfigurationBackup bool
+)
 
 func NewUpdateConfigurationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewUpdateConfigurationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateConfigurationBackup {
+
+				err := utils.BackupObject(d, "ThreatInsight", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UpdateConfigurationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UpdateConfigurationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	UpdateConfigurationCmd := NewUpdateConfigurationCmd()
 	ThreatInsightCmd.AddCommand(UpdateConfigurationCmd)
 }
+
+var GetCurrentConfigurationBackup bool
 
 func NewGetCurrentConfigurationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewGetCurrentConfigurationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCurrentConfigurationBackup {
+
+				err := utils.BackupObject(d, "ThreatInsight", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetCurrentConfigurationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

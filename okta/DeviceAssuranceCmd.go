@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(DeviceAssuranceCmd)
 }
 
-var CreateDeviceAssurancePolicydata string
+var (
+	CreateDeviceAssurancePolicydata string
+
+	CreateDeviceAssurancePolicyBackup bool
+)
 
 func NewCreateDeviceAssurancePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateDeviceAssurancePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateDeviceAssurancePolicyBackup {
+
+				err := utils.BackupObject(d, "DeviceAssurance", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateDeviceAssurancePolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateDeviceAssurancePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateDeviceAssurancePolicyCmd := NewCreateDeviceAssurancePolicyCmd()
 	DeviceAssuranceCmd.AddCommand(CreateDeviceAssurancePolicyCmd)
 }
+
+var ListDeviceAssurancePoliciesBackup bool
 
 func NewListDeviceAssurancePoliciesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListDeviceAssurancePoliciesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListDeviceAssurancePoliciesBackup {
+
+				err := utils.BackupObject(d, "DeviceAssurance", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListDeviceAssurancePoliciesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	DeviceAssuranceCmd.AddCommand(ListDeviceAssurancePoliciesCmd)
 }
 
-var GetDeviceAssurancePolicydeviceAssuranceId string
+var (
+	GetDeviceAssurancePolicydeviceAssuranceId string
+
+	GetDeviceAssurancePolicyBackup bool
+)
 
 func NewGetDeviceAssurancePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetDeviceAssurancePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetDeviceAssurancePolicyBackup {
+
+				idParam := GetDeviceAssurancePolicydeviceAssuranceId
+				err := utils.BackupObject(d, "DeviceAssurance", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetDeviceAssurancePolicydeviceAssuranceId, "deviceAssuranceId", "", "", "")
 	cmd.MarkFlagRequired("deviceAssuranceId")
+
+	cmd.Flags().BoolVarP(&GetDeviceAssurancePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceDeviceAssurancePolicydeviceAssuranceId string
 
 	ReplaceDeviceAssurancePolicydata string
+
+	ReplaceDeviceAssurancePolicyBackup bool
 )
 
 func NewReplaceDeviceAssurancePolicyCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceDeviceAssurancePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceDeviceAssurancePolicyBackup {
+
+				idParam := ReplaceDeviceAssurancePolicydeviceAssuranceId
+				err := utils.BackupObject(d, "DeviceAssurance", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceDeviceAssurancePolicyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceDeviceAssurancePolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceDeviceAssurancePolicyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	DeviceAssuranceCmd.AddCommand(ReplaceDeviceAssurancePolicyCmd)
 }
 
-var DeleteDeviceAssurancePolicydeviceAssuranceId string
+var (
+	DeleteDeviceAssurancePolicydeviceAssuranceId string
+
+	DeleteDeviceAssurancePolicyBackup bool
+)
 
 func NewDeleteDeviceAssurancePolicyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteDeviceAssurancePolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteDeviceAssurancePolicyBackup {
+
+				idParam := DeleteDeviceAssurancePolicydeviceAssuranceId
+				err := utils.BackupObject(d, "DeviceAssurance", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteDeviceAssurancePolicydeviceAssuranceId, "deviceAssuranceId", "", "", "")
 	cmd.MarkFlagRequired("deviceAssuranceId")
+
+	cmd.Flags().BoolVarP(&DeleteDeviceAssurancePolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

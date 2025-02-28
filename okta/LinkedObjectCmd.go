@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(LinkedObjectCmd)
 }
 
-var CreateLinkedObjectDefinitiondata string
+var (
+	CreateLinkedObjectDefinitiondata string
+
+	CreateLinkedObjectDefinitionBackup bool
+)
 
 func NewCreateLinkedObjectDefinitionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateLinkedObjectDefinitionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateLinkedObjectDefinitionBackup {
+
+				err := utils.BackupObject(d, "LinkedObject", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateLinkedObjectDefinitiondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateLinkedObjectDefinitionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateLinkedObjectDefinitionCmd := NewCreateLinkedObjectDefinitionCmd()
 	LinkedObjectCmd.AddCommand(CreateLinkedObjectDefinitionCmd)
 }
+
+var ListLinkedObjectDefinitionsBackup bool
 
 func NewListLinkedObjectDefinitionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListLinkedObjectDefinitionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListLinkedObjectDefinitionsBackup {
+
+				err := utils.BackupObject(d, "LinkedObject", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListLinkedObjectDefinitionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	LinkedObjectCmd.AddCommand(ListLinkedObjectDefinitionsCmd)
 }
 
-var GetLinkedObjectDefinitionlinkedObjectName string
+var (
+	GetLinkedObjectDefinitionlinkedObjectName string
+
+	GetLinkedObjectDefinitionBackup bool
+)
 
 func NewGetLinkedObjectDefinitionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetLinkedObjectDefinitionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetLinkedObjectDefinitionBackup {
+
+				idParam := GetLinkedObjectDefinitionlinkedObjectName
+				err := utils.BackupObject(d, "LinkedObject", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetLinkedObjectDefinitionlinkedObjectName, "linkedObjectName", "", "", "")
 	cmd.MarkFlagRequired("linkedObjectName")
+
+	cmd.Flags().BoolVarP(&GetLinkedObjectDefinitionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -135,7 +170,11 @@ func init() {
 	LinkedObjectCmd.AddCommand(GetLinkedObjectDefinitionCmd)
 }
 
-var DeleteLinkedObjectDefinitionlinkedObjectName string
+var (
+	DeleteLinkedObjectDefinitionlinkedObjectName string
+
+	DeleteLinkedObjectDefinitionBackup bool
+)
 
 func NewDeleteLinkedObjectDefinitionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -158,14 +197,23 @@ func NewDeleteLinkedObjectDefinitionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteLinkedObjectDefinitionBackup {
+
+				idParam := DeleteLinkedObjectDefinitionlinkedObjectName
+				err := utils.BackupObject(d, "LinkedObject", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteLinkedObjectDefinitionlinkedObjectName, "linkedObjectName", "", "", "")
 	cmd.MarkFlagRequired("linkedObjectName")
+
+	cmd.Flags().BoolVarP(&DeleteLinkedObjectDefinitionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

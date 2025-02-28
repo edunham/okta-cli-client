@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApplicationTokensCmd)
 }
 
-var ListOAuth2TokensForApplicationappId string
+var (
+	ListOAuth2TokensForApplicationappId string
+
+	ListOAuth2TokensForApplicationBackup bool
+)
 
 func NewListOAuth2TokensForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewListOAuth2TokensForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListOAuth2TokensForApplicationBackup {
+
+				idParam := ListOAuth2TokensForApplicationappId
+				err := utils.BackupObject(d, "ApplicationTokens", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListOAuth2TokensForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListOAuth2TokensForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -56,7 +69,11 @@ func init() {
 	ApplicationTokensCmd.AddCommand(ListOAuth2TokensForApplicationCmd)
 }
 
-var RevokeOAuth2TokensForApplicationappId string
+var (
+	RevokeOAuth2TokensForApplicationappId string
+
+	RevokeOAuth2TokensForApplicationBackup bool
+)
 
 func NewRevokeOAuth2TokensForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -79,14 +96,23 @@ func NewRevokeOAuth2TokensForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeOAuth2TokensForApplicationBackup {
+
+				idParam := RevokeOAuth2TokensForApplicationappId
+				err := utils.BackupObject(d, "ApplicationTokens", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RevokeOAuth2TokensForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&RevokeOAuth2TokensForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -100,6 +126,8 @@ var (
 	GetOAuth2TokenForApplicationappId string
 
 	GetOAuth2TokenForApplicationtokenId string
+
+	GetOAuth2TokenForApplicationBackup bool
 )
 
 func NewGetOAuth2TokenForApplicationCmd() *cobra.Command {
@@ -123,8 +151,15 @@ func NewGetOAuth2TokenForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOAuth2TokenForApplicationBackup {
+
+				idParam := GetOAuth2TokenForApplicationappId
+				err := utils.BackupObject(d, "ApplicationTokens", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -134,6 +169,8 @@ func NewGetOAuth2TokenForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetOAuth2TokenForApplicationtokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
+
+	cmd.Flags().BoolVarP(&GetOAuth2TokenForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -147,6 +184,8 @@ var (
 	RevokeOAuth2TokenForApplicationappId string
 
 	RevokeOAuth2TokenForApplicationtokenId string
+
+	RevokeOAuth2TokenForApplicationBackup bool
 )
 
 func NewRevokeOAuth2TokenForApplicationCmd() *cobra.Command {
@@ -170,8 +209,15 @@ func NewRevokeOAuth2TokenForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeOAuth2TokenForApplicationBackup {
+
+				idParam := RevokeOAuth2TokenForApplicationappId
+				err := utils.BackupObject(d, "ApplicationTokens", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -181,6 +227,8 @@ func NewRevokeOAuth2TokenForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeOAuth2TokenForApplicationtokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
+
+	cmd.Flags().BoolVarP(&RevokeOAuth2TokenForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(UserTypeCmd)
 }
 
-var CreateUserTypedata string
+var (
+	CreateUserTypedata string
+
+	CreateUserTypeBackup bool
+)
 
 func NewCreateUserTypeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateUserTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateUserTypeBackup {
+
+				err := utils.BackupObject(d, "UserType", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateUserTypedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateUserTypeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateUserTypeCmd := NewCreateUserTypeCmd()
 	UserTypeCmd.AddCommand(CreateUserTypeCmd)
 }
+
+var ListUserTypesBackup bool
 
 func NewListUserTypesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListUserTypesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserTypesBackup {
+
+				err := utils.BackupObject(d, "UserType", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListUserTypesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -99,6 +121,8 @@ var (
 	UpdateUserTypetypeId string
 
 	UpdateUserTypedata string
+
+	UpdateUserTypeBackup bool
 )
 
 func NewUpdateUserTypeCmd() *cobra.Command {
@@ -126,8 +150,15 @@ func NewUpdateUserTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateUserTypeBackup {
+
+				idParam := UpdateUserTypetypeId
+				err := utils.BackupObject(d, "UserType", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -138,6 +169,8 @@ func NewUpdateUserTypeCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateUserTypedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateUserTypeBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -146,7 +179,11 @@ func init() {
 	UserTypeCmd.AddCommand(UpdateUserTypeCmd)
 }
 
-var GetUserTypetypeId string
+var (
+	GetUserTypetypeId string
+
+	GetUserTypeBackup bool
+)
 
 func NewGetUserTypeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -169,14 +206,23 @@ func NewGetUserTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserTypeBackup {
+
+				idParam := GetUserTypetypeId
+				err := utils.BackupObject(d, "UserType", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetUserTypetypeId, "typeId", "", "", "")
 	cmd.MarkFlagRequired("typeId")
+
+	cmd.Flags().BoolVarP(&GetUserTypeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -190,6 +236,8 @@ var (
 	ReplaceUserTypetypeId string
 
 	ReplaceUserTypedata string
+
+	ReplaceUserTypeBackup bool
 )
 
 func NewReplaceUserTypeCmd() *cobra.Command {
@@ -217,8 +265,15 @@ func NewReplaceUserTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceUserTypeBackup {
+
+				idParam := ReplaceUserTypetypeId
+				err := utils.BackupObject(d, "UserType", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -229,6 +284,8 @@ func NewReplaceUserTypeCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceUserTypedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceUserTypeBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -237,7 +294,11 @@ func init() {
 	UserTypeCmd.AddCommand(ReplaceUserTypeCmd)
 }
 
-var DeleteUserTypetypeId string
+var (
+	DeleteUserTypetypeId string
+
+	DeleteUserTypeBackup bool
+)
 
 func NewDeleteUserTypeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -260,14 +321,23 @@ func NewDeleteUserTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteUserTypeBackup {
+
+				idParam := DeleteUserTypetypeId
+				err := utils.BackupObject(d, "UserType", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteUserTypetypeId, "typeId", "", "", "")
 	cmd.MarkFlagRequired("typeId")
+
+	cmd.Flags().BoolVarP(&DeleteUserTypeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

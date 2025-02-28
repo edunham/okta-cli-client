@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ResourceSetCmd)
 }
 
-var CreateResourceSetdata string
+var (
+	CreateResourceSetdata string
+
+	CreateResourceSetBackup bool
+)
 
 func NewCreateResourceSetCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateResourceSetCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateResourceSetBackup {
+
+				err := utils.BackupObject(d, "ResourceSet", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateResourceSetdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateResourceSetBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateResourceSetCmd := NewCreateResourceSetCmd()
 	ResourceSetCmd.AddCommand(CreateResourceSetCmd)
 }
+
+var ListResourceSetsBackup bool
 
 func NewListResourceSetsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListResourceSetsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListResourceSetsBackup {
+
+				err := utils.BackupObject(d, "ResourceSet", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListResourceSetsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	ResourceSetCmd.AddCommand(ListResourceSetsCmd)
 }
 
-var GetResourceSetresourceSetId string
+var (
+	GetResourceSetresourceSetId string
+
+	GetResourceSetBackup bool
+)
 
 func NewGetResourceSetCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetResourceSetCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetResourceSetBackup {
+
+				idParam := GetResourceSetresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetResourceSetresourceSetId, "resourceSetId", "", "", "")
 	cmd.MarkFlagRequired("resourceSetId")
+
+	cmd.Flags().BoolVarP(&GetResourceSetBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceResourceSetresourceSetId string
 
 	ReplaceResourceSetdata string
+
+	ReplaceResourceSetBackup bool
 )
 
 func NewReplaceResourceSetCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceResourceSetCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceResourceSetBackup {
+
+				idParam := ReplaceResourceSetresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceResourceSetCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceResourceSetdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceResourceSetBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	ResourceSetCmd.AddCommand(ReplaceResourceSetCmd)
 }
 
-var DeleteResourceSetresourceSetId string
+var (
+	DeleteResourceSetresourceSetId string
+
+	DeleteResourceSetBackup bool
+)
 
 func NewDeleteResourceSetCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteResourceSetCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteResourceSetBackup {
+
+				idParam := DeleteResourceSetresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteResourceSetresourceSetId, "resourceSetId", "", "", "")
 	cmd.MarkFlagRequired("resourceSetId")
+
+	cmd.Flags().BoolVarP(&DeleteResourceSetBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -230,6 +289,8 @@ var (
 	CreateResourceSetBindingresourceSetId string
 
 	CreateResourceSetBindingdata string
+
+	CreateResourceSetBindingBackup bool
 )
 
 func NewCreateResourceSetBindingCmd() *cobra.Command {
@@ -257,8 +318,15 @@ func NewCreateResourceSetBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateResourceSetBindingBackup {
+
+				idParam := CreateResourceSetBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -269,6 +337,8 @@ func NewCreateResourceSetBindingCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateResourceSetBindingdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateResourceSetBindingBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -277,7 +347,11 @@ func init() {
 	ResourceSetCmd.AddCommand(CreateResourceSetBindingCmd)
 }
 
-var ListBindingsresourceSetId string
+var (
+	ListBindingsresourceSetId string
+
+	ListBindingsBackup bool
+)
 
 func NewListBindingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -300,14 +374,23 @@ func NewListBindingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListBindingsBackup {
+
+				idParam := ListBindingsresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListBindingsresourceSetId, "resourceSetId", "", "", "")
 	cmd.MarkFlagRequired("resourceSetId")
+
+	cmd.Flags().BoolVarP(&ListBindingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -321,6 +404,8 @@ var (
 	GetBindingresourceSetId string
 
 	GetBindingroleIdOrLabel string
+
+	GetBindingBackup bool
 )
 
 func NewGetBindingCmd() *cobra.Command {
@@ -344,8 +429,15 @@ func NewGetBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetBindingBackup {
+
+				idParam := GetBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -355,6 +447,8 @@ func NewGetBindingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetBindingroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&GetBindingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -368,6 +462,8 @@ var (
 	DeleteBindingresourceSetId string
 
 	DeleteBindingroleIdOrLabel string
+
+	DeleteBindingBackup bool
 )
 
 func NewDeleteBindingCmd() *cobra.Command {
@@ -391,8 +487,15 @@ func NewDeleteBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBindingBackup {
+
+				idParam := DeleteBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -402,6 +505,8 @@ func NewDeleteBindingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteBindingroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&DeleteBindingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -415,6 +520,8 @@ var (
 	ListMembersOfBindingresourceSetId string
 
 	ListMembersOfBindingroleIdOrLabel string
+
+	ListMembersOfBindingBackup bool
 )
 
 func NewListMembersOfBindingCmd() *cobra.Command {
@@ -438,8 +545,15 @@ func NewListMembersOfBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListMembersOfBindingBackup {
+
+				idParam := ListMembersOfBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -449,6 +563,8 @@ func NewListMembersOfBindingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListMembersOfBindingroleIdOrLabel, "roleIdOrLabel", "", "", "")
 	cmd.MarkFlagRequired("roleIdOrLabel")
+
+	cmd.Flags().BoolVarP(&ListMembersOfBindingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -464,6 +580,8 @@ var (
 	AddMembersToBindingroleIdOrLabel string
 
 	AddMembersToBindingdata string
+
+	AddMembersToBindingBackup bool
 )
 
 func NewAddMembersToBindingCmd() *cobra.Command {
@@ -491,8 +609,15 @@ func NewAddMembersToBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AddMembersToBindingBackup {
+
+				idParam := AddMembersToBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -505,6 +630,8 @@ func NewAddMembersToBindingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AddMembersToBindingdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&AddMembersToBindingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -520,6 +647,8 @@ var (
 	GetMemberOfBindingroleIdOrLabel string
 
 	GetMemberOfBindingmemberId string
+
+	GetMemberOfBindingBackup bool
 )
 
 func NewGetMemberOfBindingCmd() *cobra.Command {
@@ -543,8 +672,15 @@ func NewGetMemberOfBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetMemberOfBindingBackup {
+
+				idParam := GetMemberOfBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -557,6 +693,8 @@ func NewGetMemberOfBindingCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetMemberOfBindingmemberId, "memberId", "", "", "")
 	cmd.MarkFlagRequired("memberId")
+
+	cmd.Flags().BoolVarP(&GetMemberOfBindingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -572,6 +710,8 @@ var (
 	UnassignMemberFromBindingroleIdOrLabel string
 
 	UnassignMemberFromBindingmemberId string
+
+	UnassignMemberFromBindingBackup bool
 )
 
 func NewUnassignMemberFromBindingCmd() *cobra.Command {
@@ -595,8 +735,15 @@ func NewUnassignMemberFromBindingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignMemberFromBindingBackup {
+
+				idParam := UnassignMemberFromBindingresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -610,6 +757,8 @@ func NewUnassignMemberFromBindingCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UnassignMemberFromBindingmemberId, "memberId", "", "", "")
 	cmd.MarkFlagRequired("memberId")
 
+	cmd.Flags().BoolVarP(&UnassignMemberFromBindingBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -618,7 +767,11 @@ func init() {
 	ResourceSetCmd.AddCommand(UnassignMemberFromBindingCmd)
 }
 
-var ListResourceSetResourcesresourceSetId string
+var (
+	ListResourceSetResourcesresourceSetId string
+
+	ListResourceSetResourcesBackup bool
+)
 
 func NewListResourceSetResourcesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -641,14 +794,23 @@ func NewListResourceSetResourcesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListResourceSetResourcesBackup {
+
+				idParam := ListResourceSetResourcesresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListResourceSetResourcesresourceSetId, "resourceSetId", "", "", "")
 	cmd.MarkFlagRequired("resourceSetId")
+
+	cmd.Flags().BoolVarP(&ListResourceSetResourcesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -662,6 +824,8 @@ var (
 	AddResourceSetResourceresourceSetId string
 
 	AddResourceSetResourcedata string
+
+	AddResourceSetResourceBackup bool
 )
 
 func NewAddResourceSetResourceCmd() *cobra.Command {
@@ -689,8 +853,15 @@ func NewAddResourceSetResourceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AddResourceSetResourceBackup {
+
+				idParam := AddResourceSetResourceresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -700,6 +871,8 @@ func NewAddResourceSetResourceCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AddResourceSetResourcedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&AddResourceSetResourceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -713,6 +886,8 @@ var (
 	DeleteResourceSetResourceresourceSetId string
 
 	DeleteResourceSetResourceresourceId string
+
+	DeleteResourceSetResourceBackup bool
 )
 
 func NewDeleteResourceSetResourceCmd() *cobra.Command {
@@ -736,8 +911,15 @@ func NewDeleteResourceSetResourceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteResourceSetResourceBackup {
+
+				idParam := DeleteResourceSetResourceresourceSetId
+				err := utils.BackupObject(d, "ResourceSet", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -747,6 +929,8 @@ func NewDeleteResourceSetResourceCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteResourceSetResourceresourceId, "resourceId", "", "", "")
 	cmd.MarkFlagRequired("resourceId")
+
+	cmd.Flags().BoolVarP(&DeleteResourceSetResourceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

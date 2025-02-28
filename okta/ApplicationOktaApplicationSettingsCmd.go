@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApplicationOktaApplicationSettingsCmd)
 }
 
-var GetFirstPartyAppSettingsappName string
+var (
+	GetFirstPartyAppSettingsappName string
+
+	GetFirstPartyAppSettingsBackup bool
+)
 
 func NewGetFirstPartyAppSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewGetFirstPartyAppSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetFirstPartyAppSettingsBackup {
+
+				idParam := GetFirstPartyAppSettingsappName
+				err := utils.BackupObject(d, "ApplicationOktaApplicationSettings", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetFirstPartyAppSettingsappName, "appName", "", "", "")
 	cmd.MarkFlagRequired("appName")
+
+	cmd.Flags().BoolVarP(&GetFirstPartyAppSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -60,6 +73,8 @@ var (
 	ReplaceFirstPartyAppSettingsappName string
 
 	ReplaceFirstPartyAppSettingsdata string
+
+	ReplaceFirstPartyAppSettingsBackup bool
 )
 
 func NewReplaceFirstPartyAppSettingsCmd() *cobra.Command {
@@ -87,8 +102,15 @@ func NewReplaceFirstPartyAppSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceFirstPartyAppSettingsBackup {
+
+				idParam := ReplaceFirstPartyAppSettingsappName
+				err := utils.BackupObject(d, "ApplicationOktaApplicationSettings", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -98,6 +120,8 @@ func NewReplaceFirstPartyAppSettingsCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ReplaceFirstPartyAppSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceFirstPartyAppSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

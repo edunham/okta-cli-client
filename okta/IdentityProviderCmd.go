@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(IdentityProviderCmd)
 }
 
-var CreateIdentityProviderdata string
+var (
+	CreateIdentityProviderdata string
+
+	CreateIdentityProviderBackup bool
+)
 
 func NewCreateIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateIdentityProviderBackup {
+
+				err := utils.BackupObject(d, "IdentityProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateIdentityProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateIdentityProviderCmd := NewCreateIdentityProviderCmd()
 	IdentityProviderCmd.AddCommand(CreateIdentityProviderCmd)
 }
+
+var ListIdentityProvidersBackup bool
 
 func NewListIdentityProvidersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListIdentityProvidersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListIdentityProvidersBackup {
+
+				err := utils.BackupObject(d, "IdentityProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListIdentityProvidersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(ListIdentityProvidersCmd)
 }
 
-var CreateIdentityProviderKeydata string
+var (
+	CreateIdentityProviderKeydata string
+
+	CreateIdentityProviderKeyBackup bool
+)
 
 func NewCreateIdentityProviderKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -122,14 +148,22 @@ func NewCreateIdentityProviderKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateIdentityProviderKeyBackup {
+
+				err := utils.BackupObject(d, "IdentityProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateIdentityProviderKeydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateIdentityProviderKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -138,6 +172,8 @@ func init() {
 	CreateIdentityProviderKeyCmd := NewCreateIdentityProviderKeyCmd()
 	IdentityProviderCmd.AddCommand(CreateIdentityProviderKeyCmd)
 }
+
+var ListIdentityProviderKeysBackup bool
 
 func NewListIdentityProviderKeysCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -160,11 +196,19 @@ func NewListIdentityProviderKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListIdentityProviderKeysBackup {
+
+				err := utils.BackupObject(d, "IdentityProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListIdentityProviderKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -174,7 +218,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(ListIdentityProviderKeysCmd)
 }
 
-var GetIdentityProviderKeyidpKeyId string
+var (
+	GetIdentityProviderKeyidpKeyId string
+
+	GetIdentityProviderKeyBackup bool
+)
 
 func NewGetIdentityProviderKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -197,14 +245,23 @@ func NewGetIdentityProviderKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetIdentityProviderKeyBackup {
+
+				idParam := GetIdentityProviderKeyidpKeyId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetIdentityProviderKeyidpKeyId, "idpKeyId", "", "", "")
 	cmd.MarkFlagRequired("idpKeyId")
+
+	cmd.Flags().BoolVarP(&GetIdentityProviderKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -214,7 +271,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(GetIdentityProviderKeyCmd)
 }
 
-var DeleteIdentityProviderKeyidpKeyId string
+var (
+	DeleteIdentityProviderKeyidpKeyId string
+
+	DeleteIdentityProviderKeyBackup bool
+)
 
 func NewDeleteIdentityProviderKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -237,14 +298,23 @@ func NewDeleteIdentityProviderKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteIdentityProviderKeyBackup {
+
+				idParam := DeleteIdentityProviderKeyidpKeyId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteIdentityProviderKeyidpKeyId, "idpKeyId", "", "", "")
 	cmd.MarkFlagRequired("idpKeyId")
+
+	cmd.Flags().BoolVarP(&DeleteIdentityProviderKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -254,7 +324,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(DeleteIdentityProviderKeyCmd)
 }
 
-var GetIdentityProvideridpId string
+var (
+	GetIdentityProvideridpId string
+
+	GetIdentityProviderBackup bool
+)
 
 func NewGetIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -277,14 +351,23 @@ func NewGetIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetIdentityProviderBackup {
+
+				idParam := GetIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetIdentityProvideridpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&GetIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -298,6 +381,8 @@ var (
 	ReplaceIdentityProvideridpId string
 
 	ReplaceIdentityProviderdata string
+
+	ReplaceIdentityProviderBackup bool
 )
 
 func NewReplaceIdentityProviderCmd() *cobra.Command {
@@ -325,8 +410,15 @@ func NewReplaceIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceIdentityProviderBackup {
+
+				idParam := ReplaceIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -337,6 +429,8 @@ func NewReplaceIdentityProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceIdentityProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -345,7 +439,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(ReplaceIdentityProviderCmd)
 }
 
-var DeleteIdentityProvideridpId string
+var (
+	DeleteIdentityProvideridpId string
+
+	DeleteIdentityProviderBackup bool
+)
 
 func NewDeleteIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -368,14 +466,23 @@ func NewDeleteIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteIdentityProviderBackup {
+
+				idParam := DeleteIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteIdentityProvideridpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&DeleteIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -389,6 +496,8 @@ var (
 	GenerateCsrForIdentityProvideridpId string
 
 	GenerateCsrForIdentityProviderdata string
+
+	GenerateCsrForIdentityProviderBackup bool
 )
 
 func NewGenerateCsrForIdentityProviderCmd() *cobra.Command {
@@ -416,8 +525,15 @@ func NewGenerateCsrForIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GenerateCsrForIdentityProviderBackup {
+
+				idParam := GenerateCsrForIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -428,6 +544,8 @@ func NewGenerateCsrForIdentityProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&GenerateCsrForIdentityProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&GenerateCsrForIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -436,7 +554,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(GenerateCsrForIdentityProviderCmd)
 }
 
-var ListCsrsForIdentityProvideridpId string
+var (
+	ListCsrsForIdentityProvideridpId string
+
+	ListCsrsForIdentityProviderBackup bool
+)
 
 func NewListCsrsForIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -459,14 +581,23 @@ func NewListCsrsForIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListCsrsForIdentityProviderBackup {
+
+				idParam := ListCsrsForIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListCsrsForIdentityProvideridpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&ListCsrsForIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -480,6 +611,8 @@ var (
 	GetCsrForIdentityProvideridpId string
 
 	GetCsrForIdentityProvideridpCsrId string
+
+	GetCsrForIdentityProviderBackup bool
 )
 
 func NewGetCsrForIdentityProviderCmd() *cobra.Command {
@@ -503,8 +636,15 @@ func NewGetCsrForIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCsrForIdentityProviderBackup {
+
+				idParam := GetCsrForIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -514,6 +654,8 @@ func NewGetCsrForIdentityProviderCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetCsrForIdentityProvideridpCsrId, "idpCsrId", "", "", "")
 	cmd.MarkFlagRequired("idpCsrId")
+
+	cmd.Flags().BoolVarP(&GetCsrForIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -527,6 +669,8 @@ var (
 	RevokeCsrForIdentityProvideridpId string
 
 	RevokeCsrForIdentityProvideridpCsrId string
+
+	RevokeCsrForIdentityProviderBackup bool
 )
 
 func NewRevokeCsrForIdentityProviderCmd() *cobra.Command {
@@ -550,8 +694,15 @@ func NewRevokeCsrForIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeCsrForIdentityProviderBackup {
+
+				idParam := RevokeCsrForIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -561,6 +712,8 @@ func NewRevokeCsrForIdentityProviderCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeCsrForIdentityProvideridpCsrId, "idpCsrId", "", "", "")
 	cmd.MarkFlagRequired("idpCsrId")
+
+	cmd.Flags().BoolVarP(&RevokeCsrForIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -576,6 +729,8 @@ var (
 	PublishCsrForIdentityProvideridpCsrId string
 
 	PublishCsrForIdentityProviderdata string
+
+	PublishCsrForIdentityProviderBackup bool
 )
 
 func NewPublishCsrForIdentityProviderCmd() *cobra.Command {
@@ -603,8 +758,15 @@ func NewPublishCsrForIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if PublishCsrForIdentityProviderBackup {
+
+				idParam := PublishCsrForIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -618,6 +780,8 @@ func NewPublishCsrForIdentityProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&PublishCsrForIdentityProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&PublishCsrForIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -626,7 +790,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(PublishCsrForIdentityProviderCmd)
 }
 
-var ListIdentityProviderSigningKeysidpId string
+var (
+	ListIdentityProviderSigningKeysidpId string
+
+	ListIdentityProviderSigningKeysBackup bool
+)
 
 func NewListIdentityProviderSigningKeysCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -649,14 +817,23 @@ func NewListIdentityProviderSigningKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListIdentityProviderSigningKeysBackup {
+
+				idParam := ListIdentityProviderSigningKeysidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListIdentityProviderSigningKeysidpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&ListIdentityProviderSigningKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -666,7 +843,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(ListIdentityProviderSigningKeysCmd)
 }
 
-var GenerateIdentityProviderSigningKeyidpId string
+var (
+	GenerateIdentityProviderSigningKeyidpId string
+
+	GenerateIdentityProviderSigningKeyBackup bool
+)
 
 func NewGenerateIdentityProviderSigningKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -689,14 +870,23 @@ func NewGenerateIdentityProviderSigningKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GenerateIdentityProviderSigningKeyBackup {
+
+				idParam := GenerateIdentityProviderSigningKeyidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GenerateIdentityProviderSigningKeyidpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&GenerateIdentityProviderSigningKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -710,6 +900,8 @@ var (
 	GetIdentityProviderSigningKeyidpId string
 
 	GetIdentityProviderSigningKeyidpKeyId string
+
+	GetIdentityProviderSigningKeyBackup bool
 )
 
 func NewGetIdentityProviderSigningKeyCmd() *cobra.Command {
@@ -733,8 +925,15 @@ func NewGetIdentityProviderSigningKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetIdentityProviderSigningKeyBackup {
+
+				idParam := GetIdentityProviderSigningKeyidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -744,6 +943,8 @@ func NewGetIdentityProviderSigningKeyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetIdentityProviderSigningKeyidpKeyId, "idpKeyId", "", "", "")
 	cmd.MarkFlagRequired("idpKeyId")
+
+	cmd.Flags().BoolVarP(&GetIdentityProviderSigningKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -757,6 +958,8 @@ var (
 	CloneIdentityProviderKeyidpId string
 
 	CloneIdentityProviderKeyidpKeyId string
+
+	CloneIdentityProviderKeyBackup bool
 )
 
 func NewCloneIdentityProviderKeyCmd() *cobra.Command {
@@ -780,8 +983,15 @@ func NewCloneIdentityProviderKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CloneIdentityProviderKeyBackup {
+
+				idParam := CloneIdentityProviderKeyidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -792,6 +1002,8 @@ func NewCloneIdentityProviderKeyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CloneIdentityProviderKeyidpKeyId, "idpKeyId", "", "", "")
 	cmd.MarkFlagRequired("idpKeyId")
 
+	cmd.Flags().BoolVarP(&CloneIdentityProviderKeyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -800,7 +1012,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(CloneIdentityProviderKeyCmd)
 }
 
-var ActivateIdentityProvideridpId string
+var (
+	ActivateIdentityProvideridpId string
+
+	ActivateIdentityProviderBackup bool
+)
 
 func NewActivateIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -823,14 +1039,23 @@ func NewActivateIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateIdentityProviderBackup {
+
+				idParam := ActivateIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateIdentityProvideridpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&ActivateIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -840,7 +1065,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(ActivateIdentityProviderCmd)
 }
 
-var DeactivateIdentityProvideridpId string
+var (
+	DeactivateIdentityProvideridpId string
+
+	DeactivateIdentityProviderBackup bool
+)
 
 func NewDeactivateIdentityProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -863,14 +1092,23 @@ func NewDeactivateIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateIdentityProviderBackup {
+
+				idParam := DeactivateIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateIdentityProvideridpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&DeactivateIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -880,7 +1118,11 @@ func init() {
 	IdentityProviderCmd.AddCommand(DeactivateIdentityProviderCmd)
 }
 
-var ListIdentityProviderApplicationUsersidpId string
+var (
+	ListIdentityProviderApplicationUsersidpId string
+
+	ListIdentityProviderApplicationUsersBackup bool
+)
 
 func NewListIdentityProviderApplicationUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -903,14 +1145,23 @@ func NewListIdentityProviderApplicationUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListIdentityProviderApplicationUsersBackup {
+
+				idParam := ListIdentityProviderApplicationUsersidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListIdentityProviderApplicationUsersidpId, "idpId", "", "", "")
 	cmd.MarkFlagRequired("idpId")
+
+	cmd.Flags().BoolVarP(&ListIdentityProviderApplicationUsersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -926,6 +1177,8 @@ var (
 	LinkUserToIdentityProvideruserId string
 
 	LinkUserToIdentityProviderdata string
+
+	LinkUserToIdentityProviderBackup bool
 )
 
 func NewLinkUserToIdentityProviderCmd() *cobra.Command {
@@ -953,8 +1206,15 @@ func NewLinkUserToIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if LinkUserToIdentityProviderBackup {
+
+				idParam := LinkUserToIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -968,6 +1228,8 @@ func NewLinkUserToIdentityProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&LinkUserToIdentityProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&LinkUserToIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -980,6 +1242,8 @@ var (
 	GetIdentityProviderApplicationUseridpId string
 
 	GetIdentityProviderApplicationUseruserId string
+
+	GetIdentityProviderApplicationUserBackup bool
 )
 
 func NewGetIdentityProviderApplicationUserCmd() *cobra.Command {
@@ -1003,8 +1267,15 @@ func NewGetIdentityProviderApplicationUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetIdentityProviderApplicationUserBackup {
+
+				idParam := GetIdentityProviderApplicationUseridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1014,6 +1285,8 @@ func NewGetIdentityProviderApplicationUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetIdentityProviderApplicationUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&GetIdentityProviderApplicationUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1027,6 +1300,8 @@ var (
 	UnlinkUserFromIdentityProvideridpId string
 
 	UnlinkUserFromIdentityProvideruserId string
+
+	UnlinkUserFromIdentityProviderBackup bool
 )
 
 func NewUnlinkUserFromIdentityProviderCmd() *cobra.Command {
@@ -1050,8 +1325,15 @@ func NewUnlinkUserFromIdentityProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnlinkUserFromIdentityProviderBackup {
+
+				idParam := UnlinkUserFromIdentityProvideridpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1061,6 +1343,8 @@ func NewUnlinkUserFromIdentityProviderCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnlinkUserFromIdentityProvideruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&UnlinkUserFromIdentityProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1074,6 +1358,8 @@ var (
 	ListSocialAuthTokensidpId string
 
 	ListSocialAuthTokensuserId string
+
+	ListSocialAuthTokensBackup bool
 )
 
 func NewListSocialAuthTokensCmd() *cobra.Command {
@@ -1097,8 +1383,15 @@ func NewListSocialAuthTokensCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListSocialAuthTokensBackup {
+
+				idParam := ListSocialAuthTokensidpId
+				err := utils.BackupObject(d, "IdentityProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1108,6 +1401,8 @@ func NewListSocialAuthTokensCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListSocialAuthTokensuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListSocialAuthTokensBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

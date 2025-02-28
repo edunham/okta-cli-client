@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(HookKeyCmd)
 }
 
-var CreateHookKeydata string
+var (
+	CreateHookKeydata string
+
+	CreateHookKeyBackup bool
+)
 
 func NewCreateHookKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateHookKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateHookKeyBackup {
+
+				err := utils.BackupObject(d, "HookKey", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateHookKeydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateHookKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateHookKeyCmd := NewCreateHookKeyCmd()
 	HookKeyCmd.AddCommand(CreateHookKeyCmd)
 }
+
+var ListHookKeysBackup bool
 
 func NewListHookKeysCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListHookKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListHookKeysBackup {
+
+				err := utils.BackupObject(d, "HookKey", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListHookKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	HookKeyCmd.AddCommand(ListHookKeysCmd)
 }
 
-var GetPublicKeypublicKeyId string
+var (
+	GetPublicKeypublicKeyId string
+
+	GetPublicKeyBackup bool
+)
 
 func NewGetPublicKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetPublicKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPublicKeyBackup {
+
+				idParam := GetPublicKeypublicKeyId
+				err := utils.BackupObject(d, "HookKey", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPublicKeypublicKeyId, "publicKeyId", "", "", "")
 	cmd.MarkFlagRequired("publicKeyId")
+
+	cmd.Flags().BoolVarP(&GetPublicKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -135,7 +170,11 @@ func init() {
 	HookKeyCmd.AddCommand(GetPublicKeyCmd)
 }
 
-var GetHookKeyhookKeyId string
+var (
+	GetHookKeyhookKeyId string
+
+	GetHookKeyBackup bool
+)
 
 func NewGetHookKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -158,14 +197,23 @@ func NewGetHookKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetHookKeyBackup {
+
+				idParam := GetHookKeyhookKeyId
+				err := utils.BackupObject(d, "HookKey", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetHookKeyhookKeyId, "hookKeyId", "", "", "")
 	cmd.MarkFlagRequired("hookKeyId")
+
+	cmd.Flags().BoolVarP(&GetHookKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -179,6 +227,8 @@ var (
 	ReplaceHookKeyhookKeyId string
 
 	ReplaceHookKeydata string
+
+	ReplaceHookKeyBackup bool
 )
 
 func NewReplaceHookKeyCmd() *cobra.Command {
@@ -206,8 +256,15 @@ func NewReplaceHookKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceHookKeyBackup {
+
+				idParam := ReplaceHookKeyhookKeyId
+				err := utils.BackupObject(d, "HookKey", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -218,6 +275,8 @@ func NewReplaceHookKeyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceHookKeydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceHookKeyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -226,7 +285,11 @@ func init() {
 	HookKeyCmd.AddCommand(ReplaceHookKeyCmd)
 }
 
-var DeleteHookKeyhookKeyId string
+var (
+	DeleteHookKeyhookKeyId string
+
+	DeleteHookKeyBackup bool
+)
 
 func NewDeleteHookKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewDeleteHookKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteHookKeyBackup {
+
+				idParam := DeleteHookKeyhookKeyId
+				err := utils.BackupObject(d, "HookKey", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteHookKeyhookKeyId, "hookKeyId", "", "", "")
 	cmd.MarkFlagRequired("hookKeyId")
+
+	cmd.Flags().BoolVarP(&DeleteHookKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

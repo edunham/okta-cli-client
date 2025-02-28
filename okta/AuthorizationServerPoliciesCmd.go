@@ -20,6 +20,8 @@ var (
 	CreateAuthorizationServerPolicyauthServerId string
 
 	CreateAuthorizationServerPolicydata string
+
+	CreateAuthorizationServerPolicyBackup bool
 )
 
 func NewCreateAuthorizationServerPolicyCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewCreateAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateAuthorizationServerPolicyBackup {
+
+				idParam := CreateAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewCreateAuthorizationServerPolicyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateAuthorizationServerPolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	AuthorizationServerPoliciesCmd.AddCommand(CreateAuthorizationServerPolicyCmd)
 }
 
-var ListAuthorizationServerPoliciesauthServerId string
+var (
+	ListAuthorizationServerPoliciesauthServerId string
+
+	ListAuthorizationServerPoliciesBackup bool
+)
 
 func NewListAuthorizationServerPoliciesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListAuthorizationServerPoliciesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAuthorizationServerPoliciesBackup {
+
+				idParam := ListAuthorizationServerPoliciesauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAuthorizationServerPoliciesauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListAuthorizationServerPoliciesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetAuthorizationServerPolicyauthServerId string
 
 	GetAuthorizationServerPolicypolicyId string
+
+	GetAuthorizationServerPolicyBackup bool
 )
 
 func NewGetAuthorizationServerPolicyCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAuthorizationServerPolicyBackup {
+
+				idParam := GetAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetAuthorizationServerPolicyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetAuthorizationServerPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&GetAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -160,6 +195,8 @@ var (
 	ReplaceAuthorizationServerPolicypolicyId string
 
 	ReplaceAuthorizationServerPolicydata string
+
+	ReplaceAuthorizationServerPolicyBackup bool
 )
 
 func NewReplaceAuthorizationServerPolicyCmd() *cobra.Command {
@@ -187,8 +224,15 @@ func NewReplaceAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceAuthorizationServerPolicyBackup {
+
+				idParam := ReplaceAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -202,6 +246,8 @@ func NewReplaceAuthorizationServerPolicyCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceAuthorizationServerPolicydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -214,6 +260,8 @@ var (
 	DeleteAuthorizationServerPolicyauthServerId string
 
 	DeleteAuthorizationServerPolicypolicyId string
+
+	DeleteAuthorizationServerPolicyBackup bool
 )
 
 func NewDeleteAuthorizationServerPolicyCmd() *cobra.Command {
@@ -237,8 +285,15 @@ func NewDeleteAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteAuthorizationServerPolicyBackup {
+
+				idParam := DeleteAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -248,6 +303,8 @@ func NewDeleteAuthorizationServerPolicyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteAuthorizationServerPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&DeleteAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -261,6 +318,8 @@ var (
 	ActivateAuthorizationServerPolicyauthServerId string
 
 	ActivateAuthorizationServerPolicypolicyId string
+
+	ActivateAuthorizationServerPolicyBackup bool
 )
 
 func NewActivateAuthorizationServerPolicyCmd() *cobra.Command {
@@ -284,8 +343,15 @@ func NewActivateAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateAuthorizationServerPolicyBackup {
+
+				idParam := ActivateAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -295,6 +361,8 @@ func NewActivateAuthorizationServerPolicyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivateAuthorizationServerPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&ActivateAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -308,6 +376,8 @@ var (
 	DeactivateAuthorizationServerPolicyauthServerId string
 
 	DeactivateAuthorizationServerPolicypolicyId string
+
+	DeactivateAuthorizationServerPolicyBackup bool
 )
 
 func NewDeactivateAuthorizationServerPolicyCmd() *cobra.Command {
@@ -331,8 +401,15 @@ func NewDeactivateAuthorizationServerPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateAuthorizationServerPolicyBackup {
+
+				idParam := DeactivateAuthorizationServerPolicyauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -342,6 +419,8 @@ func NewDeactivateAuthorizationServerPolicyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeactivateAuthorizationServerPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&DeactivateAuthorizationServerPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

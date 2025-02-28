@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(AuthorizationServerKeysCmd)
 }
 
-var ListAuthorizationServerKeysauthServerId string
+var (
+	ListAuthorizationServerKeysauthServerId string
+
+	ListAuthorizationServerKeysBackup bool
+)
 
 func NewListAuthorizationServerKeysCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewListAuthorizationServerKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAuthorizationServerKeysBackup {
+
+				idParam := ListAuthorizationServerKeysauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerKeys", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAuthorizationServerKeysauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListAuthorizationServerKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -60,6 +73,8 @@ var (
 	RotateAuthorizationServerKeysauthServerId string
 
 	RotateAuthorizationServerKeysdata string
+
+	RotateAuthorizationServerKeysBackup bool
 )
 
 func NewRotateAuthorizationServerKeysCmd() *cobra.Command {
@@ -87,8 +102,15 @@ func NewRotateAuthorizationServerKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RotateAuthorizationServerKeysBackup {
+
+				idParam := RotateAuthorizationServerKeysauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerKeys", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -98,6 +120,8 @@ func NewRotateAuthorizationServerKeysCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RotateAuthorizationServerKeysdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&RotateAuthorizationServerKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

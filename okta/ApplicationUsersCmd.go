@@ -20,6 +20,8 @@ var (
 	AssignUserToApplicationappId string
 
 	AssignUserToApplicationdata string
+
+	AssignUserToApplicationBackup bool
 )
 
 func NewAssignUserToApplicationCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewAssignUserToApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignUserToApplicationBackup {
+
+				idParam := AssignUserToApplicationappId
+				err := utils.BackupObject(d, "ApplicationUsers", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewAssignUserToApplicationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&AssignUserToApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&AssignUserToApplicationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	ApplicationUsersCmd.AddCommand(AssignUserToApplicationCmd)
 }
 
-var ListApplicationUsersappId string
+var (
+	ListApplicationUsersappId string
+
+	ListApplicationUsersBackup bool
+)
 
 func NewListApplicationUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListApplicationUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApplicationUsersBackup {
+
+				idParam := ListApplicationUsersappId
+				err := utils.BackupObject(d, "ApplicationUsers", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListApplicationUsersappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListApplicationUsersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -113,6 +137,8 @@ var (
 	UpdateApplicationUseruserId string
 
 	UpdateApplicationUserdata string
+
+	UpdateApplicationUserBackup bool
 )
 
 func NewUpdateApplicationUserCmd() *cobra.Command {
@@ -140,8 +166,15 @@ func NewUpdateApplicationUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateApplicationUserBackup {
+
+				idParam := UpdateApplicationUserappId
+				err := utils.BackupObject(d, "ApplicationUsers", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -155,6 +188,8 @@ func NewUpdateApplicationUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateApplicationUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateApplicationUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -167,6 +202,8 @@ var (
 	GetApplicationUserappId string
 
 	GetApplicationUseruserId string
+
+	GetApplicationUserBackup bool
 )
 
 func NewGetApplicationUserCmd() *cobra.Command {
@@ -190,8 +227,15 @@ func NewGetApplicationUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApplicationUserBackup {
+
+				idParam := GetApplicationUserappId
+				err := utils.BackupObject(d, "ApplicationUsers", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -201,6 +245,8 @@ func NewGetApplicationUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetApplicationUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&GetApplicationUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -214,6 +260,8 @@ var (
 	UnassignUserFromApplicationappId string
 
 	UnassignUserFromApplicationuserId string
+
+	UnassignUserFromApplicationBackup bool
 )
 
 func NewUnassignUserFromApplicationCmd() *cobra.Command {
@@ -237,8 +285,15 @@ func NewUnassignUserFromApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignUserFromApplicationBackup {
+
+				idParam := UnassignUserFromApplicationappId
+				err := utils.BackupObject(d, "ApplicationUsers", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -248,6 +303,8 @@ func NewUnassignUserFromApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignUserFromApplicationuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&UnassignUserFromApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

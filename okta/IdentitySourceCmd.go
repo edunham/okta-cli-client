@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(IdentitySourceCmd)
 }
 
-var CreateIdentitySourceSessionidentitySourceId string
+var (
+	CreateIdentitySourceSessionidentitySourceId string
+
+	CreateIdentitySourceSessionBackup bool
+)
 
 func NewCreateIdentitySourceSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewCreateIdentitySourceSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateIdentitySourceSessionBackup {
+
+				idParam := CreateIdentitySourceSessionidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateIdentitySourceSessionidentitySourceId, "identitySourceId", "", "", "")
 	cmd.MarkFlagRequired("identitySourceId")
+
+	cmd.Flags().BoolVarP(&CreateIdentitySourceSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -56,7 +69,11 @@ func init() {
 	IdentitySourceCmd.AddCommand(CreateIdentitySourceSessionCmd)
 }
 
-var ListIdentitySourceSessionsidentitySourceId string
+var (
+	ListIdentitySourceSessionsidentitySourceId string
+
+	ListIdentitySourceSessionsBackup bool
+)
 
 func NewListIdentitySourceSessionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -79,14 +96,23 @@ func NewListIdentitySourceSessionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListIdentitySourceSessionsBackup {
+
+				idParam := ListIdentitySourceSessionsidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListIdentitySourceSessionsidentitySourceId, "identitySourceId", "", "", "")
 	cmd.MarkFlagRequired("identitySourceId")
+
+	cmd.Flags().BoolVarP(&ListIdentitySourceSessionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -100,6 +126,8 @@ var (
 	GetIdentitySourceSessionidentitySourceId string
 
 	GetIdentitySourceSessionsessionId string
+
+	GetIdentitySourceSessionBackup bool
 )
 
 func NewGetIdentitySourceSessionCmd() *cobra.Command {
@@ -123,8 +151,15 @@ func NewGetIdentitySourceSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetIdentitySourceSessionBackup {
+
+				idParam := GetIdentitySourceSessionidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -134,6 +169,8 @@ func NewGetIdentitySourceSessionCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetIdentitySourceSessionsessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&GetIdentitySourceSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -147,6 +184,8 @@ var (
 	DeleteIdentitySourceSessionidentitySourceId string
 
 	DeleteIdentitySourceSessionsessionId string
+
+	DeleteIdentitySourceSessionBackup bool
 )
 
 func NewDeleteIdentitySourceSessionCmd() *cobra.Command {
@@ -170,8 +209,15 @@ func NewDeleteIdentitySourceSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteIdentitySourceSessionBackup {
+
+				idParam := DeleteIdentitySourceSessionidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -181,6 +227,8 @@ func NewDeleteIdentitySourceSessionCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteIdentitySourceSessionsessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&DeleteIdentitySourceSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -196,6 +244,8 @@ var (
 	UploadIdentitySourceDataForDeletesessionId string
 
 	UploadIdentitySourceDataForDeletedata string
+
+	UploadIdentitySourceDataForDeleteBackup bool
 )
 
 func NewUploadIdentitySourceDataForDeleteCmd() *cobra.Command {
@@ -223,8 +273,15 @@ func NewUploadIdentitySourceDataForDeleteCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadIdentitySourceDataForDeleteBackup {
+
+				idParam := UploadIdentitySourceDataForDeleteidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -237,6 +294,8 @@ func NewUploadIdentitySourceDataForDeleteCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UploadIdentitySourceDataForDeletedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UploadIdentitySourceDataForDeleteBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -252,6 +311,8 @@ var (
 	UploadIdentitySourceDataForUpsertsessionId string
 
 	UploadIdentitySourceDataForUpsertdata string
+
+	UploadIdentitySourceDataForUpsertBackup bool
 )
 
 func NewUploadIdentitySourceDataForUpsertCmd() *cobra.Command {
@@ -279,8 +340,15 @@ func NewUploadIdentitySourceDataForUpsertCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadIdentitySourceDataForUpsertBackup {
+
+				idParam := UploadIdentitySourceDataForUpsertidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -294,6 +362,8 @@ func NewUploadIdentitySourceDataForUpsertCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UploadIdentitySourceDataForUpsertdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UploadIdentitySourceDataForUpsertBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -306,6 +376,8 @@ var (
 	StartImportFromIdentitySourceidentitySourceId string
 
 	StartImportFromIdentitySourcesessionId string
+
+	StartImportFromIdentitySourceBackup bool
 )
 
 func NewStartImportFromIdentitySourceCmd() *cobra.Command {
@@ -329,8 +401,15 @@ func NewStartImportFromIdentitySourceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if StartImportFromIdentitySourceBackup {
+
+				idParam := StartImportFromIdentitySourceidentitySourceId
+				err := utils.BackupObject(d, "IdentitySource", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -340,6 +419,8 @@ func NewStartImportFromIdentitySourceCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&StartImportFromIdentitySourcesessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&StartImportFromIdentitySourceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

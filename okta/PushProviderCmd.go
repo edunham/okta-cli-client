@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(PushProviderCmd)
 }
 
-var CreatePushProviderdata string
+var (
+	CreatePushProviderdata string
+
+	CreatePushProviderBackup bool
+)
 
 func NewCreatePushProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreatePushProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreatePushProviderBackup {
+
+				err := utils.BackupObject(d, "PushProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreatePushProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreatePushProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreatePushProviderCmd := NewCreatePushProviderCmd()
 	PushProviderCmd.AddCommand(CreatePushProviderCmd)
 }
+
+var ListPushProvidersBackup bool
 
 func NewListPushProvidersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListPushProvidersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPushProvidersBackup {
+
+				err := utils.BackupObject(d, "PushProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListPushProvidersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	PushProviderCmd.AddCommand(ListPushProvidersCmd)
 }
 
-var GetPushProviderpushProviderId string
+var (
+	GetPushProviderpushProviderId string
+
+	GetPushProviderBackup bool
+)
 
 func NewGetPushProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetPushProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPushProviderBackup {
+
+				idParam := GetPushProviderpushProviderId
+				err := utils.BackupObject(d, "PushProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPushProviderpushProviderId, "pushProviderId", "", "", "")
 	cmd.MarkFlagRequired("pushProviderId")
+
+	cmd.Flags().BoolVarP(&GetPushProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplacePushProviderpushProviderId string
 
 	ReplacePushProviderdata string
+
+	ReplacePushProviderBackup bool
 )
 
 func NewReplacePushProviderCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplacePushProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePushProviderBackup {
+
+				idParam := ReplacePushProviderpushProviderId
+				err := utils.BackupObject(d, "PushProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplacePushProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplacePushProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplacePushProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	PushProviderCmd.AddCommand(ReplacePushProviderCmd)
 }
 
-var DeletePushProviderpushProviderId string
+var (
+	DeletePushProviderpushProviderId string
+
+	DeletePushProviderBackup bool
+)
 
 func NewDeletePushProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeletePushProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePushProviderBackup {
+
+				idParam := DeletePushProviderpushProviderId
+				err := utils.BackupObject(d, "PushProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeletePushProviderpushProviderId, "pushProviderId", "", "", "")
 	cmd.MarkFlagRequired("pushProviderId")
+
+	cmd.Flags().BoolVarP(&DeletePushProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

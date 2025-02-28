@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApiServiceIntegrationsCmd)
 }
 
-var CreateApiServiceIntegrationInstancedata string
+var (
+	CreateApiServiceIntegrationInstancedata string
+
+	CreateApiServiceIntegrationInstanceBackup bool
+)
 
 func NewCreateApiServiceIntegrationInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateApiServiceIntegrationInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateApiServiceIntegrationInstanceBackup {
+
+				err := utils.BackupObject(d, "ApiServiceIntegrations", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateApiServiceIntegrationInstancedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateApiServiceIntegrationInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateApiServiceIntegrationInstanceCmd := NewCreateApiServiceIntegrationInstanceCmd()
 	ApiServiceIntegrationsCmd.AddCommand(CreateApiServiceIntegrationInstanceCmd)
 }
+
+var ListApiServiceIntegrationInstancesBackup bool
 
 func NewListApiServiceIntegrationInstancesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListApiServiceIntegrationInstancesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApiServiceIntegrationInstancesBackup {
+
+				err := utils.BackupObject(d, "ApiServiceIntegrations", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListApiServiceIntegrationInstancesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	ApiServiceIntegrationsCmd.AddCommand(ListApiServiceIntegrationInstancesCmd)
 }
 
-var GetApiServiceIntegrationInstanceapiServiceId string
+var (
+	GetApiServiceIntegrationInstanceapiServiceId string
+
+	GetApiServiceIntegrationInstanceBackup bool
+)
 
 func NewGetApiServiceIntegrationInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetApiServiceIntegrationInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApiServiceIntegrationInstanceBackup {
+
+				idParam := GetApiServiceIntegrationInstanceapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetApiServiceIntegrationInstanceapiServiceId, "apiServiceId", "", "", "")
 	cmd.MarkFlagRequired("apiServiceId")
+
+	cmd.Flags().BoolVarP(&GetApiServiceIntegrationInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -135,7 +170,11 @@ func init() {
 	ApiServiceIntegrationsCmd.AddCommand(GetApiServiceIntegrationInstanceCmd)
 }
 
-var DeleteApiServiceIntegrationInstanceapiServiceId string
+var (
+	DeleteApiServiceIntegrationInstanceapiServiceId string
+
+	DeleteApiServiceIntegrationInstanceBackup bool
+)
 
 func NewDeleteApiServiceIntegrationInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -158,14 +197,23 @@ func NewDeleteApiServiceIntegrationInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteApiServiceIntegrationInstanceBackup {
+
+				idParam := DeleteApiServiceIntegrationInstanceapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteApiServiceIntegrationInstanceapiServiceId, "apiServiceId", "", "", "")
 	cmd.MarkFlagRequired("apiServiceId")
+
+	cmd.Flags().BoolVarP(&DeleteApiServiceIntegrationInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -175,7 +223,11 @@ func init() {
 	ApiServiceIntegrationsCmd.AddCommand(DeleteApiServiceIntegrationInstanceCmd)
 }
 
-var CreateApiServiceIntegrationInstanceSecretapiServiceId string
+var (
+	CreateApiServiceIntegrationInstanceSecretapiServiceId string
+
+	CreateApiServiceIntegrationInstanceSecretBackup bool
+)
 
 func NewCreateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -198,14 +250,23 @@ func NewCreateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateApiServiceIntegrationInstanceSecretBackup {
+
+				idParam := CreateApiServiceIntegrationInstanceSecretapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateApiServiceIntegrationInstanceSecretapiServiceId, "apiServiceId", "", "", "")
 	cmd.MarkFlagRequired("apiServiceId")
+
+	cmd.Flags().BoolVarP(&CreateApiServiceIntegrationInstanceSecretBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -215,7 +276,11 @@ func init() {
 	ApiServiceIntegrationsCmd.AddCommand(CreateApiServiceIntegrationInstanceSecretCmd)
 }
 
-var ListApiServiceIntegrationInstanceSecretsapiServiceId string
+var (
+	ListApiServiceIntegrationInstanceSecretsapiServiceId string
+
+	ListApiServiceIntegrationInstanceSecretsBackup bool
+)
 
 func NewListApiServiceIntegrationInstanceSecretsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -238,14 +303,23 @@ func NewListApiServiceIntegrationInstanceSecretsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApiServiceIntegrationInstanceSecretsBackup {
+
+				idParam := ListApiServiceIntegrationInstanceSecretsapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListApiServiceIntegrationInstanceSecretsapiServiceId, "apiServiceId", "", "", "")
 	cmd.MarkFlagRequired("apiServiceId")
+
+	cmd.Flags().BoolVarP(&ListApiServiceIntegrationInstanceSecretsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -259,6 +333,8 @@ var (
 	DeleteApiServiceIntegrationInstanceSecretapiServiceId string
 
 	DeleteApiServiceIntegrationInstanceSecretsecretId string
+
+	DeleteApiServiceIntegrationInstanceSecretBackup bool
 )
 
 func NewDeleteApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
@@ -282,8 +358,15 @@ func NewDeleteApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteApiServiceIntegrationInstanceSecretBackup {
+
+				idParam := DeleteApiServiceIntegrationInstanceSecretapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -293,6 +376,8 @@ func NewDeleteApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteApiServiceIntegrationInstanceSecretsecretId, "secretId", "", "", "")
 	cmd.MarkFlagRequired("secretId")
+
+	cmd.Flags().BoolVarP(&DeleteApiServiceIntegrationInstanceSecretBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -306,6 +391,8 @@ var (
 	ActivateApiServiceIntegrationInstanceSecretapiServiceId string
 
 	ActivateApiServiceIntegrationInstanceSecretsecretId string
+
+	ActivateApiServiceIntegrationInstanceSecretBackup bool
 )
 
 func NewActivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
@@ -329,8 +416,15 @@ func NewActivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateApiServiceIntegrationInstanceSecretBackup {
+
+				idParam := ActivateApiServiceIntegrationInstanceSecretapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -340,6 +434,8 @@ func NewActivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivateApiServiceIntegrationInstanceSecretsecretId, "secretId", "", "", "")
 	cmd.MarkFlagRequired("secretId")
+
+	cmd.Flags().BoolVarP(&ActivateApiServiceIntegrationInstanceSecretBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -353,6 +449,8 @@ var (
 	DeactivateApiServiceIntegrationInstanceSecretapiServiceId string
 
 	DeactivateApiServiceIntegrationInstanceSecretsecretId string
+
+	DeactivateApiServiceIntegrationInstanceSecretBackup bool
 )
 
 func NewDeactivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
@@ -376,8 +474,15 @@ func NewDeactivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateApiServiceIntegrationInstanceSecretBackup {
+
+				idParam := DeactivateApiServiceIntegrationInstanceSecretapiServiceId
+				err := utils.BackupObject(d, "ApiServiceIntegrations", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -387,6 +492,8 @@ func NewDeactivateApiServiceIntegrationInstanceSecretCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeactivateApiServiceIntegrationInstanceSecretsecretId, "secretId", "", "", "")
 	cmd.MarkFlagRequired("secretId")
+
+	cmd.Flags().BoolVarP(&DeactivateApiServiceIntegrationInstanceSecretBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

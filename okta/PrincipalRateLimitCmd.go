@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(PrincipalRateLimitCmd)
 }
 
-var CreatePrincipalRateLimitEntitydata string
+var (
+	CreatePrincipalRateLimitEntitydata string
+
+	CreatePrincipalRateLimitEntityBackup bool
+)
 
 func NewCreatePrincipalRateLimitEntityCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreatePrincipalRateLimitEntityCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreatePrincipalRateLimitEntityBackup {
+
+				err := utils.BackupObject(d, "PrincipalRateLimit", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreatePrincipalRateLimitEntitydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreatePrincipalRateLimitEntityBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreatePrincipalRateLimitEntityCmd := NewCreatePrincipalRateLimitEntityCmd()
 	PrincipalRateLimitCmd.AddCommand(CreatePrincipalRateLimitEntityCmd)
 }
+
+var ListPrincipalRateLimitEntitiesBackup bool
 
 func NewListPrincipalRateLimitEntitiesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListPrincipalRateLimitEntitiesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListPrincipalRateLimitEntitiesBackup {
+
+				err := utils.BackupObject(d, "PrincipalRateLimit", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListPrincipalRateLimitEntitiesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	PrincipalRateLimitCmd.AddCommand(ListPrincipalRateLimitEntitiesCmd)
 }
 
-var GetPrincipalRateLimitEntityprincipalRateLimitId string
+var (
+	GetPrincipalRateLimitEntityprincipalRateLimitId string
+
+	GetPrincipalRateLimitEntityBackup bool
+)
 
 func NewGetPrincipalRateLimitEntityCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetPrincipalRateLimitEntityCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPrincipalRateLimitEntityBackup {
+
+				idParam := GetPrincipalRateLimitEntityprincipalRateLimitId
+				err := utils.BackupObject(d, "PrincipalRateLimit", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPrincipalRateLimitEntityprincipalRateLimitId, "principalRateLimitId", "", "", "")
 	cmd.MarkFlagRequired("principalRateLimitId")
+
+	cmd.Flags().BoolVarP(&GetPrincipalRateLimitEntityBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplacePrincipalRateLimitEntityprincipalRateLimitId string
 
 	ReplacePrincipalRateLimitEntitydata string
+
+	ReplacePrincipalRateLimitEntityBackup bool
 )
 
 func NewReplacePrincipalRateLimitEntityCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplacePrincipalRateLimitEntityCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePrincipalRateLimitEntityBackup {
+
+				idParam := ReplacePrincipalRateLimitEntityprincipalRateLimitId
+				err := utils.BackupObject(d, "PrincipalRateLimit", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -177,6 +221,8 @@ func NewReplacePrincipalRateLimitEntityCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ReplacePrincipalRateLimitEntitydata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplacePrincipalRateLimitEntityBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

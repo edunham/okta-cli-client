@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(ApiTokenCmd)
 }
 
+var ListApiTokensBackup bool
+
 func NewListApiTokensCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "lists",
@@ -37,11 +39,19 @@ func NewListApiTokensCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApiTokensBackup {
+
+				err := utils.BackupObject(d, "ApiToken", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListApiTokensBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -50,6 +60,8 @@ func init() {
 	ListApiTokensCmd := NewListApiTokensCmd()
 	ApiTokenCmd.AddCommand(ListApiTokensCmd)
 }
+
+var RevokeCurrentApiTokenBackup bool
 
 func NewRevokeCurrentApiTokenCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -72,11 +84,19 @@ func NewRevokeCurrentApiTokenCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeCurrentApiTokenBackup {
+
+				err := utils.BackupObject(d, "ApiToken", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&RevokeCurrentApiTokenBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -86,7 +106,11 @@ func init() {
 	ApiTokenCmd.AddCommand(RevokeCurrentApiTokenCmd)
 }
 
-var GetApiTokenapiTokenId string
+var (
+	GetApiTokenapiTokenId string
+
+	GetApiTokenBackup bool
+)
 
 func NewGetApiTokenCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -109,14 +133,23 @@ func NewGetApiTokenCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApiTokenBackup {
+
+				idParam := GetApiTokenapiTokenId
+				err := utils.BackupObject(d, "ApiToken", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetApiTokenapiTokenId, "apiTokenId", "", "", "")
 	cmd.MarkFlagRequired("apiTokenId")
+
+	cmd.Flags().BoolVarP(&GetApiTokenBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -126,7 +159,11 @@ func init() {
 	ApiTokenCmd.AddCommand(GetApiTokenCmd)
 }
 
-var RevokeApiTokenapiTokenId string
+var (
+	RevokeApiTokenapiTokenId string
+
+	RevokeApiTokenBackup bool
+)
 
 func NewRevokeApiTokenCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -149,14 +186,23 @@ func NewRevokeApiTokenCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeApiTokenBackup {
+
+				idParam := RevokeApiTokenapiTokenId
+				err := utils.BackupObject(d, "ApiToken", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RevokeApiTokenapiTokenId, "apiTokenId", "", "", "")
 	cmd.MarkFlagRequired("apiTokenId")
+
+	cmd.Flags().BoolVarP(&RevokeApiTokenBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

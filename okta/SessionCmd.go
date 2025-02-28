@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(SessionCmd)
 }
 
-var CreateSessiondata string
+var (
+	CreateSessiondata string
+
+	CreateSessionBackup bool
+)
 
 func NewCreateSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateSessionBackup {
+
+				err := utils.BackupObject(d, "Session", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateSessiondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateSessionCmd := NewCreateSessionCmd()
 	SessionCmd.AddCommand(CreateSessionCmd)
 }
+
+var GetCurrentSessionBackup bool
 
 func NewGetCurrentSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewGetCurrentSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCurrentSessionBackup {
+
+				err := utils.BackupObject(d, "Session", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetCurrentSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -94,6 +116,8 @@ func init() {
 	GetCurrentSessionCmd := NewGetCurrentSessionCmd()
 	SessionCmd.AddCommand(GetCurrentSessionCmd)
 }
+
+var CloseCurrentSessionBackup bool
 
 func NewCloseCurrentSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -116,11 +140,19 @@ func NewCloseCurrentSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CloseCurrentSessionBackup {
+
+				err := utils.BackupObject(d, "Session", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&CloseCurrentSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -129,6 +161,8 @@ func init() {
 	CloseCurrentSessionCmd := NewCloseCurrentSessionCmd()
 	SessionCmd.AddCommand(CloseCurrentSessionCmd)
 }
+
+var RefreshCurrentSessionBackup bool
 
 func NewRefreshCurrentSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -151,11 +185,19 @@ func NewRefreshCurrentSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RefreshCurrentSessionBackup {
+
+				err := utils.BackupObject(d, "Session", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&RefreshCurrentSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -165,7 +207,11 @@ func init() {
 	SessionCmd.AddCommand(RefreshCurrentSessionCmd)
 }
 
-var GetSessionsessionId string
+var (
+	GetSessionsessionId string
+
+	GetSessionBackup bool
+)
 
 func NewGetSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -188,14 +234,23 @@ func NewGetSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetSessionBackup {
+
+				idParam := GetSessionsessionId
+				err := utils.BackupObject(d, "Session", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetSessionsessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&GetSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -205,7 +260,11 @@ func init() {
 	SessionCmd.AddCommand(GetSessionCmd)
 }
 
-var RevokeSessionsessionId string
+var (
+	RevokeSessionsessionId string
+
+	RevokeSessionBackup bool
+)
 
 func NewRevokeSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -228,14 +287,23 @@ func NewRevokeSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeSessionBackup {
+
+				idParam := RevokeSessionsessionId
+				err := utils.BackupObject(d, "Session", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RevokeSessionsessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&RevokeSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -245,7 +313,11 @@ func init() {
 	SessionCmd.AddCommand(RevokeSessionCmd)
 }
 
-var RefreshSessionsessionId string
+var (
+	RefreshSessionsessionId string
+
+	RefreshSessionBackup bool
+)
 
 func NewRefreshSessionCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -268,14 +340,23 @@ func NewRefreshSessionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RefreshSessionBackup {
+
+				idParam := RefreshSessionsessionId
+				err := utils.BackupObject(d, "Session", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RefreshSessionsessionId, "sessionId", "", "", "")
 	cmd.MarkFlagRequired("sessionId")
+
+	cmd.Flags().BoolVarP(&RefreshSessionBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

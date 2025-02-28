@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(CAPTCHACmd)
 }
 
-var CreateCaptchaInstancedata string
+var (
+	CreateCaptchaInstancedata string
+
+	CreateCaptchaInstanceBackup bool
+)
 
 func NewCreateCaptchaInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateCaptchaInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateCaptchaInstanceBackup {
+
+				err := utils.BackupObject(d, "CAPTCHA", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateCaptchaInstancedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateCaptchaInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateCaptchaInstanceCmd := NewCreateCaptchaInstanceCmd()
 	CAPTCHACmd.AddCommand(CreateCaptchaInstanceCmd)
 }
+
+var ListCaptchaInstancesBackup bool
 
 func NewListCaptchaInstancesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListCaptchaInstancesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListCaptchaInstancesBackup {
+
+				err := utils.BackupObject(d, "CAPTCHA", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListCaptchaInstancesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -99,6 +121,8 @@ var (
 	UpdateCaptchaInstancecaptchaId string
 
 	UpdateCaptchaInstancedata string
+
+	UpdateCaptchaInstanceBackup bool
 )
 
 func NewUpdateCaptchaInstanceCmd() *cobra.Command {
@@ -126,8 +150,15 @@ func NewUpdateCaptchaInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateCaptchaInstanceBackup {
+
+				idParam := UpdateCaptchaInstancecaptchaId
+				err := utils.BackupObject(d, "CAPTCHA", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -138,6 +169,8 @@ func NewUpdateCaptchaInstanceCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateCaptchaInstancedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateCaptchaInstanceBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -146,7 +179,11 @@ func init() {
 	CAPTCHACmd.AddCommand(UpdateCaptchaInstanceCmd)
 }
 
-var GetCaptchaInstancecaptchaId string
+var (
+	GetCaptchaInstancecaptchaId string
+
+	GetCaptchaInstanceBackup bool
+)
 
 func NewGetCaptchaInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -169,14 +206,23 @@ func NewGetCaptchaInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCaptchaInstanceBackup {
+
+				idParam := GetCaptchaInstancecaptchaId
+				err := utils.BackupObject(d, "CAPTCHA", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetCaptchaInstancecaptchaId, "captchaId", "", "", "")
 	cmd.MarkFlagRequired("captchaId")
+
+	cmd.Flags().BoolVarP(&GetCaptchaInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -190,6 +236,8 @@ var (
 	ReplaceCaptchaInstancecaptchaId string
 
 	ReplaceCaptchaInstancedata string
+
+	ReplaceCaptchaInstanceBackup bool
 )
 
 func NewReplaceCaptchaInstanceCmd() *cobra.Command {
@@ -217,8 +265,15 @@ func NewReplaceCaptchaInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceCaptchaInstanceBackup {
+
+				idParam := ReplaceCaptchaInstancecaptchaId
+				err := utils.BackupObject(d, "CAPTCHA", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -229,6 +284,8 @@ func NewReplaceCaptchaInstanceCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceCaptchaInstancedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceCaptchaInstanceBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -237,7 +294,11 @@ func init() {
 	CAPTCHACmd.AddCommand(ReplaceCaptchaInstanceCmd)
 }
 
-var DeleteCaptchaInstancecaptchaId string
+var (
+	DeleteCaptchaInstancecaptchaId string
+
+	DeleteCaptchaInstanceBackup bool
+)
 
 func NewDeleteCaptchaInstanceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -260,14 +321,23 @@ func NewDeleteCaptchaInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteCaptchaInstanceBackup {
+
+				idParam := DeleteCaptchaInstancecaptchaId
+				err := utils.BackupObject(d, "CAPTCHA", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteCaptchaInstancecaptchaId, "captchaId", "", "", "")
 	cmd.MarkFlagRequired("captchaId")
+
+	cmd.Flags().BoolVarP(&DeleteCaptchaInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -276,6 +346,8 @@ func init() {
 	DeleteCaptchaInstanceCmd := NewDeleteCaptchaInstanceCmd()
 	CAPTCHACmd.AddCommand(DeleteCaptchaInstanceCmd)
 }
+
+var GetOrgCaptchaSettingsBackup bool
 
 func NewGetOrgCaptchaSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -298,11 +370,19 @@ func NewGetOrgCaptchaSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgCaptchaSettingsBackup {
+
+				err := utils.BackupObject(d, "CAPTCHA", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOrgCaptchaSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -312,7 +392,11 @@ func init() {
 	CAPTCHACmd.AddCommand(GetOrgCaptchaSettingsCmd)
 }
 
-var ReplacesOrgCaptchaSettingsdata string
+var (
+	ReplacesOrgCaptchaSettingsdata string
+
+	ReplacesOrgCaptchaSettingsBackup bool
+)
 
 func NewReplacesOrgCaptchaSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -339,14 +423,22 @@ func NewReplacesOrgCaptchaSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacesOrgCaptchaSettingsBackup {
+
+				err := utils.BackupObject(d, "CAPTCHA", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplacesOrgCaptchaSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplacesOrgCaptchaSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -355,6 +447,8 @@ func init() {
 	ReplacesOrgCaptchaSettingsCmd := NewReplacesOrgCaptchaSettingsCmd()
 	CAPTCHACmd.AddCommand(ReplacesOrgCaptchaSettingsCmd)
 }
+
+var DeleteOrgCaptchaSettingsBackup bool
 
 func NewDeleteOrgCaptchaSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -377,11 +471,19 @@ func NewDeleteOrgCaptchaSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteOrgCaptchaSettingsBackup {
+
+				err := utils.BackupObject(d, "CAPTCHA", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&DeleteOrgCaptchaSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

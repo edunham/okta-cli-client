@@ -20,6 +20,8 @@ var (
 	AssignApplicationPolicyappId string
 
 	AssignApplicationPolicypolicyId string
+
+	AssignApplicationPolicyBackup bool
 )
 
 func NewAssignApplicationPolicyCmd() *cobra.Command {
@@ -43,8 +45,15 @@ func NewAssignApplicationPolicyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignApplicationPolicyBackup {
+
+				idParam := AssignApplicationPolicyappId
+				err := utils.BackupObject(d, "ApplicationPolicies", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -54,6 +63,8 @@ func NewAssignApplicationPolicyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignApplicationPolicypolicyId, "policyId", "", "", "")
 	cmd.MarkFlagRequired("policyId")
+
+	cmd.Flags().BoolVarP(&AssignApplicationPolicyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

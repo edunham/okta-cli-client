@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(EmailServerCmd)
 }
 
-var CreateEmailServerdata string
+var (
+	CreateEmailServerdata string
+
+	CreateEmailServerBackup bool
+)
 
 func NewCreateEmailServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateEmailServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateEmailServerBackup {
+
+				err := utils.BackupObject(d, "EmailServer", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateEmailServerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateEmailServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateEmailServerCmd := NewCreateEmailServerCmd()
 	EmailServerCmd.AddCommand(CreateEmailServerCmd)
 }
+
+var ListEmailServersBackup bool
 
 func NewListEmailServersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListEmailServersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListEmailServersBackup {
+
+				err := utils.BackupObject(d, "EmailServer", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListEmailServersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	EmailServerCmd.AddCommand(ListEmailServersCmd)
 }
 
-var GetEmailServeremailServerId string
+var (
+	GetEmailServeremailServerId string
+
+	GetEmailServerBackup bool
+)
 
 func NewGetEmailServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetEmailServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailServerBackup {
+
+				idParam := GetEmailServeremailServerId
+				err := utils.BackupObject(d, "EmailServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetEmailServeremailServerId, "emailServerId", "", "", "")
 	cmd.MarkFlagRequired("emailServerId")
+
+	cmd.Flags().BoolVarP(&GetEmailServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -135,7 +170,11 @@ func init() {
 	EmailServerCmd.AddCommand(GetEmailServerCmd)
 }
 
-var DeleteEmailServeremailServerId string
+var (
+	DeleteEmailServeremailServerId string
+
+	DeleteEmailServerBackup bool
+)
 
 func NewDeleteEmailServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -158,14 +197,23 @@ func NewDeleteEmailServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteEmailServerBackup {
+
+				idParam := DeleteEmailServeremailServerId
+				err := utils.BackupObject(d, "EmailServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteEmailServeremailServerId, "emailServerId", "", "", "")
 	cmd.MarkFlagRequired("emailServerId")
+
+	cmd.Flags().BoolVarP(&DeleteEmailServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -179,6 +227,8 @@ var (
 	UpdateEmailServeremailServerId string
 
 	UpdateEmailServerdata string
+
+	UpdateEmailServerBackup bool
 )
 
 func NewUpdateEmailServerCmd() *cobra.Command {
@@ -206,8 +256,15 @@ func NewUpdateEmailServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateEmailServerBackup {
+
+				idParam := UpdateEmailServeremailServerId
+				err := utils.BackupObject(d, "EmailServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -217,6 +274,8 @@ func NewUpdateEmailServerCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UpdateEmailServerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UpdateEmailServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -230,6 +289,8 @@ var (
 	TestEmailServeremailServerId string
 
 	TestEmailServerdata string
+
+	TestEmailServerBackup bool
 )
 
 func NewTestEmailServerCmd() *cobra.Command {
@@ -257,8 +318,15 @@ func NewTestEmailServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if TestEmailServerBackup {
+
+				idParam := TestEmailServeremailServerId
+				err := utils.BackupObject(d, "EmailServer", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -268,6 +336,8 @@ func NewTestEmailServerCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&TestEmailServerdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&TestEmailServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

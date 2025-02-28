@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApplicationFeaturesCmd)
 }
 
-var ListFeaturesForApplicationappId string
+var (
+	ListFeaturesForApplicationappId string
+
+	ListFeaturesForApplicationBackup bool
+)
 
 func NewListFeaturesForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewListFeaturesForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListFeaturesForApplicationBackup {
+
+				idParam := ListFeaturesForApplicationappId
+				err := utils.BackupObject(d, "ApplicationFeatures", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListFeaturesForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListFeaturesForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -60,6 +73,8 @@ var (
 	GetFeatureForApplicationappId string
 
 	GetFeatureForApplicationfeatureName string
+
+	GetFeatureForApplicationBackup bool
 )
 
 func NewGetFeatureForApplicationCmd() *cobra.Command {
@@ -83,8 +98,15 @@ func NewGetFeatureForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetFeatureForApplicationBackup {
+
+				idParam := GetFeatureForApplicationappId
+				err := utils.BackupObject(d, "ApplicationFeatures", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -94,6 +116,8 @@ func NewGetFeatureForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetFeatureForApplicationfeatureName, "featureName", "", "", "")
 	cmd.MarkFlagRequired("featureName")
+
+	cmd.Flags().BoolVarP(&GetFeatureForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -109,6 +133,8 @@ var (
 	UpdateFeatureForApplicationfeatureName string
 
 	UpdateFeatureForApplicationdata string
+
+	UpdateFeatureForApplicationBackup bool
 )
 
 func NewUpdateFeatureForApplicationCmd() *cobra.Command {
@@ -136,8 +162,15 @@ func NewUpdateFeatureForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateFeatureForApplicationBackup {
+
+				idParam := UpdateFeatureForApplicationappId
+				err := utils.BackupObject(d, "ApplicationFeatures", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -150,6 +183,8 @@ func NewUpdateFeatureForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UpdateFeatureForApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UpdateFeatureForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

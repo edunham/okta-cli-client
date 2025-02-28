@@ -20,6 +20,8 @@ var (
 	UploadApplicationLogoappId string
 
 	UploadApplicationLogodata string
+
+	UploadApplicationLogoBackup bool
 )
 
 func NewUploadApplicationLogoCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewUploadApplicationLogoCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadApplicationLogoBackup {
+
+				idParam := UploadApplicationLogoappId
+				err := utils.BackupObject(d, "ApplicationLogos", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -58,6 +67,8 @@ func NewUploadApplicationLogoCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UploadApplicationLogodata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UploadApplicationLogoBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

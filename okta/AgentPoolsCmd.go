@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(AgentPoolsCmd)
 }
 
+var ListAgentPoolsBackup bool
+
 func NewListAgentPoolsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "list",
@@ -37,11 +39,19 @@ func NewListAgentPoolsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAgentPoolsBackup {
+
+				err := utils.BackupObject(d, "AgentPools", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListAgentPoolsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -55,6 +65,8 @@ var (
 	CreateAgentPoolsUpdatepoolId string
 
 	CreateAgentPoolsUpdatedata string
+
+	CreateAgentPoolsUpdateBackup bool
 )
 
 func NewCreateAgentPoolsUpdateCmd() *cobra.Command {
@@ -82,8 +94,15 @@ func NewCreateAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateAgentPoolsUpdateBackup {
+
+				idParam := CreateAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -94,6 +113,8 @@ func NewCreateAgentPoolsUpdateCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateAgentPoolsUpdatedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -102,7 +123,11 @@ func init() {
 	AgentPoolsCmd.AddCommand(CreateAgentPoolsUpdateCmd)
 }
 
-var ListAgentPoolsUpdatespoolId string
+var (
+	ListAgentPoolsUpdatespoolId string
+
+	ListAgentPoolsUpdatesBackup bool
+)
 
 func NewListAgentPoolsUpdatesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -125,14 +150,23 @@ func NewListAgentPoolsUpdatesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAgentPoolsUpdatesBackup {
+
+				idParam := ListAgentPoolsUpdatespoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAgentPoolsUpdatespoolId, "poolId", "", "", "")
 	cmd.MarkFlagRequired("poolId")
+
+	cmd.Flags().BoolVarP(&ListAgentPoolsUpdatesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -146,6 +180,8 @@ var (
 	UpdateAgentPoolsUpdateSettingspoolId string
 
 	UpdateAgentPoolsUpdateSettingsdata string
+
+	UpdateAgentPoolsUpdateSettingsBackup bool
 )
 
 func NewUpdateAgentPoolsUpdateSettingsCmd() *cobra.Command {
@@ -173,8 +209,15 @@ func NewUpdateAgentPoolsUpdateSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateAgentPoolsUpdateSettingsBackup {
+
+				idParam := UpdateAgentPoolsUpdateSettingspoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -185,6 +228,8 @@ func NewUpdateAgentPoolsUpdateSettingsCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateAgentPoolsUpdateSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateAgentPoolsUpdateSettingsBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -193,7 +238,11 @@ func init() {
 	AgentPoolsCmd.AddCommand(UpdateAgentPoolsUpdateSettingsCmd)
 }
 
-var GetAgentPoolsUpdateSettingspoolId string
+var (
+	GetAgentPoolsUpdateSettingspoolId string
+
+	GetAgentPoolsUpdateSettingsBackup bool
+)
 
 func NewGetAgentPoolsUpdateSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -216,14 +265,23 @@ func NewGetAgentPoolsUpdateSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAgentPoolsUpdateSettingsBackup {
+
+				idParam := GetAgentPoolsUpdateSettingspoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetAgentPoolsUpdateSettingspoolId, "poolId", "", "", "")
 	cmd.MarkFlagRequired("poolId")
+
+	cmd.Flags().BoolVarP(&GetAgentPoolsUpdateSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -239,6 +297,8 @@ var (
 	UpdateAgentPoolsUpdateupdateId string
 
 	UpdateAgentPoolsUpdatedata string
+
+	UpdateAgentPoolsUpdateBackup bool
 )
 
 func NewUpdateAgentPoolsUpdateCmd() *cobra.Command {
@@ -266,8 +326,15 @@ func NewUpdateAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateAgentPoolsUpdateBackup {
+
+				idParam := UpdateAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -281,6 +348,8 @@ func NewUpdateAgentPoolsUpdateCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateAgentPoolsUpdatedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -293,6 +362,8 @@ var (
 	GetAgentPoolsUpdateInstancepoolId string
 
 	GetAgentPoolsUpdateInstanceupdateId string
+
+	GetAgentPoolsUpdateInstanceBackup bool
 )
 
 func NewGetAgentPoolsUpdateInstanceCmd() *cobra.Command {
@@ -316,8 +387,15 @@ func NewGetAgentPoolsUpdateInstanceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAgentPoolsUpdateInstanceBackup {
+
+				idParam := GetAgentPoolsUpdateInstancepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -327,6 +405,8 @@ func NewGetAgentPoolsUpdateInstanceCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetAgentPoolsUpdateInstanceupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&GetAgentPoolsUpdateInstanceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -340,6 +420,8 @@ var (
 	DeleteAgentPoolsUpdatepoolId string
 
 	DeleteAgentPoolsUpdateupdateId string
+
+	DeleteAgentPoolsUpdateBackup bool
 )
 
 func NewDeleteAgentPoolsUpdateCmd() *cobra.Command {
@@ -363,8 +445,15 @@ func NewDeleteAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteAgentPoolsUpdateBackup {
+
+				idParam := DeleteAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -374,6 +463,8 @@ func NewDeleteAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&DeleteAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -387,6 +478,8 @@ var (
 	ActivateAgentPoolsUpdatepoolId string
 
 	ActivateAgentPoolsUpdateupdateId string
+
+	ActivateAgentPoolsUpdateBackup bool
 )
 
 func NewActivateAgentPoolsUpdateCmd() *cobra.Command {
@@ -410,8 +503,15 @@ func NewActivateAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateAgentPoolsUpdateBackup {
+
+				idParam := ActivateAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -421,6 +521,8 @@ func NewActivateAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivateAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&ActivateAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -434,6 +536,8 @@ var (
 	DeactivateAgentPoolsUpdatepoolId string
 
 	DeactivateAgentPoolsUpdateupdateId string
+
+	DeactivateAgentPoolsUpdateBackup bool
 )
 
 func NewDeactivateAgentPoolsUpdateCmd() *cobra.Command {
@@ -457,8 +561,15 @@ func NewDeactivateAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateAgentPoolsUpdateBackup {
+
+				idParam := DeactivateAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -468,6 +579,8 @@ func NewDeactivateAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeactivateAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&DeactivateAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -481,6 +594,8 @@ var (
 	PauseAgentPoolsUpdatepoolId string
 
 	PauseAgentPoolsUpdateupdateId string
+
+	PauseAgentPoolsUpdateBackup bool
 )
 
 func NewPauseAgentPoolsUpdateCmd() *cobra.Command {
@@ -504,8 +619,15 @@ func NewPauseAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if PauseAgentPoolsUpdateBackup {
+
+				idParam := PauseAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -515,6 +637,8 @@ func NewPauseAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&PauseAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&PauseAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -528,6 +652,8 @@ var (
 	ResumeAgentPoolsUpdatepoolId string
 
 	ResumeAgentPoolsUpdateupdateId string
+
+	ResumeAgentPoolsUpdateBackup bool
 )
 
 func NewResumeAgentPoolsUpdateCmd() *cobra.Command {
@@ -551,8 +677,15 @@ func NewResumeAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ResumeAgentPoolsUpdateBackup {
+
+				idParam := ResumeAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -562,6 +695,8 @@ func NewResumeAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ResumeAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&ResumeAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -575,6 +710,8 @@ var (
 	RetryAgentPoolsUpdatepoolId string
 
 	RetryAgentPoolsUpdateupdateId string
+
+	RetryAgentPoolsUpdateBackup bool
 )
 
 func NewRetryAgentPoolsUpdateCmd() *cobra.Command {
@@ -598,8 +735,15 @@ func NewRetryAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RetryAgentPoolsUpdateBackup {
+
+				idParam := RetryAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -609,6 +753,8 @@ func NewRetryAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RetryAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&RetryAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -622,6 +768,8 @@ var (
 	StopAgentPoolsUpdatepoolId string
 
 	StopAgentPoolsUpdateupdateId string
+
+	StopAgentPoolsUpdateBackup bool
 )
 
 func NewStopAgentPoolsUpdateCmd() *cobra.Command {
@@ -645,8 +793,15 @@ func NewStopAgentPoolsUpdateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if StopAgentPoolsUpdateBackup {
+
+				idParam := StopAgentPoolsUpdatepoolId
+				err := utils.BackupObject(d, "AgentPools", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -656,6 +811,8 @@ func NewStopAgentPoolsUpdateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&StopAgentPoolsUpdateupdateId, "updateId", "", "", "")
 	cmd.MarkFlagRequired("updateId")
+
+	cmd.Flags().BoolVarP(&StopAgentPoolsUpdateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

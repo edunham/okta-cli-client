@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(CustomizationCmd)
 }
 
-var CreateBranddata string
+var (
+	CreateBranddata string
+
+	CreateBrandBackup bool
+)
 
 func NewCreateBrandCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateBrandCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateBrandBackup {
+
+				err := utils.BackupObject(d, "Customization", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateBranddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateBrandBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateBrandCmd := NewCreateBrandCmd()
 	CustomizationCmd.AddCommand(CreateBrandCmd)
 }
+
+var ListBrandsBackup bool
 
 func NewListBrandsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListBrandsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListBrandsBackup {
+
+				err := utils.BackupObject(d, "Customization", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListBrandsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	CustomizationCmd.AddCommand(ListBrandsCmd)
 }
 
-var GetBrandbrandId string
+var (
+	GetBrandbrandId string
+
+	GetBrandBackup bool
+)
 
 func NewGetBrandCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetBrandCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetBrandBackup {
+
+				idParam := GetBrandbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetBrandbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetBrandBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceBrandbrandId string
 
 	ReplaceBranddata string
+
+	ReplaceBrandBackup bool
 )
 
 func NewReplaceBrandCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceBrandCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceBrandBackup {
+
+				idParam := ReplaceBrandbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceBrandCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceBranddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceBrandBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplaceBrandCmd)
 }
 
-var DeleteBrandbrandId string
+var (
+	DeleteBrandbrandId string
+
+	DeleteBrandBackup bool
+)
 
 func NewDeleteBrandCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteBrandCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBrandBackup {
+
+				idParam := DeleteBrandbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteBrandbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&DeleteBrandBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	CustomizationCmd.AddCommand(DeleteBrandCmd)
 }
 
-var ListBrandDomainsbrandId string
+var (
+	ListBrandDomainsbrandId string
+
+	ListBrandDomainsBackup bool
+)
 
 func NewListBrandDomainsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewListBrandDomainsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListBrandDomainsBackup {
+
+				idParam := ListBrandDomainsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListBrandDomainsbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&ListBrandDomainsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	CustomizationCmd.AddCommand(ListBrandDomainsCmd)
 }
 
-var GetErrorPagebrandId string
+var (
+	GetErrorPagebrandId string
+
+	GetErrorPageBackup bool
+)
 
 func NewGetErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewGetErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetErrorPageBackup {
+
+				idParam := GetErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -306,7 +391,11 @@ func init() {
 	CustomizationCmd.AddCommand(GetErrorPageCmd)
 }
 
-var GetCustomizedErrorPagebrandId string
+var (
+	GetCustomizedErrorPagebrandId string
+
+	GetCustomizedErrorPageBackup bool
+)
 
 func NewGetCustomizedErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -329,14 +418,23 @@ func NewGetCustomizedErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCustomizedErrorPageBackup {
+
+				idParam := GetCustomizedErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetCustomizedErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetCustomizedErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -350,6 +448,8 @@ var (
 	ReplaceCustomizedErrorPagebrandId string
 
 	ReplaceCustomizedErrorPagedata string
+
+	ReplaceCustomizedErrorPageBackup bool
 )
 
 func NewReplaceCustomizedErrorPageCmd() *cobra.Command {
@@ -377,8 +477,15 @@ func NewReplaceCustomizedErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceCustomizedErrorPageBackup {
+
+				idParam := ReplaceCustomizedErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -389,6 +496,8 @@ func NewReplaceCustomizedErrorPageCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceCustomizedErrorPagedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceCustomizedErrorPageBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -397,7 +506,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplaceCustomizedErrorPageCmd)
 }
 
-var DeleteCustomizedErrorPagebrandId string
+var (
+	DeleteCustomizedErrorPagebrandId string
+
+	DeleteCustomizedErrorPageBackup bool
+)
 
 func NewDeleteCustomizedErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -420,14 +533,23 @@ func NewDeleteCustomizedErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteCustomizedErrorPageBackup {
+
+				idParam := DeleteCustomizedErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteCustomizedErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&DeleteCustomizedErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -437,7 +559,11 @@ func init() {
 	CustomizationCmd.AddCommand(DeleteCustomizedErrorPageCmd)
 }
 
-var GetDefaultErrorPagebrandId string
+var (
+	GetDefaultErrorPagebrandId string
+
+	GetDefaultErrorPageBackup bool
+)
 
 func NewGetDefaultErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -460,14 +586,23 @@ func NewGetDefaultErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetDefaultErrorPageBackup {
+
+				idParam := GetDefaultErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetDefaultErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetDefaultErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -477,7 +612,11 @@ func init() {
 	CustomizationCmd.AddCommand(GetDefaultErrorPageCmd)
 }
 
-var GetPreviewErrorPagebrandId string
+var (
+	GetPreviewErrorPagebrandId string
+
+	GetPreviewErrorPageBackup bool
+)
 
 func NewGetPreviewErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -500,14 +639,23 @@ func NewGetPreviewErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPreviewErrorPageBackup {
+
+				idParam := GetPreviewErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPreviewErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetPreviewErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -521,6 +669,8 @@ var (
 	ReplacePreviewErrorPagebrandId string
 
 	ReplacePreviewErrorPagedata string
+
+	ReplacePreviewErrorPageBackup bool
 )
 
 func NewReplacePreviewErrorPageCmd() *cobra.Command {
@@ -548,8 +698,15 @@ func NewReplacePreviewErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePreviewErrorPageBackup {
+
+				idParam := ReplacePreviewErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -560,6 +717,8 @@ func NewReplacePreviewErrorPageCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplacePreviewErrorPagedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplacePreviewErrorPageBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -568,7 +727,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplacePreviewErrorPageCmd)
 }
 
-var DeletePreviewErrorPagebrandId string
+var (
+	DeletePreviewErrorPagebrandId string
+
+	DeletePreviewErrorPageBackup bool
+)
 
 func NewDeletePreviewErrorPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -591,14 +754,23 @@ func NewDeletePreviewErrorPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePreviewErrorPageBackup {
+
+				idParam := DeletePreviewErrorPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeletePreviewErrorPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&DeletePreviewErrorPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -608,7 +780,11 @@ func init() {
 	CustomizationCmd.AddCommand(DeletePreviewErrorPageCmd)
 }
 
-var GetSignInPagebrandId string
+var (
+	GetSignInPagebrandId string
+
+	GetSignInPageBackup bool
+)
 
 func NewGetSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -631,14 +807,23 @@ func NewGetSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetSignInPageBackup {
+
+				idParam := GetSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -648,7 +833,11 @@ func init() {
 	CustomizationCmd.AddCommand(GetSignInPageCmd)
 }
 
-var GetCustomizedSignInPagebrandId string
+var (
+	GetCustomizedSignInPagebrandId string
+
+	GetCustomizedSignInPageBackup bool
+)
 
 func NewGetCustomizedSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -671,14 +860,23 @@ func NewGetCustomizedSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCustomizedSignInPageBackup {
+
+				idParam := GetCustomizedSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetCustomizedSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetCustomizedSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -692,6 +890,8 @@ var (
 	ReplaceCustomizedSignInPagebrandId string
 
 	ReplaceCustomizedSignInPagedata string
+
+	ReplaceCustomizedSignInPageBackup bool
 )
 
 func NewReplaceCustomizedSignInPageCmd() *cobra.Command {
@@ -719,8 +919,15 @@ func NewReplaceCustomizedSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceCustomizedSignInPageBackup {
+
+				idParam := ReplaceCustomizedSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -731,6 +938,8 @@ func NewReplaceCustomizedSignInPageCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceCustomizedSignInPagedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceCustomizedSignInPageBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -739,7 +948,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplaceCustomizedSignInPageCmd)
 }
 
-var DeleteCustomizedSignInPagebrandId string
+var (
+	DeleteCustomizedSignInPagebrandId string
+
+	DeleteCustomizedSignInPageBackup bool
+)
 
 func NewDeleteCustomizedSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -762,14 +975,23 @@ func NewDeleteCustomizedSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteCustomizedSignInPageBackup {
+
+				idParam := DeleteCustomizedSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteCustomizedSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&DeleteCustomizedSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -779,7 +1001,11 @@ func init() {
 	CustomizationCmd.AddCommand(DeleteCustomizedSignInPageCmd)
 }
 
-var GetDefaultSignInPagebrandId string
+var (
+	GetDefaultSignInPagebrandId string
+
+	GetDefaultSignInPageBackup bool
+)
 
 func NewGetDefaultSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -802,14 +1028,23 @@ func NewGetDefaultSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetDefaultSignInPageBackup {
+
+				idParam := GetDefaultSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetDefaultSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetDefaultSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -819,7 +1054,11 @@ func init() {
 	CustomizationCmd.AddCommand(GetDefaultSignInPageCmd)
 }
 
-var GetPreviewSignInPagebrandId string
+var (
+	GetPreviewSignInPagebrandId string
+
+	GetPreviewSignInPageBackup bool
+)
 
 func NewGetPreviewSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -842,14 +1081,23 @@ func NewGetPreviewSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetPreviewSignInPageBackup {
+
+				idParam := GetPreviewSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetPreviewSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetPreviewSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -863,6 +1111,8 @@ var (
 	ReplacePreviewSignInPagebrandId string
 
 	ReplacePreviewSignInPagedata string
+
+	ReplacePreviewSignInPageBackup bool
 )
 
 func NewReplacePreviewSignInPageCmd() *cobra.Command {
@@ -890,8 +1140,15 @@ func NewReplacePreviewSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplacePreviewSignInPageBackup {
+
+				idParam := ReplacePreviewSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -902,6 +1159,8 @@ func NewReplacePreviewSignInPageCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplacePreviewSignInPagedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplacePreviewSignInPageBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -910,7 +1169,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplacePreviewSignInPageCmd)
 }
 
-var DeletePreviewSignInPagebrandId string
+var (
+	DeletePreviewSignInPagebrandId string
+
+	DeletePreviewSignInPageBackup bool
+)
 
 func NewDeletePreviewSignInPageCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -933,14 +1196,23 @@ func NewDeletePreviewSignInPageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeletePreviewSignInPageBackup {
+
+				idParam := DeletePreviewSignInPagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeletePreviewSignInPagebrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&DeletePreviewSignInPageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -950,7 +1222,11 @@ func init() {
 	CustomizationCmd.AddCommand(DeletePreviewSignInPageCmd)
 }
 
-var ListAllSignInWidgetVersionsbrandId string
+var (
+	ListAllSignInWidgetVersionsbrandId string
+
+	ListAllSignInWidgetVersionsBackup bool
+)
 
 func NewListAllSignInWidgetVersionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -973,14 +1249,23 @@ func NewListAllSignInWidgetVersionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAllSignInWidgetVersionsBackup {
+
+				idParam := ListAllSignInWidgetVersionsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAllSignInWidgetVersionsbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&ListAllSignInWidgetVersionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -990,7 +1275,11 @@ func init() {
 	CustomizationCmd.AddCommand(ListAllSignInWidgetVersionsCmd)
 }
 
-var GetSignOutPageSettingsbrandId string
+var (
+	GetSignOutPageSettingsbrandId string
+
+	GetSignOutPageSettingsBackup bool
+)
 
 func NewGetSignOutPageSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1013,14 +1302,23 @@ func NewGetSignOutPageSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetSignOutPageSettingsBackup {
+
+				idParam := GetSignOutPageSettingsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetSignOutPageSettingsbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&GetSignOutPageSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1034,6 +1332,8 @@ var (
 	ReplaceSignOutPageSettingsbrandId string
 
 	ReplaceSignOutPageSettingsdata string
+
+	ReplaceSignOutPageSettingsBackup bool
 )
 
 func NewReplaceSignOutPageSettingsCmd() *cobra.Command {
@@ -1061,8 +1361,15 @@ func NewReplaceSignOutPageSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceSignOutPageSettingsBackup {
+
+				idParam := ReplaceSignOutPageSettingsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1073,6 +1380,8 @@ func NewReplaceSignOutPageSettingsCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceSignOutPageSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceSignOutPageSettingsBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1081,7 +1390,11 @@ func init() {
 	CustomizationCmd.AddCommand(ReplaceSignOutPageSettingsCmd)
 }
 
-var ListEmailTemplatesbrandId string
+var (
+	ListEmailTemplatesbrandId string
+
+	ListEmailTemplatesBackup bool
+)
 
 func NewListEmailTemplatesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1104,14 +1417,23 @@ func NewListEmailTemplatesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListEmailTemplatesBackup {
+
+				idParam := ListEmailTemplatesbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListEmailTemplatesbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&ListEmailTemplatesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1125,6 +1447,8 @@ var (
 	GetEmailTemplatebrandId string
 
 	GetEmailTemplatetemplateName string
+
+	GetEmailTemplateBackup bool
 )
 
 func NewGetEmailTemplateCmd() *cobra.Command {
@@ -1148,8 +1472,15 @@ func NewGetEmailTemplateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailTemplateBackup {
+
+				idParam := GetEmailTemplatebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1159,6 +1490,8 @@ func NewGetEmailTemplateCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetEmailTemplatetemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&GetEmailTemplateBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1174,6 +1507,8 @@ var (
 	CreateEmailCustomizationtemplateName string
 
 	CreateEmailCustomizationdata string
+
+	CreateEmailCustomizationBackup bool
 )
 
 func NewCreateEmailCustomizationCmd() *cobra.Command {
@@ -1201,8 +1536,15 @@ func NewCreateEmailCustomizationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateEmailCustomizationBackup {
+
+				idParam := CreateEmailCustomizationbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1216,6 +1558,8 @@ func NewCreateEmailCustomizationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateEmailCustomizationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateEmailCustomizationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1228,6 +1572,8 @@ var (
 	ListEmailCustomizationsbrandId string
 
 	ListEmailCustomizationstemplateName string
+
+	ListEmailCustomizationsBackup bool
 )
 
 func NewListEmailCustomizationsCmd() *cobra.Command {
@@ -1251,8 +1597,15 @@ func NewListEmailCustomizationsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListEmailCustomizationsBackup {
+
+				idParam := ListEmailCustomizationsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1262,6 +1615,8 @@ func NewListEmailCustomizationsCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListEmailCustomizationstemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&ListEmailCustomizationsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1275,6 +1630,8 @@ var (
 	DeleteAllCustomizationsbrandId string
 
 	DeleteAllCustomizationstemplateName string
+
+	DeleteAllCustomizationsBackup bool
 )
 
 func NewDeleteAllCustomizationsCmd() *cobra.Command {
@@ -1298,8 +1655,15 @@ func NewDeleteAllCustomizationsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteAllCustomizationsBackup {
+
+				idParam := DeleteAllCustomizationsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1309,6 +1673,8 @@ func NewDeleteAllCustomizationsCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteAllCustomizationstemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&DeleteAllCustomizationsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1324,6 +1690,8 @@ var (
 	GetEmailCustomizationtemplateName string
 
 	GetEmailCustomizationcustomizationId string
+
+	GetEmailCustomizationBackup bool
 )
 
 func NewGetEmailCustomizationCmd() *cobra.Command {
@@ -1347,8 +1715,15 @@ func NewGetEmailCustomizationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailCustomizationBackup {
+
+				idParam := GetEmailCustomizationbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1361,6 +1736,8 @@ func NewGetEmailCustomizationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetEmailCustomizationcustomizationId, "customizationId", "", "", "")
 	cmd.MarkFlagRequired("customizationId")
+
+	cmd.Flags().BoolVarP(&GetEmailCustomizationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1378,6 +1755,8 @@ var (
 	ReplaceEmailCustomizationcustomizationId string
 
 	ReplaceEmailCustomizationdata string
+
+	ReplaceEmailCustomizationBackup bool
 )
 
 func NewReplaceEmailCustomizationCmd() *cobra.Command {
@@ -1405,8 +1784,15 @@ func NewReplaceEmailCustomizationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceEmailCustomizationBackup {
+
+				idParam := ReplaceEmailCustomizationbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1423,6 +1809,8 @@ func NewReplaceEmailCustomizationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceEmailCustomizationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceEmailCustomizationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1437,6 +1825,8 @@ var (
 	DeleteEmailCustomizationtemplateName string
 
 	DeleteEmailCustomizationcustomizationId string
+
+	DeleteEmailCustomizationBackup bool
 )
 
 func NewDeleteEmailCustomizationCmd() *cobra.Command {
@@ -1460,8 +1850,15 @@ func NewDeleteEmailCustomizationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteEmailCustomizationBackup {
+
+				idParam := DeleteEmailCustomizationbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1474,6 +1871,8 @@ func NewDeleteEmailCustomizationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteEmailCustomizationcustomizationId, "customizationId", "", "", "")
 	cmd.MarkFlagRequired("customizationId")
+
+	cmd.Flags().BoolVarP(&DeleteEmailCustomizationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1489,6 +1888,8 @@ var (
 	GetCustomizationPreviewtemplateName string
 
 	GetCustomizationPreviewcustomizationId string
+
+	GetCustomizationPreviewBackup bool
 )
 
 func NewGetCustomizationPreviewCmd() *cobra.Command {
@@ -1512,8 +1913,15 @@ func NewGetCustomizationPreviewCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCustomizationPreviewBackup {
+
+				idParam := GetCustomizationPreviewbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1527,6 +1935,8 @@ func NewGetCustomizationPreviewCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&GetCustomizationPreviewcustomizationId, "customizationId", "", "", "")
 	cmd.MarkFlagRequired("customizationId")
 
+	cmd.Flags().BoolVarP(&GetCustomizationPreviewBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1539,6 +1949,8 @@ var (
 	GetEmailDefaultContentbrandId string
 
 	GetEmailDefaultContenttemplateName string
+
+	GetEmailDefaultContentBackup bool
 )
 
 func NewGetEmailDefaultContentCmd() *cobra.Command {
@@ -1562,8 +1974,15 @@ func NewGetEmailDefaultContentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailDefaultContentBackup {
+
+				idParam := GetEmailDefaultContentbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1573,6 +1992,8 @@ func NewGetEmailDefaultContentCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetEmailDefaultContenttemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&GetEmailDefaultContentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1586,6 +2007,8 @@ var (
 	GetEmailDefaultPreviewbrandId string
 
 	GetEmailDefaultPreviewtemplateName string
+
+	GetEmailDefaultPreviewBackup bool
 )
 
 func NewGetEmailDefaultPreviewCmd() *cobra.Command {
@@ -1609,8 +2032,15 @@ func NewGetEmailDefaultPreviewCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailDefaultPreviewBackup {
+
+				idParam := GetEmailDefaultPreviewbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1620,6 +2050,8 @@ func NewGetEmailDefaultPreviewCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetEmailDefaultPreviewtemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&GetEmailDefaultPreviewBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1633,6 +2065,8 @@ var (
 	GetEmailSettingsbrandId string
 
 	GetEmailSettingstemplateName string
+
+	GetEmailSettingsBackup bool
 )
 
 func NewGetEmailSettingsCmd() *cobra.Command {
@@ -1656,8 +2090,15 @@ func NewGetEmailSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEmailSettingsBackup {
+
+				idParam := GetEmailSettingsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1667,6 +2108,8 @@ func NewGetEmailSettingsCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetEmailSettingstemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
+
+	cmd.Flags().BoolVarP(&GetEmailSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1682,6 +2125,8 @@ var (
 	ReplaceEmailSettingstemplateName string
 
 	ReplaceEmailSettingsdata string
+
+	ReplaceEmailSettingsBackup bool
 )
 
 func NewReplaceEmailSettingsCmd() *cobra.Command {
@@ -1709,8 +2154,15 @@ func NewReplaceEmailSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceEmailSettingsBackup {
+
+				idParam := ReplaceEmailSettingsbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1724,6 +2176,8 @@ func NewReplaceEmailSettingsCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceEmailSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceEmailSettingsBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1736,6 +2190,8 @@ var (
 	SendTestEmailbrandId string
 
 	SendTestEmailtemplateName string
+
+	SendTestEmailBackup bool
 )
 
 func NewSendTestEmailCmd() *cobra.Command {
@@ -1759,8 +2215,15 @@ func NewSendTestEmailCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if SendTestEmailBackup {
+
+				idParam := SendTestEmailbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1771,6 +2234,8 @@ func NewSendTestEmailCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&SendTestEmailtemplateName, "templateName", "", "", "")
 	cmd.MarkFlagRequired("templateName")
 
+	cmd.Flags().BoolVarP(&SendTestEmailBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1779,7 +2244,11 @@ func init() {
 	CustomizationCmd.AddCommand(SendTestEmailCmd)
 }
 
-var ListBrandThemesbrandId string
+var (
+	ListBrandThemesbrandId string
+
+	ListBrandThemesBackup bool
+)
 
 func NewListBrandThemesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1802,14 +2271,23 @@ func NewListBrandThemesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListBrandThemesBackup {
+
+				idParam := ListBrandThemesbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListBrandThemesbrandId, "brandId", "", "", "")
 	cmd.MarkFlagRequired("brandId")
+
+	cmd.Flags().BoolVarP(&ListBrandThemesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1823,6 +2301,8 @@ var (
 	GetBrandThemebrandId string
 
 	GetBrandThemethemeId string
+
+	GetBrandThemeBackup bool
 )
 
 func NewGetBrandThemeCmd() *cobra.Command {
@@ -1846,8 +2326,15 @@ func NewGetBrandThemeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetBrandThemeBackup {
+
+				idParam := GetBrandThemebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1857,6 +2344,8 @@ func NewGetBrandThemeCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetBrandThemethemeId, "themeId", "", "", "")
 	cmd.MarkFlagRequired("themeId")
+
+	cmd.Flags().BoolVarP(&GetBrandThemeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1872,6 +2361,8 @@ var (
 	ReplaceBrandThemethemeId string
 
 	ReplaceBrandThemedata string
+
+	ReplaceBrandThemeBackup bool
 )
 
 func NewReplaceBrandThemeCmd() *cobra.Command {
@@ -1899,8 +2390,15 @@ func NewReplaceBrandThemeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceBrandThemeBackup {
+
+				idParam := ReplaceBrandThemebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1913,6 +2411,8 @@ func NewReplaceBrandThemeCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ReplaceBrandThemedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceBrandThemeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1928,6 +2428,8 @@ var (
 	UploadBrandThemeBackgroundImagethemeId string
 
 	UploadBrandThemeBackgroundImagedata string
+
+	UploadBrandThemeBackgroundImageBackup bool
 )
 
 func NewUploadBrandThemeBackgroundImageCmd() *cobra.Command {
@@ -1955,8 +2457,15 @@ func NewUploadBrandThemeBackgroundImageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadBrandThemeBackgroundImageBackup {
+
+				idParam := UploadBrandThemeBackgroundImagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1970,6 +2479,8 @@ func NewUploadBrandThemeBackgroundImageCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UploadBrandThemeBackgroundImagedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UploadBrandThemeBackgroundImageBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1982,6 +2493,8 @@ var (
 	DeleteBrandThemeBackgroundImagebrandId string
 
 	DeleteBrandThemeBackgroundImagethemeId string
+
+	DeleteBrandThemeBackgroundImageBackup bool
 )
 
 func NewDeleteBrandThemeBackgroundImageCmd() *cobra.Command {
@@ -2005,8 +2518,15 @@ func NewDeleteBrandThemeBackgroundImageCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBrandThemeBackgroundImageBackup {
+
+				idParam := DeleteBrandThemeBackgroundImagebrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -2016,6 +2536,8 @@ func NewDeleteBrandThemeBackgroundImageCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteBrandThemeBackgroundImagethemeId, "themeId", "", "", "")
 	cmd.MarkFlagRequired("themeId")
+
+	cmd.Flags().BoolVarP(&DeleteBrandThemeBackgroundImageBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -2031,6 +2553,8 @@ var (
 	UploadBrandThemeFaviconthemeId string
 
 	UploadBrandThemeFavicondata string
+
+	UploadBrandThemeFaviconBackup bool
 )
 
 func NewUploadBrandThemeFaviconCmd() *cobra.Command {
@@ -2058,8 +2582,15 @@ func NewUploadBrandThemeFaviconCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadBrandThemeFaviconBackup {
+
+				idParam := UploadBrandThemeFaviconbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -2073,6 +2604,8 @@ func NewUploadBrandThemeFaviconCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UploadBrandThemeFavicondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UploadBrandThemeFaviconBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -2085,6 +2618,8 @@ var (
 	DeleteBrandThemeFaviconbrandId string
 
 	DeleteBrandThemeFaviconthemeId string
+
+	DeleteBrandThemeFaviconBackup bool
 )
 
 func NewDeleteBrandThemeFaviconCmd() *cobra.Command {
@@ -2108,8 +2643,15 @@ func NewDeleteBrandThemeFaviconCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBrandThemeFaviconBackup {
+
+				idParam := DeleteBrandThemeFaviconbrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -2119,6 +2661,8 @@ func NewDeleteBrandThemeFaviconCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteBrandThemeFaviconthemeId, "themeId", "", "", "")
 	cmd.MarkFlagRequired("themeId")
+
+	cmd.Flags().BoolVarP(&DeleteBrandThemeFaviconBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -2134,6 +2678,8 @@ var (
 	UploadBrandThemeLogothemeId string
 
 	UploadBrandThemeLogodata string
+
+	UploadBrandThemeLogoBackup bool
 )
 
 func NewUploadBrandThemeLogoCmd() *cobra.Command {
@@ -2161,8 +2707,15 @@ func NewUploadBrandThemeLogoCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadBrandThemeLogoBackup {
+
+				idParam := UploadBrandThemeLogobrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -2176,6 +2729,8 @@ func NewUploadBrandThemeLogoCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UploadBrandThemeLogodata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UploadBrandThemeLogoBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -2188,6 +2743,8 @@ var (
 	DeleteBrandThemeLogobrandId string
 
 	DeleteBrandThemeLogothemeId string
+
+	DeleteBrandThemeLogoBackup bool
 )
 
 func NewDeleteBrandThemeLogoCmd() *cobra.Command {
@@ -2211,8 +2768,15 @@ func NewDeleteBrandThemeLogoCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBrandThemeLogoBackup {
+
+				idParam := DeleteBrandThemeLogobrandId
+				err := utils.BackupObject(d, "Customization", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -2222,6 +2786,8 @@ func NewDeleteBrandThemeLogoCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteBrandThemeLogothemeId, "themeId", "", "", "")
 	cmd.MarkFlagRequired("themeId")
+
+	cmd.Flags().BoolVarP(&DeleteBrandThemeLogoBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

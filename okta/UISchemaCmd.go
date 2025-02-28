@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(UISchemaCmd)
 }
 
-var CreateUISchemadata string
+var (
+	CreateUISchemadata string
+
+	CreateUISchemaBackup bool
+)
 
 func NewCreateUISchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateUISchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateUISchemaBackup {
+
+				err := utils.BackupObject(d, "UISchema", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateUISchemadata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateUISchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateUISchemaCmd := NewCreateUISchemaCmd()
 	UISchemaCmd.AddCommand(CreateUISchemaCmd)
 }
+
+var ListUISchemasBackup bool
 
 func NewListUISchemasCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListUISchemasCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUISchemasBackup {
+
+				err := utils.BackupObject(d, "UISchema", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListUISchemasBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	UISchemaCmd.AddCommand(ListUISchemasCmd)
 }
 
-var GetUISchemaid string
+var (
+	GetUISchemaid string
+
+	GetUISchemaBackup bool
+)
 
 func NewGetUISchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetUISchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUISchemaBackup {
+
+				idParam := GetUISchemaid
+				err := utils.BackupObject(d, "UISchema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetUISchemaid, "id", "", "", "")
 	cmd.MarkFlagRequired("id")
+
+	cmd.Flags().BoolVarP(&GetUISchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceUISchemasid string
 
 	ReplaceUISchemasdata string
+
+	ReplaceUISchemasBackup bool
 )
 
 func NewReplaceUISchemasCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceUISchemasCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceUISchemasBackup {
+
+				idParam := ReplaceUISchemasid
+				err := utils.BackupObject(d, "UISchema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceUISchemasCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceUISchemasdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceUISchemasBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	UISchemaCmd.AddCommand(ReplaceUISchemasCmd)
 }
 
-var DeleteUISchemasid string
+var (
+	DeleteUISchemasid string
+
+	DeleteUISchemasBackup bool
+)
 
 func NewDeleteUISchemasCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteUISchemasCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteUISchemasBackup {
+
+				idParam := DeleteUISchemasid
+				err := utils.BackupObject(d, "UISchema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteUISchemasid, "id", "", "", "")
 	cmd.MarkFlagRequired("id")
+
+	cmd.Flags().BoolVarP(&DeleteUISchemasBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

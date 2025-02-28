@@ -20,6 +20,8 @@ var (
 	GenerateCsrForApplicationappId string
 
 	GenerateCsrForApplicationdata string
+
+	GenerateCsrForApplicationBackup bool
 )
 
 func NewGenerateCsrForApplicationCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewGenerateCsrForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GenerateCsrForApplicationBackup {
+
+				idParam := GenerateCsrForApplicationappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewGenerateCsrForApplicationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&GenerateCsrForApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&GenerateCsrForApplicationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	ApplicationCredentialsCmd.AddCommand(GenerateCsrForApplicationCmd)
 }
 
-var ListCsrsForApplicationappId string
+var (
+	ListCsrsForApplicationappId string
+
+	ListCsrsForApplicationBackup bool
+)
 
 func NewListCsrsForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListCsrsForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListCsrsForApplicationBackup {
+
+				idParam := ListCsrsForApplicationappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListCsrsForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListCsrsForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetCsrForApplicationappId string
 
 	GetCsrForApplicationcsrId string
+
+	GetCsrForApplicationBackup bool
 )
 
 func NewGetCsrForApplicationCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetCsrForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCsrForApplicationBackup {
+
+				idParam := GetCsrForApplicationappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetCsrForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetCsrForApplicationcsrId, "csrId", "", "", "")
 	cmd.MarkFlagRequired("csrId")
+
+	cmd.Flags().BoolVarP(&GetCsrForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -158,6 +193,8 @@ var (
 	RevokeCsrFromApplicationappId string
 
 	RevokeCsrFromApplicationcsrId string
+
+	RevokeCsrFromApplicationBackup bool
 )
 
 func NewRevokeCsrFromApplicationCmd() *cobra.Command {
@@ -181,8 +218,15 @@ func NewRevokeCsrFromApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeCsrFromApplicationBackup {
+
+				idParam := RevokeCsrFromApplicationappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -192,6 +236,8 @@ func NewRevokeCsrFromApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeCsrFromApplicationcsrId, "csrId", "", "", "")
 	cmd.MarkFlagRequired("csrId")
+
+	cmd.Flags().BoolVarP(&RevokeCsrFromApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -207,6 +253,8 @@ var (
 	PublishCsrFromApplicationcsrId string
 
 	PublishCsrFromApplicationdata string
+
+	PublishCsrFromApplicationBackup bool
 )
 
 func NewPublishCsrFromApplicationCmd() *cobra.Command {
@@ -234,8 +282,15 @@ func NewPublishCsrFromApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if PublishCsrFromApplicationBackup {
+
+				idParam := PublishCsrFromApplicationappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -249,6 +304,8 @@ func NewPublishCsrFromApplicationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&PublishCsrFromApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&PublishCsrFromApplicationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -257,7 +314,11 @@ func init() {
 	ApplicationCredentialsCmd.AddCommand(PublishCsrFromApplicationCmd)
 }
 
-var ListApplicationKeysappId string
+var (
+	ListApplicationKeysappId string
+
+	ListApplicationKeysBackup bool
+)
 
 func NewListApplicationKeysCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -280,14 +341,23 @@ func NewListApplicationKeysCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListApplicationKeysBackup {
+
+				idParam := ListApplicationKeysappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListApplicationKeysappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListApplicationKeysBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -297,7 +367,11 @@ func init() {
 	ApplicationCredentialsCmd.AddCommand(ListApplicationKeysCmd)
 }
 
-var GenerateApplicationKeyappId string
+var (
+	GenerateApplicationKeyappId string
+
+	GenerateApplicationKeyBackup bool
+)
 
 func NewGenerateApplicationKeyCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -320,14 +394,23 @@ func NewGenerateApplicationKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GenerateApplicationKeyBackup {
+
+				idParam := GenerateApplicationKeyappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GenerateApplicationKeyappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&GenerateApplicationKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -341,6 +424,8 @@ var (
 	GetApplicationKeyappId string
 
 	GetApplicationKeykeyId string
+
+	GetApplicationKeyBackup bool
 )
 
 func NewGetApplicationKeyCmd() *cobra.Command {
@@ -364,8 +449,15 @@ func NewGetApplicationKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApplicationKeyBackup {
+
+				idParam := GetApplicationKeyappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -375,6 +467,8 @@ func NewGetApplicationKeyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetApplicationKeykeyId, "keyId", "", "", "")
 	cmd.MarkFlagRequired("keyId")
+
+	cmd.Flags().BoolVarP(&GetApplicationKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -388,6 +482,8 @@ var (
 	CloneApplicationKeyappId string
 
 	CloneApplicationKeykeyId string
+
+	CloneApplicationKeyBackup bool
 )
 
 func NewCloneApplicationKeyCmd() *cobra.Command {
@@ -411,8 +507,15 @@ func NewCloneApplicationKeyCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CloneApplicationKeyBackup {
+
+				idParam := CloneApplicationKeyappId
+				err := utils.BackupObject(d, "ApplicationCredentials", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -422,6 +525,8 @@ func NewCloneApplicationKeyCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&CloneApplicationKeykeyId, "keyId", "", "", "")
 	cmd.MarkFlagRequired("keyId")
+
+	cmd.Flags().BoolVarP(&CloneApplicationKeyBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

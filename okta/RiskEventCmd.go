@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(RiskEventCmd)
 }
 
-var SendRiskEventsdata string
+var (
+	SendRiskEventsdata string
+
+	SendRiskEventsBackup bool
+)
 
 func NewSendRiskEventsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewSendRiskEventsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if SendRiskEventsBackup {
+
+				err := utils.BackupObject(d, "RiskEvent", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&SendRiskEventsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&SendRiskEventsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

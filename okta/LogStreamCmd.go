@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(LogStreamCmd)
 }
 
-var CreateLogStreamdata string
+var (
+	CreateLogStreamdata string
+
+	CreateLogStreamBackup bool
+)
 
 func NewCreateLogStreamCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateLogStreamBackup {
+
+				err := utils.BackupObject(d, "LogStream", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateLogStreamdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateLogStreamBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateLogStreamCmd := NewCreateLogStreamCmd()
 	LogStreamCmd.AddCommand(CreateLogStreamCmd)
 }
+
+var ListLogStreamsBackup bool
 
 func NewListLogStreamsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListLogStreamsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListLogStreamsBackup {
+
+				err := utils.BackupObject(d, "LogStream", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListLogStreamsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	LogStreamCmd.AddCommand(ListLogStreamsCmd)
 }
 
-var GetLogStreamlogStreamId string
+var (
+	GetLogStreamlogStreamId string
+
+	GetLogStreamBackup bool
+)
 
 func NewGetLogStreamCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetLogStreamBackup {
+
+				idParam := GetLogStreamlogStreamId
+				err := utils.BackupObject(d, "LogStream", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetLogStreamlogStreamId, "logStreamId", "", "", "")
 	cmd.MarkFlagRequired("logStreamId")
+
+	cmd.Flags().BoolVarP(&GetLogStreamBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceLogStreamlogStreamId string
 
 	ReplaceLogStreamdata string
+
+	ReplaceLogStreamBackup bool
 )
 
 func NewReplaceLogStreamCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceLogStreamBackup {
+
+				idParam := ReplaceLogStreamlogStreamId
+				err := utils.BackupObject(d, "LogStream", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceLogStreamCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceLogStreamdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceLogStreamBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	LogStreamCmd.AddCommand(ReplaceLogStreamCmd)
 }
 
-var DeleteLogStreamlogStreamId string
+var (
+	DeleteLogStreamlogStreamId string
+
+	DeleteLogStreamBackup bool
+)
 
 func NewDeleteLogStreamCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteLogStreamBackup {
+
+				idParam := DeleteLogStreamlogStreamId
+				err := utils.BackupObject(d, "LogStream", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteLogStreamlogStreamId, "logStreamId", "", "", "")
 	cmd.MarkFlagRequired("logStreamId")
+
+	cmd.Flags().BoolVarP(&DeleteLogStreamBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	LogStreamCmd.AddCommand(DeleteLogStreamCmd)
 }
 
-var ActivateLogStreamlogStreamId string
+var (
+	ActivateLogStreamlogStreamId string
+
+	ActivateLogStreamBackup bool
+)
 
 func NewActivateLogStreamCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateLogStreamBackup {
+
+				idParam := ActivateLogStreamlogStreamId
+				err := utils.BackupObject(d, "LogStream", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateLogStreamlogStreamId, "logStreamId", "", "", "")
 	cmd.MarkFlagRequired("logStreamId")
+
+	cmd.Flags().BoolVarP(&ActivateLogStreamBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	LogStreamCmd.AddCommand(ActivateLogStreamCmd)
 }
 
-var DeactivateLogStreamlogStreamId string
+var (
+	DeactivateLogStreamlogStreamId string
+
+	DeactivateLogStreamBackup bool
+)
 
 func NewDeactivateLogStreamCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateLogStreamCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateLogStreamBackup {
+
+				idParam := DeactivateLogStreamlogStreamId
+				err := utils.BackupObject(d, "LogStream", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateLogStreamlogStreamId, "logStreamId", "", "", "")
 	cmd.MarkFlagRequired("logStreamId")
+
+	cmd.Flags().BoolVarP(&DeactivateLogStreamBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

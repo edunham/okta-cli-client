@@ -20,6 +20,8 @@ var (
 	CreateAssociatedServersauthServerId string
 
 	CreateAssociatedServersdata string
+
+	CreateAssociatedServersBackup bool
 )
 
 func NewCreateAssociatedServersCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewCreateAssociatedServersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateAssociatedServersBackup {
+
+				idParam := CreateAssociatedServersauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerAssoc", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewCreateAssociatedServersCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateAssociatedServersdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateAssociatedServersBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	AuthorizationServerAssocCmd.AddCommand(CreateAssociatedServersCmd)
 }
 
-var ListAssociatedServersByTrustedTypeauthServerId string
+var (
+	ListAssociatedServersByTrustedTypeauthServerId string
+
+	ListAssociatedServersByTrustedTypeBackup bool
+)
 
 func NewListAssociatedServersByTrustedTypeCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListAssociatedServersByTrustedTypeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAssociatedServersByTrustedTypeBackup {
+
+				idParam := ListAssociatedServersByTrustedTypeauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerAssoc", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAssociatedServersByTrustedTypeauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListAssociatedServersByTrustedTypeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	DeleteAssociatedServerauthServerId string
 
 	DeleteAssociatedServerassociatedServerId string
+
+	DeleteAssociatedServerBackup bool
 )
 
 func NewDeleteAssociatedServerCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewDeleteAssociatedServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteAssociatedServerBackup {
+
+				idParam := DeleteAssociatedServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerAssoc", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewDeleteAssociatedServerCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteAssociatedServerassociatedServerId, "associatedServerId", "", "", "")
 	cmd.MarkFlagRequired("associatedServerId")
+
+	cmd.Flags().BoolVarP(&DeleteAssociatedServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

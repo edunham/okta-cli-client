@@ -20,6 +20,8 @@ var (
 	UpdateDefaultProvisioningConnectionForApplicationappId string
 
 	UpdateDefaultProvisioningConnectionForApplicationdata string
+
+	UpdateDefaultProvisioningConnectionForApplicationBackup bool
 )
 
 func NewUpdateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewUpdateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateDefaultProvisioningConnectionForApplicationBackup {
+
+				idParam := UpdateDefaultProvisioningConnectionForApplicationappId
+				err := utils.BackupObject(d, "ApplicationConnections", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewUpdateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateDefaultProvisioningConnectionForApplicationdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateDefaultProvisioningConnectionForApplicationBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	ApplicationConnectionsCmd.AddCommand(UpdateDefaultProvisioningConnectionForApplicationCmd)
 }
 
-var GetDefaultProvisioningConnectionForApplicationappId string
+var (
+	GetDefaultProvisioningConnectionForApplicationappId string
+
+	GetDefaultProvisioningConnectionForApplicationBackup bool
+)
 
 func NewGetDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewGetDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetDefaultProvisioningConnectionForApplicationBackup {
+
+				idParam := GetDefaultProvisioningConnectionForApplicationappId
+				err := utils.BackupObject(d, "ApplicationConnections", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetDefaultProvisioningConnectionForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&GetDefaultProvisioningConnectionForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -107,7 +131,11 @@ func init() {
 	ApplicationConnectionsCmd.AddCommand(GetDefaultProvisioningConnectionForApplicationCmd)
 }
 
-var ActivateDefaultProvisioningConnectionForApplicationappId string
+var (
+	ActivateDefaultProvisioningConnectionForApplicationappId string
+
+	ActivateDefaultProvisioningConnectionForApplicationBackup bool
+)
 
 func NewActivateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -130,14 +158,23 @@ func NewActivateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command 
 			if err != nil {
 				return err
 			}
+			if ActivateDefaultProvisioningConnectionForApplicationBackup {
+
+				idParam := ActivateDefaultProvisioningConnectionForApplicationappId
+				err := utils.BackupObject(d, "ApplicationConnections", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateDefaultProvisioningConnectionForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ActivateDefaultProvisioningConnectionForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -147,7 +184,11 @@ func init() {
 	ApplicationConnectionsCmd.AddCommand(ActivateDefaultProvisioningConnectionForApplicationCmd)
 }
 
-var DeactivateDefaultProvisioningConnectionForApplicationappId string
+var (
+	DeactivateDefaultProvisioningConnectionForApplicationappId string
+
+	DeactivateDefaultProvisioningConnectionForApplicationBackup bool
+)
 
 func NewDeactivateDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -170,14 +211,23 @@ func NewDeactivateDefaultProvisioningConnectionForApplicationCmd() *cobra.Comman
 			if err != nil {
 				return err
 			}
+			if DeactivateDefaultProvisioningConnectionForApplicationBackup {
+
+				idParam := DeactivateDefaultProvisioningConnectionForApplicationappId
+				err := utils.BackupObject(d, "ApplicationConnections", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateDefaultProvisioningConnectionForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&DeactivateDefaultProvisioningConnectionForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -191,6 +241,8 @@ var (
 	VerifyProvisioningConnectionForApplicationappName string
 
 	VerifyProvisioningConnectionForApplicationappId string
+
+	VerifyProvisioningConnectionForApplicationBackup bool
 )
 
 func NewVerifyProvisioningConnectionForApplicationCmd() *cobra.Command {
@@ -214,8 +266,15 @@ func NewVerifyProvisioningConnectionForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if VerifyProvisioningConnectionForApplicationBackup {
+
+				idParam := VerifyProvisioningConnectionForApplicationappName
+				err := utils.BackupObject(d, "ApplicationConnections", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -225,6 +284,8 @@ func NewVerifyProvisioningConnectionForApplicationCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&VerifyProvisioningConnectionForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&VerifyProvisioningConnectionForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

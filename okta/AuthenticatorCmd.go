@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(AuthenticatorCmd)
 }
 
+var GetWellKnownAppAuthenticatorConfigurationBackup bool
+
 func NewGetWellKnownAppAuthenticatorConfigurationCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "getWellKnownAppConfiguration",
@@ -37,11 +39,19 @@ func NewGetWellKnownAppAuthenticatorConfigurationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetWellKnownAppAuthenticatorConfigurationBackup {
+
+				err := utils.BackupObject(d, "Authenticator", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetWellKnownAppAuthenticatorConfigurationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	AuthenticatorCmd.AddCommand(GetWellKnownAppAuthenticatorConfigurationCmd)
 }
 
-var CreateAuthenticatordata string
+var (
+	CreateAuthenticatordata string
+
+	CreateAuthenticatorBackup bool
+)
 
 func NewCreateAuthenticatorCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -78,14 +92,22 @@ func NewCreateAuthenticatorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateAuthenticatorBackup {
+
+				err := utils.BackupObject(d, "Authenticator", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateAuthenticatordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateAuthenticatorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -94,6 +116,8 @@ func init() {
 	CreateAuthenticatorCmd := NewCreateAuthenticatorCmd()
 	AuthenticatorCmd.AddCommand(CreateAuthenticatorCmd)
 }
+
+var ListAuthenticatorsBackup bool
 
 func NewListAuthenticatorsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -116,11 +140,19 @@ func NewListAuthenticatorsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAuthenticatorsBackup {
+
+				err := utils.BackupObject(d, "Authenticator", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListAuthenticatorsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -130,7 +162,11 @@ func init() {
 	AuthenticatorCmd.AddCommand(ListAuthenticatorsCmd)
 }
 
-var GetAuthenticatorauthenticatorId string
+var (
+	GetAuthenticatorauthenticatorId string
+
+	GetAuthenticatorBackup bool
+)
 
 func NewGetAuthenticatorCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -153,14 +189,23 @@ func NewGetAuthenticatorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAuthenticatorBackup {
+
+				idParam := GetAuthenticatorauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetAuthenticatorauthenticatorId, "authenticatorId", "", "", "")
 	cmd.MarkFlagRequired("authenticatorId")
+
+	cmd.Flags().BoolVarP(&GetAuthenticatorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -174,6 +219,8 @@ var (
 	ReplaceAuthenticatorauthenticatorId string
 
 	ReplaceAuthenticatordata string
+
+	ReplaceAuthenticatorBackup bool
 )
 
 func NewReplaceAuthenticatorCmd() *cobra.Command {
@@ -201,8 +248,15 @@ func NewReplaceAuthenticatorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceAuthenticatorBackup {
+
+				idParam := ReplaceAuthenticatorauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -213,6 +267,8 @@ func NewReplaceAuthenticatorCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceAuthenticatordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceAuthenticatorBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -221,7 +277,11 @@ func init() {
 	AuthenticatorCmd.AddCommand(ReplaceAuthenticatorCmd)
 }
 
-var ActivateAuthenticatorauthenticatorId string
+var (
+	ActivateAuthenticatorauthenticatorId string
+
+	ActivateAuthenticatorBackup bool
+)
 
 func NewActivateAuthenticatorCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -244,14 +304,23 @@ func NewActivateAuthenticatorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateAuthenticatorBackup {
+
+				idParam := ActivateAuthenticatorauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateAuthenticatorauthenticatorId, "authenticatorId", "", "", "")
 	cmd.MarkFlagRequired("authenticatorId")
+
+	cmd.Flags().BoolVarP(&ActivateAuthenticatorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -261,7 +330,11 @@ func init() {
 	AuthenticatorCmd.AddCommand(ActivateAuthenticatorCmd)
 }
 
-var DeactivateAuthenticatorauthenticatorId string
+var (
+	DeactivateAuthenticatorauthenticatorId string
+
+	DeactivateAuthenticatorBackup bool
+)
 
 func NewDeactivateAuthenticatorCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -284,14 +357,23 @@ func NewDeactivateAuthenticatorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateAuthenticatorBackup {
+
+				idParam := DeactivateAuthenticatorauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateAuthenticatorauthenticatorId, "authenticatorId", "", "", "")
 	cmd.MarkFlagRequired("authenticatorId")
+
+	cmd.Flags().BoolVarP(&DeactivateAuthenticatorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -301,7 +383,11 @@ func init() {
 	AuthenticatorCmd.AddCommand(DeactivateAuthenticatorCmd)
 }
 
-var ListAuthenticatorMethodsauthenticatorId string
+var (
+	ListAuthenticatorMethodsauthenticatorId string
+
+	ListAuthenticatorMethodsBackup bool
+)
 
 func NewListAuthenticatorMethodsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -324,14 +410,23 @@ func NewListAuthenticatorMethodsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAuthenticatorMethodsBackup {
+
+				idParam := ListAuthenticatorMethodsauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAuthenticatorMethodsauthenticatorId, "authenticatorId", "", "", "")
 	cmd.MarkFlagRequired("authenticatorId")
+
+	cmd.Flags().BoolVarP(&ListAuthenticatorMethodsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -345,6 +440,8 @@ var (
 	GetAuthenticatorMethodauthenticatorId string
 
 	GetAuthenticatorMethodmethodType string
+
+	GetAuthenticatorMethodBackup bool
 )
 
 func NewGetAuthenticatorMethodCmd() *cobra.Command {
@@ -368,8 +465,15 @@ func NewGetAuthenticatorMethodCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAuthenticatorMethodBackup {
+
+				idParam := GetAuthenticatorMethodauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -379,6 +483,8 @@ func NewGetAuthenticatorMethodCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetAuthenticatorMethodmethodType, "methodType", "", "", "")
 	cmd.MarkFlagRequired("methodType")
+
+	cmd.Flags().BoolVarP(&GetAuthenticatorMethodBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -394,6 +500,8 @@ var (
 	ReplaceAuthenticatorMethodmethodType string
 
 	ReplaceAuthenticatorMethoddata string
+
+	ReplaceAuthenticatorMethodBackup bool
 )
 
 func NewReplaceAuthenticatorMethodCmd() *cobra.Command {
@@ -421,8 +529,15 @@ func NewReplaceAuthenticatorMethodCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceAuthenticatorMethodBackup {
+
+				idParam := ReplaceAuthenticatorMethodauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -436,6 +551,8 @@ func NewReplaceAuthenticatorMethodCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceAuthenticatorMethoddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceAuthenticatorMethodBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -448,6 +565,8 @@ var (
 	ActivateAuthenticatorMethodauthenticatorId string
 
 	ActivateAuthenticatorMethodmethodType string
+
+	ActivateAuthenticatorMethodBackup bool
 )
 
 func NewActivateAuthenticatorMethodCmd() *cobra.Command {
@@ -471,8 +590,15 @@ func NewActivateAuthenticatorMethodCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateAuthenticatorMethodBackup {
+
+				idParam := ActivateAuthenticatorMethodauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -482,6 +608,8 @@ func NewActivateAuthenticatorMethodCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivateAuthenticatorMethodmethodType, "methodType", "", "", "")
 	cmd.MarkFlagRequired("methodType")
+
+	cmd.Flags().BoolVarP(&ActivateAuthenticatorMethodBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -495,6 +623,8 @@ var (
 	DeactivateAuthenticatorMethodauthenticatorId string
 
 	DeactivateAuthenticatorMethodmethodType string
+
+	DeactivateAuthenticatorMethodBackup bool
 )
 
 func NewDeactivateAuthenticatorMethodCmd() *cobra.Command {
@@ -518,8 +648,15 @@ func NewDeactivateAuthenticatorMethodCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateAuthenticatorMethodBackup {
+
+				idParam := DeactivateAuthenticatorMethodauthenticatorId
+				err := utils.BackupObject(d, "Authenticator", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -529,6 +666,8 @@ func NewDeactivateAuthenticatorMethodCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeactivateAuthenticatorMethodmethodType, "methodType", "", "", "")
 	cmd.MarkFlagRequired("methodType")
+
+	cmd.Flags().BoolVarP(&DeactivateAuthenticatorMethodBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

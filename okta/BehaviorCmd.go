@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(BehaviorCmd)
 }
 
-var CreateBehaviorDetectionRuledata string
+var (
+	CreateBehaviorDetectionRuledata string
+
+	CreateBehaviorDetectionRuleBackup bool
+)
 
 func NewCreateBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateBehaviorDetectionRuleBackup {
+
+				err := utils.BackupObject(d, "Behavior", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateBehaviorDetectionRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateBehaviorDetectionRuleCmd := NewCreateBehaviorDetectionRuleCmd()
 	BehaviorCmd.AddCommand(CreateBehaviorDetectionRuleCmd)
 }
+
+var ListBehaviorDetectionRulesBackup bool
 
 func NewListBehaviorDetectionRulesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListBehaviorDetectionRulesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListBehaviorDetectionRulesBackup {
+
+				err := utils.BackupObject(d, "Behavior", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListBehaviorDetectionRulesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	BehaviorCmd.AddCommand(ListBehaviorDetectionRulesCmd)
 }
 
-var GetBehaviorDetectionRulebehaviorId string
+var (
+	GetBehaviorDetectionRulebehaviorId string
+
+	GetBehaviorDetectionRuleBackup bool
+)
 
 func NewGetBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetBehaviorDetectionRuleBackup {
+
+				idParam := GetBehaviorDetectionRulebehaviorId
+				err := utils.BackupObject(d, "Behavior", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetBehaviorDetectionRulebehaviorId, "behaviorId", "", "", "")
 	cmd.MarkFlagRequired("behaviorId")
+
+	cmd.Flags().BoolVarP(&GetBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceBehaviorDetectionRulebehaviorId string
 
 	ReplaceBehaviorDetectionRuledata string
+
+	ReplaceBehaviorDetectionRuleBackup bool
 )
 
 func NewReplaceBehaviorDetectionRuleCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceBehaviorDetectionRuleBackup {
+
+				idParam := ReplaceBehaviorDetectionRulebehaviorId
+				err := utils.BackupObject(d, "Behavior", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceBehaviorDetectionRuledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	BehaviorCmd.AddCommand(ReplaceBehaviorDetectionRuleCmd)
 }
 
-var DeleteBehaviorDetectionRulebehaviorId string
+var (
+	DeleteBehaviorDetectionRulebehaviorId string
+
+	DeleteBehaviorDetectionRuleBackup bool
+)
 
 func NewDeleteBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteBehaviorDetectionRuleBackup {
+
+				idParam := DeleteBehaviorDetectionRulebehaviorId
+				err := utils.BackupObject(d, "Behavior", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteBehaviorDetectionRulebehaviorId, "behaviorId", "", "", "")
 	cmd.MarkFlagRequired("behaviorId")
+
+	cmd.Flags().BoolVarP(&DeleteBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	BehaviorCmd.AddCommand(DeleteBehaviorDetectionRuleCmd)
 }
 
-var ActivateBehaviorDetectionRulebehaviorId string
+var (
+	ActivateBehaviorDetectionRulebehaviorId string
+
+	ActivateBehaviorDetectionRuleBackup bool
+)
 
 func NewActivateBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateBehaviorDetectionRuleBackup {
+
+				idParam := ActivateBehaviorDetectionRulebehaviorId
+				err := utils.BackupObject(d, "Behavior", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateBehaviorDetectionRulebehaviorId, "behaviorId", "", "", "")
 	cmd.MarkFlagRequired("behaviorId")
+
+	cmd.Flags().BoolVarP(&ActivateBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	BehaviorCmd.AddCommand(ActivateBehaviorDetectionRuleCmd)
 }
 
-var DeactivateBehaviorDetectionRulebehaviorId string
+var (
+	DeactivateBehaviorDetectionRulebehaviorId string
+
+	DeactivateBehaviorDetectionRuleBackup bool
+)
 
 func NewDeactivateBehaviorDetectionRuleCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateBehaviorDetectionRuleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateBehaviorDetectionRuleBackup {
+
+				idParam := DeactivateBehaviorDetectionRulebehaviorId
+				err := utils.BackupObject(d, "Behavior", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateBehaviorDetectionRulebehaviorId, "behaviorId", "", "", "")
 	cmd.MarkFlagRequired("behaviorId")
+
+	cmd.Flags().BoolVarP(&DeactivateBehaviorDetectionRuleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

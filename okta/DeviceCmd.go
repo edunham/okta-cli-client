@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(DeviceCmd)
 }
 
+var ListDevicesBackup bool
+
 func NewListDevicesCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "lists",
@@ -37,11 +39,19 @@ func NewListDevicesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListDevicesBackup {
+
+				err := utils.BackupObject(d, "Device", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListDevicesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	DeviceCmd.AddCommand(ListDevicesCmd)
 }
 
-var GetDevicedeviceId string
+var (
+	GetDevicedeviceId string
+
+	GetDeviceBackup bool
+)
 
 func NewGetDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -74,14 +88,23 @@ func NewGetDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetDeviceBackup {
+
+				idParam := GetDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&GetDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -91,7 +114,11 @@ func init() {
 	DeviceCmd.AddCommand(GetDeviceCmd)
 }
 
-var DeleteDevicedeviceId string
+var (
+	DeleteDevicedeviceId string
+
+	DeleteDeviceBackup bool
+)
 
 func NewDeleteDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -114,14 +141,23 @@ func NewDeleteDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteDeviceBackup {
+
+				idParam := DeleteDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&DeleteDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -131,7 +167,11 @@ func init() {
 	DeviceCmd.AddCommand(DeleteDeviceCmd)
 }
 
-var ActivateDevicedeviceId string
+var (
+	ActivateDevicedeviceId string
+
+	ActivateDeviceBackup bool
+)
 
 func NewActivateDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -154,14 +194,23 @@ func NewActivateDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateDeviceBackup {
+
+				idParam := ActivateDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&ActivateDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -171,7 +220,11 @@ func init() {
 	DeviceCmd.AddCommand(ActivateDeviceCmd)
 }
 
-var DeactivateDevicedeviceId string
+var (
+	DeactivateDevicedeviceId string
+
+	DeactivateDeviceBackup bool
+)
 
 func NewDeactivateDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -194,14 +247,23 @@ func NewDeactivateDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateDeviceBackup {
+
+				idParam := DeactivateDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&DeactivateDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -211,7 +273,11 @@ func init() {
 	DeviceCmd.AddCommand(DeactivateDeviceCmd)
 }
 
-var SuspendDevicedeviceId string
+var (
+	SuspendDevicedeviceId string
+
+	SuspendDeviceBackup bool
+)
 
 func NewSuspendDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -234,14 +300,23 @@ func NewSuspendDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if SuspendDeviceBackup {
+
+				idParam := SuspendDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&SuspendDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&SuspendDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -251,7 +326,11 @@ func init() {
 	DeviceCmd.AddCommand(SuspendDeviceCmd)
 }
 
-var UnsuspendDevicedeviceId string
+var (
+	UnsuspendDevicedeviceId string
+
+	UnsuspendDeviceBackup bool
+)
 
 func NewUnsuspendDeviceCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -274,14 +353,23 @@ func NewUnsuspendDeviceCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnsuspendDeviceBackup {
+
+				idParam := UnsuspendDevicedeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UnsuspendDevicedeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&UnsuspendDeviceBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -291,7 +379,11 @@ func init() {
 	DeviceCmd.AddCommand(UnsuspendDeviceCmd)
 }
 
-var ListDeviceUsersdeviceId string
+var (
+	ListDeviceUsersdeviceId string
+
+	ListDeviceUsersBackup bool
+)
 
 func NewListDeviceUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -314,14 +406,23 @@ func NewListDeviceUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListDeviceUsersBackup {
+
+				idParam := ListDeviceUsersdeviceId
+				err := utils.BackupObject(d, "Device", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListDeviceUsersdeviceId, "deviceId", "", "", "")
 	cmd.MarkFlagRequired("deviceId")
+
+	cmd.Flags().BoolVarP(&ListDeviceUsersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

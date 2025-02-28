@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(ApplicationSSOCmd)
 }
 
-var PreviewSAMLmetadataForApplicationappId string
+var (
+	PreviewSAMLmetadataForApplicationappId string
+
+	PreviewSAMLmetadataForApplicationBackup bool
+)
 
 func NewPreviewSAMLmetadataForApplicationCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewPreviewSAMLmetadataForApplicationCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if PreviewSAMLmetadataForApplicationBackup {
+
+				idParam := PreviewSAMLmetadataForApplicationappId
+				err := utils.BackupObject(d, "ApplicationSSO", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&PreviewSAMLmetadataForApplicationappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&PreviewSAMLmetadataForApplicationBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

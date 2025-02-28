@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(UserCmd)
 }
 
-var CreateUserdata string
+var (
+	CreateUserdata string
+
+	CreateUserBackup bool
+)
 
 func NewCreateUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateUserBackup {
+
+				err := utils.BackupObject(d, "User", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateUserCmd := NewCreateUserCmd()
 	UserCmd.AddCommand(CreateUserCmd)
 }
+
+var ListUsersBackup bool
 
 func NewListUsersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListUsersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUsersBackup {
+
+				err := utils.BackupObject(d, "User", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListUsersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -99,6 +121,8 @@ var (
 	UpdateUseruserId string
 
 	UpdateUserdata string
+
+	UpdateUserBackup bool
 )
 
 func NewUpdateUserCmd() *cobra.Command {
@@ -126,8 +150,15 @@ func NewUpdateUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateUserBackup {
+
+				idParam := UpdateUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -138,6 +169,8 @@ func NewUpdateUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -146,7 +179,11 @@ func init() {
 	UserCmd.AddCommand(UpdateUserCmd)
 }
 
-var GetUseruserId string
+var (
+	GetUseruserId string
+
+	GetUserBackup bool
+)
 
 func NewGetUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -169,14 +206,23 @@ func NewGetUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserBackup {
+
+				idParam := GetUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&GetUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -190,6 +236,8 @@ var (
 	ReplaceUseruserId string
 
 	ReplaceUserdata string
+
+	ReplaceUserBackup bool
 )
 
 func NewReplaceUserCmd() *cobra.Command {
@@ -217,8 +265,15 @@ func NewReplaceUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceUserBackup {
+
+				idParam := ReplaceUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -229,6 +284,8 @@ func NewReplaceUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -237,7 +294,11 @@ func init() {
 	UserCmd.AddCommand(ReplaceUserCmd)
 }
 
-var DeleteUseruserId string
+var (
+	DeleteUseruserId string
+
+	DeleteUserBackup bool
+)
 
 func NewDeleteUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -260,14 +321,23 @@ func NewDeleteUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteUserBackup {
+
+				idParam := DeleteUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&DeleteUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -277,7 +347,11 @@ func init() {
 	UserCmd.AddCommand(DeleteUserCmd)
 }
 
-var ListAppLinksuserId string
+var (
+	ListAppLinksuserId string
+
+	ListAppLinksBackup bool
+)
 
 func NewListAppLinksCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -300,14 +374,23 @@ func NewListAppLinksCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListAppLinksBackup {
+
+				idParam := ListAppLinksuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListAppLinksuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListAppLinksBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -317,7 +400,11 @@ func init() {
 	UserCmd.AddCommand(ListAppLinksCmd)
 }
 
-var ListUserBlocksuserId string
+var (
+	ListUserBlocksuserId string
+
+	ListUserBlocksBackup bool
+)
 
 func NewListUserBlocksCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -340,14 +427,23 @@ func NewListUserBlocksCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserBlocksBackup {
+
+				idParam := ListUserBlocksuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListUserBlocksuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListUserBlocksBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -357,7 +453,11 @@ func init() {
 	UserCmd.AddCommand(ListUserBlocksCmd)
 }
 
-var ListUserClientsuserId string
+var (
+	ListUserClientsuserId string
+
+	ListUserClientsBackup bool
+)
 
 func NewListUserClientsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -380,14 +480,23 @@ func NewListUserClientsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserClientsBackup {
+
+				idParam := ListUserClientsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListUserClientsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListUserClientsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -401,6 +510,8 @@ var (
 	ListGrantsForUserAndClientuserId string
 
 	ListGrantsForUserAndClientclientId string
+
+	ListGrantsForUserAndClientBackup bool
 )
 
 func NewListGrantsForUserAndClientCmd() *cobra.Command {
@@ -424,8 +535,15 @@ func NewListGrantsForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGrantsForUserAndClientBackup {
+
+				idParam := ListGrantsForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -435,6 +553,8 @@ func NewListGrantsForUserAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListGrantsForUserAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&ListGrantsForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -448,6 +568,8 @@ var (
 	RevokeGrantsForUserAndClientuserId string
 
 	RevokeGrantsForUserAndClientclientId string
+
+	RevokeGrantsForUserAndClientBackup bool
 )
 
 func NewRevokeGrantsForUserAndClientCmd() *cobra.Command {
@@ -471,8 +593,15 @@ func NewRevokeGrantsForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeGrantsForUserAndClientBackup {
+
+				idParam := RevokeGrantsForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -482,6 +611,8 @@ func NewRevokeGrantsForUserAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeGrantsForUserAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&RevokeGrantsForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -495,6 +626,8 @@ var (
 	ListRefreshTokensForUserAndClientuserId string
 
 	ListRefreshTokensForUserAndClientclientId string
+
+	ListRefreshTokensForUserAndClientBackup bool
 )
 
 func NewListRefreshTokensForUserAndClientCmd() *cobra.Command {
@@ -518,8 +651,15 @@ func NewListRefreshTokensForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRefreshTokensForUserAndClientBackup {
+
+				idParam := ListRefreshTokensForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -529,6 +669,8 @@ func NewListRefreshTokensForUserAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListRefreshTokensForUserAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&ListRefreshTokensForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -542,6 +684,8 @@ var (
 	RevokeTokensForUserAndClientuserId string
 
 	RevokeTokensForUserAndClientclientId string
+
+	RevokeTokensForUserAndClientBackup bool
 )
 
 func NewRevokeTokensForUserAndClientCmd() *cobra.Command {
@@ -565,8 +709,15 @@ func NewRevokeTokensForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeTokensForUserAndClientBackup {
+
+				idParam := RevokeTokensForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -576,6 +727,8 @@ func NewRevokeTokensForUserAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeTokensForUserAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&RevokeTokensForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -591,6 +744,8 @@ var (
 	GetRefreshTokenForUserAndClientclientId string
 
 	GetRefreshTokenForUserAndClienttokenId string
+
+	GetRefreshTokenForUserAndClientBackup bool
 )
 
 func NewGetRefreshTokenForUserAndClientCmd() *cobra.Command {
@@ -614,8 +769,15 @@ func NewGetRefreshTokenForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRefreshTokenForUserAndClientBackup {
+
+				idParam := GetRefreshTokenForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -628,6 +790,8 @@ func NewGetRefreshTokenForUserAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetRefreshTokenForUserAndClienttokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
+
+	cmd.Flags().BoolVarP(&GetRefreshTokenForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -643,6 +807,8 @@ var (
 	RevokeTokenForUserAndClientclientId string
 
 	RevokeTokenForUserAndClienttokenId string
+
+	RevokeTokenForUserAndClientBackup bool
 )
 
 func NewRevokeTokenForUserAndClientCmd() *cobra.Command {
@@ -666,8 +832,15 @@ func NewRevokeTokenForUserAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeTokenForUserAndClientBackup {
+
+				idParam := RevokeTokenForUserAndClientuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -681,6 +854,8 @@ func NewRevokeTokenForUserAndClientCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&RevokeTokenForUserAndClienttokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
 
+	cmd.Flags().BoolVarP(&RevokeTokenForUserAndClientBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -693,6 +868,8 @@ var (
 	ChangePassworduserId string
 
 	ChangePassworddata string
+
+	ChangePasswordBackup bool
 )
 
 func NewChangePasswordCmd() *cobra.Command {
@@ -720,8 +897,15 @@ func NewChangePasswordCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ChangePasswordBackup {
+
+				idParam := ChangePassworduserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -731,6 +915,8 @@ func NewChangePasswordCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ChangePassworddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ChangePasswordBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -744,6 +930,8 @@ var (
 	ChangeRecoveryQuestionuserId string
 
 	ChangeRecoveryQuestiondata string
+
+	ChangeRecoveryQuestionBackup bool
 )
 
 func NewChangeRecoveryQuestionCmd() *cobra.Command {
@@ -771,8 +959,15 @@ func NewChangeRecoveryQuestionCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ChangeRecoveryQuestionBackup {
+
+				idParam := ChangeRecoveryQuestionuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -783,6 +978,8 @@ func NewChangeRecoveryQuestionCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ChangeRecoveryQuestiondata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ChangeRecoveryQuestionBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -791,7 +988,11 @@ func init() {
 	UserCmd.AddCommand(ChangeRecoveryQuestionCmd)
 }
 
-var ForgotPassworduserId string
+var (
+	ForgotPassworduserId string
+
+	ForgotPasswordBackup bool
+)
 
 func NewForgotPasswordCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -814,14 +1015,23 @@ func NewForgotPasswordCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ForgotPasswordBackup {
+
+				idParam := ForgotPassworduserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ForgotPassworduserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ForgotPasswordBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -835,6 +1045,8 @@ var (
 	ForgotPasswordSetNewPassworduserId string
 
 	ForgotPasswordSetNewPassworddata string
+
+	ForgotPasswordSetNewPasswordBackup bool
 )
 
 func NewForgotPasswordSetNewPasswordCmd() *cobra.Command {
@@ -862,8 +1074,15 @@ func NewForgotPasswordSetNewPasswordCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ForgotPasswordSetNewPasswordBackup {
+
+				idParam := ForgotPasswordSetNewPassworduserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -874,6 +1093,8 @@ func NewForgotPasswordSetNewPasswordCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ForgotPasswordSetNewPassworddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ForgotPasswordSetNewPasswordBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -882,7 +1103,11 @@ func init() {
 	UserCmd.AddCommand(ForgotPasswordSetNewPasswordCmd)
 }
 
-var ListUserGrantsuserId string
+var (
+	ListUserGrantsuserId string
+
+	ListUserGrantsBackup bool
+)
 
 func NewListUserGrantsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -905,14 +1130,23 @@ func NewListUserGrantsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserGrantsBackup {
+
+				idParam := ListUserGrantsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListUserGrantsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListUserGrantsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -922,7 +1156,11 @@ func init() {
 	UserCmd.AddCommand(ListUserGrantsCmd)
 }
 
-var RevokeUserGrantsuserId string
+var (
+	RevokeUserGrantsuserId string
+
+	RevokeUserGrantsBackup bool
+)
 
 func NewRevokeUserGrantsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -945,14 +1183,23 @@ func NewRevokeUserGrantsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeUserGrantsBackup {
+
+				idParam := RevokeUserGrantsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RevokeUserGrantsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&RevokeUserGrantsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -966,6 +1213,8 @@ var (
 	GetUserGrantuserId string
 
 	GetUserGrantgrantId string
+
+	GetUserGrantBackup bool
 )
 
 func NewGetUserGrantCmd() *cobra.Command {
@@ -989,8 +1238,15 @@ func NewGetUserGrantCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserGrantBackup {
+
+				idParam := GetUserGrantuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1000,6 +1256,8 @@ func NewGetUserGrantCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetUserGrantgrantId, "grantId", "", "", "")
 	cmd.MarkFlagRequired("grantId")
+
+	cmd.Flags().BoolVarP(&GetUserGrantBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1013,6 +1271,8 @@ var (
 	RevokeUserGrantuserId string
 
 	RevokeUserGrantgrantId string
+
+	RevokeUserGrantBackup bool
 )
 
 func NewRevokeUserGrantCmd() *cobra.Command {
@@ -1036,8 +1296,15 @@ func NewRevokeUserGrantCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeUserGrantBackup {
+
+				idParam := RevokeUserGrantuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1048,6 +1315,8 @@ func NewRevokeUserGrantCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&RevokeUserGrantgrantId, "grantId", "", "", "")
 	cmd.MarkFlagRequired("grantId")
 
+	cmd.Flags().BoolVarP(&RevokeUserGrantBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1056,7 +1325,11 @@ func init() {
 	UserCmd.AddCommand(RevokeUserGrantCmd)
 }
 
-var ListUserGroupsuserId string
+var (
+	ListUserGroupsuserId string
+
+	ListUserGroupsBackup bool
+)
 
 func NewListUserGroupsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1079,14 +1352,23 @@ func NewListUserGroupsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserGroupsBackup {
+
+				idParam := ListUserGroupsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListUserGroupsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListUserGroupsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1096,7 +1378,11 @@ func init() {
 	UserCmd.AddCommand(ListUserGroupsCmd)
 }
 
-var ListUserIdentityProvidersuserId string
+var (
+	ListUserIdentityProvidersuserId string
+
+	ListUserIdentityProvidersBackup bool
+)
 
 func NewListUserIdentityProvidersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1119,14 +1405,23 @@ func NewListUserIdentityProvidersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListUserIdentityProvidersBackup {
+
+				idParam := ListUserIdentityProvidersuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListUserIdentityProvidersuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListUserIdentityProvidersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1136,7 +1431,11 @@ func init() {
 	UserCmd.AddCommand(ListUserIdentityProvidersCmd)
 }
 
-var ActivateUseruserId string
+var (
+	ActivateUseruserId string
+
+	ActivateUserBackup bool
+)
 
 func NewActivateUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1159,14 +1458,23 @@ func NewActivateUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateUserBackup {
+
+				idParam := ActivateUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ActivateUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1176,7 +1484,11 @@ func init() {
 	UserCmd.AddCommand(ActivateUserCmd)
 }
 
-var DeactivateUseruserId string
+var (
+	DeactivateUseruserId string
+
+	DeactivateUserBackup bool
+)
 
 func NewDeactivateUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1199,14 +1511,23 @@ func NewDeactivateUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateUserBackup {
+
+				idParam := DeactivateUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&DeactivateUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1216,7 +1537,11 @@ func init() {
 	UserCmd.AddCommand(DeactivateUserCmd)
 }
 
-var ExpirePassworduserId string
+var (
+	ExpirePassworduserId string
+
+	ExpirePasswordBackup bool
+)
 
 func NewExpirePasswordCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1239,14 +1564,23 @@ func NewExpirePasswordCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ExpirePasswordBackup {
+
+				idParam := ExpirePassworduserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ExpirePassworduserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ExpirePasswordBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1256,7 +1590,11 @@ func init() {
 	UserCmd.AddCommand(ExpirePasswordCmd)
 }
 
-var ExpirePasswordAndGetTemporaryPassworduserId string
+var (
+	ExpirePasswordAndGetTemporaryPassworduserId string
+
+	ExpirePasswordAndGetTemporaryPasswordBackup bool
+)
 
 func NewExpirePasswordAndGetTemporaryPasswordCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1279,14 +1617,23 @@ func NewExpirePasswordAndGetTemporaryPasswordCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ExpirePasswordAndGetTemporaryPasswordBackup {
+
+				idParam := ExpirePasswordAndGetTemporaryPassworduserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ExpirePasswordAndGetTemporaryPassworduserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ExpirePasswordAndGetTemporaryPasswordBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1296,7 +1643,11 @@ func init() {
 	UserCmd.AddCommand(ExpirePasswordAndGetTemporaryPasswordCmd)
 }
 
-var ReactivateUseruserId string
+var (
+	ReactivateUseruserId string
+
+	ReactivateUserBackup bool
+)
 
 func NewReactivateUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1319,14 +1670,23 @@ func NewReactivateUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReactivateUserBackup {
+
+				idParam := ReactivateUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReactivateUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ReactivateUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1336,7 +1696,11 @@ func init() {
 	UserCmd.AddCommand(ReactivateUserCmd)
 }
 
-var ResetFactorsuserId string
+var (
+	ResetFactorsuserId string
+
+	ResetFactorsBackup bool
+)
 
 func NewResetFactorsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1359,14 +1723,23 @@ func NewResetFactorsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ResetFactorsBackup {
+
+				idParam := ResetFactorsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ResetFactorsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ResetFactorsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1376,7 +1749,11 @@ func init() {
 	UserCmd.AddCommand(ResetFactorsCmd)
 }
 
-var GenerateResetPasswordTokenuserId string
+var (
+	GenerateResetPasswordTokenuserId string
+
+	GenerateResetPasswordTokenBackup bool
+)
 
 func NewGenerateResetPasswordTokenCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1399,14 +1776,23 @@ func NewGenerateResetPasswordTokenCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GenerateResetPasswordTokenBackup {
+
+				idParam := GenerateResetPasswordTokenuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GenerateResetPasswordTokenuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&GenerateResetPasswordTokenBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1416,7 +1802,11 @@ func init() {
 	UserCmd.AddCommand(GenerateResetPasswordTokenCmd)
 }
 
-var SuspendUseruserId string
+var (
+	SuspendUseruserId string
+
+	SuspendUserBackup bool
+)
 
 func NewSuspendUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1439,14 +1829,23 @@ func NewSuspendUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if SuspendUserBackup {
+
+				idParam := SuspendUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&SuspendUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&SuspendUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1456,7 +1855,11 @@ func init() {
 	UserCmd.AddCommand(SuspendUserCmd)
 }
 
-var UnlockUseruserId string
+var (
+	UnlockUseruserId string
+
+	UnlockUserBackup bool
+)
 
 func NewUnlockUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1479,14 +1882,23 @@ func NewUnlockUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnlockUserBackup {
+
+				idParam := UnlockUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UnlockUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&UnlockUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1496,7 +1908,11 @@ func init() {
 	UserCmd.AddCommand(UnlockUserCmd)
 }
 
-var UnsuspendUseruserId string
+var (
+	UnsuspendUseruserId string
+
+	UnsuspendUserBackup bool
+)
 
 func NewUnsuspendUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1519,14 +1935,23 @@ func NewUnsuspendUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnsuspendUserBackup {
+
+				idParam := UnsuspendUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UnsuspendUseruserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&UnsuspendUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1542,6 +1967,8 @@ var (
 	SetLinkedObjectForUserprimaryRelationshipName string
 
 	SetLinkedObjectForUserprimaryUserId string
+
+	SetLinkedObjectForUserBackup bool
 )
 
 func NewSetLinkedObjectForUserCmd() *cobra.Command {
@@ -1565,8 +1992,15 @@ func NewSetLinkedObjectForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if SetLinkedObjectForUserBackup {
+
+				idParam := SetLinkedObjectForUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1580,6 +2014,8 @@ func NewSetLinkedObjectForUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&SetLinkedObjectForUserprimaryUserId, "primaryUserId", "", "", "")
 	cmd.MarkFlagRequired("primaryUserId")
 
+	cmd.Flags().BoolVarP(&SetLinkedObjectForUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1592,6 +2028,8 @@ var (
 	ListLinkedObjectsForUseruserId string
 
 	ListLinkedObjectsForUserrelationshipName string
+
+	ListLinkedObjectsForUserBackup bool
 )
 
 func NewListLinkedObjectsForUserCmd() *cobra.Command {
@@ -1615,8 +2053,15 @@ func NewListLinkedObjectsForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListLinkedObjectsForUserBackup {
+
+				idParam := ListLinkedObjectsForUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1626,6 +2071,8 @@ func NewListLinkedObjectsForUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListLinkedObjectsForUserrelationshipName, "relationshipName", "", "", "")
 	cmd.MarkFlagRequired("relationshipName")
+
+	cmd.Flags().BoolVarP(&ListLinkedObjectsForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -1639,6 +2086,8 @@ var (
 	DeleteLinkedObjectForUseruserId string
 
 	DeleteLinkedObjectForUserrelationshipName string
+
+	DeleteLinkedObjectForUserBackup bool
 )
 
 func NewDeleteLinkedObjectForUserCmd() *cobra.Command {
@@ -1662,8 +2111,15 @@ func NewDeleteLinkedObjectForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteLinkedObjectForUserBackup {
+
+				idParam := DeleteLinkedObjectForUseruserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -1674,6 +2130,8 @@ func NewDeleteLinkedObjectForUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&DeleteLinkedObjectForUserrelationshipName, "relationshipName", "", "", "")
 	cmd.MarkFlagRequired("relationshipName")
 
+	cmd.Flags().BoolVarP(&DeleteLinkedObjectForUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -1682,7 +2140,11 @@ func init() {
 	UserCmd.AddCommand(DeleteLinkedObjectForUserCmd)
 }
 
-var RevokeUserSessionsuserId string
+var (
+	RevokeUserSessionsuserId string
+
+	RevokeUserSessionsBackup bool
+)
 
 func NewRevokeUserSessionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -1705,14 +2167,23 @@ func NewRevokeUserSessionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeUserSessionsBackup {
+
+				idParam := RevokeUserSessionsuserId
+				err := utils.BackupObject(d, "User", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&RevokeUserSessionsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&RevokeUserSessionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

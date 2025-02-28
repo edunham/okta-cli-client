@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(ProfileMappingCmd)
 }
 
+var ListProfileMappingsBackup bool
+
 func NewListProfileMappingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "lists",
@@ -37,11 +39,19 @@ func NewListProfileMappingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListProfileMappingsBackup {
+
+				err := utils.BackupObject(d, "ProfileMapping", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListProfileMappingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -55,6 +65,8 @@ var (
 	UpdateProfileMappingmappingId string
 
 	UpdateProfileMappingdata string
+
+	UpdateProfileMappingBackup bool
 )
 
 func NewUpdateProfileMappingCmd() *cobra.Command {
@@ -82,8 +94,15 @@ func NewUpdateProfileMappingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateProfileMappingBackup {
+
+				idParam := UpdateProfileMappingmappingId
+				err := utils.BackupObject(d, "ProfileMapping", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -94,6 +113,8 @@ func NewUpdateProfileMappingCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateProfileMappingdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateProfileMappingBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -102,7 +123,11 @@ func init() {
 	ProfileMappingCmd.AddCommand(UpdateProfileMappingCmd)
 }
 
-var GetProfileMappingmappingId string
+var (
+	GetProfileMappingmappingId string
+
+	GetProfileMappingBackup bool
+)
 
 func NewGetProfileMappingCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -125,14 +150,23 @@ func NewGetProfileMappingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetProfileMappingBackup {
+
+				idParam := GetProfileMappingmappingId
+				err := utils.BackupObject(d, "ProfileMapping", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetProfileMappingmappingId, "mappingId", "", "", "")
 	cmd.MarkFlagRequired("mappingId")
+
+	cmd.Flags().BoolVarP(&GetProfileMappingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

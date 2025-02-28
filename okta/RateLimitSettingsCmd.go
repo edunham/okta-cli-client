@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(RateLimitSettingsCmd)
 }
 
+var GetRateLimitSettingsAdminNotificationsBackup bool
+
 func NewGetRateLimitSettingsAdminNotificationsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "getAdminNotifications",
@@ -37,11 +39,19 @@ func NewGetRateLimitSettingsAdminNotificationsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRateLimitSettingsAdminNotificationsBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetRateLimitSettingsAdminNotificationsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	RateLimitSettingsCmd.AddCommand(GetRateLimitSettingsAdminNotificationsCmd)
 }
 
-var ReplaceRateLimitSettingsAdminNotificationsdata string
+var (
+	ReplaceRateLimitSettingsAdminNotificationsdata string
+
+	ReplaceRateLimitSettingsAdminNotificationsBackup bool
+)
 
 func NewReplaceRateLimitSettingsAdminNotificationsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -78,14 +92,22 @@ func NewReplaceRateLimitSettingsAdminNotificationsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRateLimitSettingsAdminNotificationsBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceRateLimitSettingsAdminNotificationsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceRateLimitSettingsAdminNotificationsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -94,6 +116,8 @@ func init() {
 	ReplaceRateLimitSettingsAdminNotificationsCmd := NewReplaceRateLimitSettingsAdminNotificationsCmd()
 	RateLimitSettingsCmd.AddCommand(ReplaceRateLimitSettingsAdminNotificationsCmd)
 }
+
+var GetRateLimitSettingsPerClientBackup bool
 
 func NewGetRateLimitSettingsPerClientCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -116,11 +140,19 @@ func NewGetRateLimitSettingsPerClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRateLimitSettingsPerClientBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetRateLimitSettingsPerClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -130,7 +162,11 @@ func init() {
 	RateLimitSettingsCmd.AddCommand(GetRateLimitSettingsPerClientCmd)
 }
 
-var ReplaceRateLimitSettingsPerClientdata string
+var (
+	ReplaceRateLimitSettingsPerClientdata string
+
+	ReplaceRateLimitSettingsPerClientBackup bool
+)
 
 func NewReplaceRateLimitSettingsPerClientCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -157,14 +193,22 @@ func NewReplaceRateLimitSettingsPerClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRateLimitSettingsPerClientBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceRateLimitSettingsPerClientdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceRateLimitSettingsPerClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -173,6 +217,8 @@ func init() {
 	ReplaceRateLimitSettingsPerClientCmd := NewReplaceRateLimitSettingsPerClientCmd()
 	RateLimitSettingsCmd.AddCommand(ReplaceRateLimitSettingsPerClientCmd)
 }
+
+var GetRateLimitSettingsWarningThresholdBackup bool
 
 func NewGetRateLimitSettingsWarningThresholdCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -195,11 +241,19 @@ func NewGetRateLimitSettingsWarningThresholdCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRateLimitSettingsWarningThresholdBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetRateLimitSettingsWarningThresholdBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -209,7 +263,11 @@ func init() {
 	RateLimitSettingsCmd.AddCommand(GetRateLimitSettingsWarningThresholdCmd)
 }
 
-var ReplaceRateLimitSettingsWarningThresholddata string
+var (
+	ReplaceRateLimitSettingsWarningThresholddata string
+
+	ReplaceRateLimitSettingsWarningThresholdBackup bool
+)
 
 func NewReplaceRateLimitSettingsWarningThresholdCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -236,14 +294,22 @@ func NewReplaceRateLimitSettingsWarningThresholdCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRateLimitSettingsWarningThresholdBackup {
+
+				err := utils.BackupObject(d, "RateLimitSettings", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceRateLimitSettingsWarningThresholddata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceRateLimitSettingsWarningThresholdBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

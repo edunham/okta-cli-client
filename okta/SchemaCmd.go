@@ -20,6 +20,8 @@ var (
 	UpdateApplicationUserProfileappId string
 
 	UpdateApplicationUserProfiledata string
+
+	UpdateApplicationUserProfileBackup bool
 )
 
 func NewUpdateApplicationUserProfileCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewUpdateApplicationUserProfileCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateApplicationUserProfileBackup {
+
+				idParam := UpdateApplicationUserProfileappId
+				err := utils.BackupObject(d, "Schema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewUpdateApplicationUserProfileCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateApplicationUserProfiledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateApplicationUserProfileBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	SchemaCmd.AddCommand(UpdateApplicationUserProfileCmd)
 }
 
-var GetApplicationUserSchemaappId string
+var (
+	GetApplicationUserSchemaappId string
+
+	GetApplicationUserSchemaBackup bool
+)
 
 func NewGetApplicationUserSchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewGetApplicationUserSchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetApplicationUserSchemaBackup {
+
+				idParam := GetApplicationUserSchemaappId
+				err := utils.BackupObject(d, "Schema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetApplicationUserSchemaappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&GetApplicationUserSchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -107,7 +131,11 @@ func init() {
 	SchemaCmd.AddCommand(GetApplicationUserSchemaCmd)
 }
 
-var UpdateGroupSchemadata string
+var (
+	UpdateGroupSchemadata string
+
+	UpdateGroupSchemaBackup bool
+)
 
 func NewUpdateGroupSchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -134,14 +162,22 @@ func NewUpdateGroupSchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateGroupSchemaBackup {
+
+				err := utils.BackupObject(d, "Schema", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UpdateGroupSchemadata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UpdateGroupSchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -150,6 +186,8 @@ func init() {
 	UpdateGroupSchemaCmd := NewUpdateGroupSchemaCmd()
 	SchemaCmd.AddCommand(UpdateGroupSchemaCmd)
 }
+
+var GetGroupSchemaBackup bool
 
 func NewGetGroupSchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -172,11 +210,19 @@ func NewGetGroupSchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetGroupSchemaBackup {
+
+				err := utils.BackupObject(d, "Schema", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetGroupSchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -185,6 +231,8 @@ func init() {
 	GetGroupSchemaCmd := NewGetGroupSchemaCmd()
 	SchemaCmd.AddCommand(GetGroupSchemaCmd)
 }
+
+var ListLogStreamSchemasBackup bool
 
 func NewListLogStreamSchemasCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -207,11 +255,19 @@ func NewListLogStreamSchemasCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListLogStreamSchemasBackup {
+
+				err := utils.BackupObject(d, "Schema", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListLogStreamSchemasBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -221,7 +277,11 @@ func init() {
 	SchemaCmd.AddCommand(ListLogStreamSchemasCmd)
 }
 
-var GetLogStreamSchemalogStreamType string
+var (
+	GetLogStreamSchemalogStreamType string
+
+	GetLogStreamSchemaBackup bool
+)
 
 func NewGetLogStreamSchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -244,14 +304,23 @@ func NewGetLogStreamSchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetLogStreamSchemaBackup {
+
+				idParam := GetLogStreamSchemalogStreamType
+				err := utils.BackupObject(d, "Schema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetLogStreamSchemalogStreamType, "logStreamType", "", "", "")
 	cmd.MarkFlagRequired("logStreamType")
+
+	cmd.Flags().BoolVarP(&GetLogStreamSchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -265,6 +334,8 @@ var (
 	UpdateUserProfileschemaId string
 
 	UpdateUserProfiledata string
+
+	UpdateUserProfileBackup bool
 )
 
 func NewUpdateUserProfileCmd() *cobra.Command {
@@ -292,8 +363,15 @@ func NewUpdateUserProfileCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateUserProfileBackup {
+
+				idParam := UpdateUserProfileschemaId
+				err := utils.BackupObject(d, "Schema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -304,6 +382,8 @@ func NewUpdateUserProfileCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpdateUserProfiledata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpdateUserProfileBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -312,7 +392,11 @@ func init() {
 	SchemaCmd.AddCommand(UpdateUserProfileCmd)
 }
 
-var GetUserSchemaschemaId string
+var (
+	GetUserSchemaschemaId string
+
+	GetUserSchemaBackup bool
+)
 
 func NewGetUserSchemaCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -335,14 +419,23 @@ func NewGetUserSchemaCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserSchemaBackup {
+
+				idParam := GetUserSchemaschemaId
+				err := utils.BackupObject(d, "Schema", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetUserSchemaschemaId, "schemaId", "", "", "")
 	cmd.MarkFlagRequired("schemaId")
+
+	cmd.Flags().BoolVarP(&GetUserSchemaBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

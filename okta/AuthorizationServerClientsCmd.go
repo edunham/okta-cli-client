@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(AuthorizationServerClientsCmd)
 }
 
-var ListOAuth2ClientsForAuthorizationServerauthServerId string
+var (
+	ListOAuth2ClientsForAuthorizationServerauthServerId string
+
+	ListOAuth2ClientsForAuthorizationServerBackup bool
+)
 
 func NewListOAuth2ClientsForAuthorizationServerCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,14 +43,23 @@ func NewListOAuth2ClientsForAuthorizationServerCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListOAuth2ClientsForAuthorizationServerBackup {
+
+				idParam := ListOAuth2ClientsForAuthorizationServerauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClients", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListOAuth2ClientsForAuthorizationServerauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListOAuth2ClientsForAuthorizationServerBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -60,6 +73,8 @@ var (
 	ListRefreshTokensForAuthorizationServerAndClientauthServerId string
 
 	ListRefreshTokensForAuthorizationServerAndClientclientId string
+
+	ListRefreshTokensForAuthorizationServerAndClientBackup bool
 )
 
 func NewListRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
@@ -83,8 +98,15 @@ func NewListRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRefreshTokensForAuthorizationServerAndClientBackup {
+
+				idParam := ListRefreshTokensForAuthorizationServerAndClientauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClients", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -94,6 +116,8 @@ func NewListRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListRefreshTokensForAuthorizationServerAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&ListRefreshTokensForAuthorizationServerAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -107,6 +131,8 @@ var (
 	RevokeRefreshTokensForAuthorizationServerAndClientauthServerId string
 
 	RevokeRefreshTokensForAuthorizationServerAndClientclientId string
+
+	RevokeRefreshTokensForAuthorizationServerAndClientBackup bool
 )
 
 func NewRevokeRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
@@ -130,8 +156,15 @@ func NewRevokeRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeRefreshTokensForAuthorizationServerAndClientBackup {
+
+				idParam := RevokeRefreshTokensForAuthorizationServerAndClientauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClients", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -141,6 +174,8 @@ func NewRevokeRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeRefreshTokensForAuthorizationServerAndClientclientId, "clientId", "", "", "")
 	cmd.MarkFlagRequired("clientId")
+
+	cmd.Flags().BoolVarP(&RevokeRefreshTokensForAuthorizationServerAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -156,6 +191,8 @@ var (
 	GetRefreshTokenForAuthorizationServerAndClientclientId string
 
 	GetRefreshTokenForAuthorizationServerAndClienttokenId string
+
+	GetRefreshTokenForAuthorizationServerAndClientBackup bool
 )
 
 func NewGetRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
@@ -179,8 +216,15 @@ func NewGetRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRefreshTokenForAuthorizationServerAndClientBackup {
+
+				idParam := GetRefreshTokenForAuthorizationServerAndClientauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClients", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -193,6 +237,8 @@ func NewGetRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetRefreshTokenForAuthorizationServerAndClienttokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
+
+	cmd.Flags().BoolVarP(&GetRefreshTokenForAuthorizationServerAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -208,6 +254,8 @@ var (
 	RevokeRefreshTokenForAuthorizationServerAndClientclientId string
 
 	RevokeRefreshTokenForAuthorizationServerAndClienttokenId string
+
+	RevokeRefreshTokenForAuthorizationServerAndClientBackup bool
 )
 
 func NewRevokeRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
@@ -231,8 +279,15 @@ func NewRevokeRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeRefreshTokenForAuthorizationServerAndClientBackup {
+
+				idParam := RevokeRefreshTokenForAuthorizationServerAndClientauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClients", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -245,6 +300,8 @@ func NewRevokeRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeRefreshTokenForAuthorizationServerAndClienttokenId, "tokenId", "", "", "")
 	cmd.MarkFlagRequired("tokenId")
+
+	cmd.Flags().BoolVarP(&RevokeRefreshTokenForAuthorizationServerAndClientBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

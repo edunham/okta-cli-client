@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(CustomDomainCmd)
 }
 
-var CreateCustomDomaindata string
+var (
+	CreateCustomDomaindata string
+
+	CreateCustomDomainBackup bool
+)
 
 func NewCreateCustomDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateCustomDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateCustomDomainBackup {
+
+				err := utils.BackupObject(d, "CustomDomain", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateCustomDomaindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateCustomDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateCustomDomainCmd := NewCreateCustomDomainCmd()
 	CustomDomainCmd.AddCommand(CreateCustomDomainCmd)
 }
+
+var ListCustomDomainsBackup bool
 
 func NewListCustomDomainsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListCustomDomainsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListCustomDomainsBackup {
+
+				err := utils.BackupObject(d, "CustomDomain", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListCustomDomainsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	CustomDomainCmd.AddCommand(ListCustomDomainsCmd)
 }
 
-var GetCustomDomaindomainId string
+var (
+	GetCustomDomaindomainId string
+
+	GetCustomDomainBackup bool
+)
 
 func NewGetCustomDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetCustomDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetCustomDomainBackup {
+
+				idParam := GetCustomDomaindomainId
+				err := utils.BackupObject(d, "CustomDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetCustomDomaindomainId, "domainId", "", "", "")
 	cmd.MarkFlagRequired("domainId")
+
+	cmd.Flags().BoolVarP(&GetCustomDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceCustomDomaindomainId string
 
 	ReplaceCustomDomaindata string
+
+	ReplaceCustomDomainBackup bool
 )
 
 func NewReplaceCustomDomainCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceCustomDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceCustomDomainBackup {
+
+				idParam := ReplaceCustomDomaindomainId
+				err := utils.BackupObject(d, "CustomDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceCustomDomainCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceCustomDomaindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceCustomDomainBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	CustomDomainCmd.AddCommand(ReplaceCustomDomainCmd)
 }
 
-var DeleteCustomDomaindomainId string
+var (
+	DeleteCustomDomaindomainId string
+
+	DeleteCustomDomainBackup bool
+)
 
 func NewDeleteCustomDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteCustomDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteCustomDomainBackup {
+
+				idParam := DeleteCustomDomaindomainId
+				err := utils.BackupObject(d, "CustomDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteCustomDomaindomainId, "domainId", "", "", "")
 	cmd.MarkFlagRequired("domainId")
+
+	cmd.Flags().BoolVarP(&DeleteCustomDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -230,6 +289,8 @@ var (
 	UpsertCertificatedomainId string
 
 	UpsertCertificatedata string
+
+	UpsertCertificateBackup bool
 )
 
 func NewUpsertCertificateCmd() *cobra.Command {
@@ -257,8 +318,15 @@ func NewUpsertCertificateCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpsertCertificateBackup {
+
+				idParam := UpsertCertificatedomainId
+				err := utils.BackupObject(d, "CustomDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -269,6 +337,8 @@ func NewUpsertCertificateCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UpsertCertificatedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&UpsertCertificateBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -277,7 +347,11 @@ func init() {
 	CustomDomainCmd.AddCommand(UpsertCertificateCmd)
 }
 
-var VerifyDomaindomainId string
+var (
+	VerifyDomaindomainId string
+
+	VerifyDomainBackup bool
+)
 
 func NewVerifyDomainCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -300,14 +374,23 @@ func NewVerifyDomainCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if VerifyDomainBackup {
+
+				idParam := VerifyDomaindomainId
+				err := utils.BackupObject(d, "CustomDomain", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&VerifyDomaindomainId, "domainId", "", "", "")
 	cmd.MarkFlagRequired("domainId")
+
+	cmd.Flags().BoolVarP(&VerifyDomainBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

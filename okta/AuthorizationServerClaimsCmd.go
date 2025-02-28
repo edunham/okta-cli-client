@@ -20,6 +20,8 @@ var (
 	CreateOAuth2ClaimauthServerId string
 
 	CreateOAuth2Claimdata string
+
+	CreateOAuth2ClaimBackup bool
 )
 
 func NewCreateOAuth2ClaimCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewCreateOAuth2ClaimCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateOAuth2ClaimBackup {
+
+				idParam := CreateOAuth2ClaimauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClaims", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewCreateOAuth2ClaimCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateOAuth2Claimdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateOAuth2ClaimBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	AuthorizationServerClaimsCmd.AddCommand(CreateOAuth2ClaimCmd)
 }
 
-var ListOAuth2ClaimsauthServerId string
+var (
+	ListOAuth2ClaimsauthServerId string
+
+	ListOAuth2ClaimsBackup bool
+)
 
 func NewListOAuth2ClaimsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListOAuth2ClaimsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListOAuth2ClaimsBackup {
+
+				idParam := ListOAuth2ClaimsauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClaims", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListOAuth2ClaimsauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListOAuth2ClaimsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetOAuth2ClaimauthServerId string
 
 	GetOAuth2ClaimclaimId string
+
+	GetOAuth2ClaimBackup bool
 )
 
 func NewGetOAuth2ClaimCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetOAuth2ClaimCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOAuth2ClaimBackup {
+
+				idParam := GetOAuth2ClaimauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClaims", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetOAuth2ClaimCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetOAuth2ClaimclaimId, "claimId", "", "", "")
 	cmd.MarkFlagRequired("claimId")
+
+	cmd.Flags().BoolVarP(&GetOAuth2ClaimBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -160,6 +195,8 @@ var (
 	ReplaceOAuth2ClaimclaimId string
 
 	ReplaceOAuth2Claimdata string
+
+	ReplaceOAuth2ClaimBackup bool
 )
 
 func NewReplaceOAuth2ClaimCmd() *cobra.Command {
@@ -187,8 +224,15 @@ func NewReplaceOAuth2ClaimCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceOAuth2ClaimBackup {
+
+				idParam := ReplaceOAuth2ClaimauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClaims", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -202,6 +246,8 @@ func NewReplaceOAuth2ClaimCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceOAuth2Claimdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceOAuth2ClaimBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -214,6 +260,8 @@ var (
 	DeleteOAuth2ClaimauthServerId string
 
 	DeleteOAuth2ClaimclaimId string
+
+	DeleteOAuth2ClaimBackup bool
 )
 
 func NewDeleteOAuth2ClaimCmd() *cobra.Command {
@@ -237,8 +285,15 @@ func NewDeleteOAuth2ClaimCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteOAuth2ClaimBackup {
+
+				idParam := DeleteOAuth2ClaimauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerClaims", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -248,6 +303,8 @@ func NewDeleteOAuth2ClaimCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteOAuth2ClaimclaimId, "claimId", "", "", "")
 	cmd.MarkFlagRequired("claimId")
+
+	cmd.Flags().BoolVarP(&DeleteOAuth2ClaimBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

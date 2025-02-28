@@ -20,6 +20,8 @@ var (
 	ListApplicationTargetsForApplicationAdministratorRoleForGroupgroupId string
 
 	ListApplicationTargetsForApplicationAdministratorRoleForGrouproleId string
+
+	ListApplicationTargetsForApplicationAdministratorRoleForGroupBackup bool
 )
 
 func NewListApplicationTargetsForApplicationAdministratorRoleForGroupCmd() *cobra.Command {
@@ -43,8 +45,15 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForGroupCmd() *cobr
 			if err != nil {
 				return err
 			}
+			if ListApplicationTargetsForApplicationAdministratorRoleForGroupBackup {
+
+				idParam := ListApplicationTargetsForApplicationAdministratorRoleForGroupgroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -54,6 +63,8 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForGroupCmd() *cobr
 
 	cmd.Flags().StringVarP(&ListApplicationTargetsForApplicationAdministratorRoleForGrouproleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&ListApplicationTargetsForApplicationAdministratorRoleForGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -69,6 +80,8 @@ var (
 	AssignAppTargetToAdminRoleForGrouproleId string
 
 	AssignAppTargetToAdminRoleForGroupappName string
+
+	AssignAppTargetToAdminRoleForGroupBackup bool
 )
 
 func NewAssignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
@@ -92,8 +105,15 @@ func NewAssignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignAppTargetToAdminRoleForGroupBackup {
+
+				idParam := AssignAppTargetToAdminRoleForGroupgroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -106,6 +126,8 @@ func NewAssignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignAppTargetToAdminRoleForGroupappName, "appName", "", "", "")
 	cmd.MarkFlagRequired("appName")
+
+	cmd.Flags().BoolVarP(&AssignAppTargetToAdminRoleForGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -121,6 +143,8 @@ var (
 	UnassignAppTargetToAdminRoleForGrouproleId string
 
 	UnassignAppTargetToAdminRoleForGroupappName string
+
+	UnassignAppTargetToAdminRoleForGroupBackup bool
 )
 
 func NewUnassignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
@@ -144,8 +168,15 @@ func NewUnassignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignAppTargetToAdminRoleForGroupBackup {
+
+				idParam := UnassignAppTargetToAdminRoleForGroupgroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -158,6 +189,8 @@ func NewUnassignAppTargetToAdminRoleForGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignAppTargetToAdminRoleForGroupappName, "appName", "", "", "")
 	cmd.MarkFlagRequired("appName")
+
+	cmd.Flags().BoolVarP(&UnassignAppTargetToAdminRoleForGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -175,6 +208,8 @@ var (
 	AssignAppInstanceTargetToAppAdminRoleForGroupappName string
 
 	AssignAppInstanceTargetToAppAdminRoleForGroupappId string
+
+	AssignAppInstanceTargetToAppAdminRoleForGroupBackup bool
 )
 
 func NewAssignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
@@ -198,8 +233,15 @@ func NewAssignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignAppInstanceTargetToAppAdminRoleForGroupBackup {
+
+				idParam := AssignAppInstanceTargetToAppAdminRoleForGroupgroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -215,6 +257,8 @@ func NewAssignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignAppInstanceTargetToAppAdminRoleForGroupappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&AssignAppInstanceTargetToAppAdminRoleForGroupBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -232,6 +276,8 @@ var (
 	UnassignAppInstanceTargetToAppAdminRoleForGroupappName string
 
 	UnassignAppInstanceTargetToAppAdminRoleForGroupappId string
+
+	UnassignAppInstanceTargetToAppAdminRoleForGroupBackup bool
 )
 
 func NewUnassignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
@@ -255,8 +301,15 @@ func NewUnassignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignAppInstanceTargetToAppAdminRoleForGroupBackup {
+
+				idParam := UnassignAppInstanceTargetToAppAdminRoleForGroupgroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -273,6 +326,8 @@ func NewUnassignAppInstanceTargetToAppAdminRoleForGroupCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UnassignAppInstanceTargetToAppAdminRoleForGroupappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
 
+	cmd.Flags().BoolVarP(&UnassignAppInstanceTargetToAppAdminRoleForGroupBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -285,6 +340,8 @@ var (
 	ListGroupTargetsForGroupRolegroupId string
 
 	ListGroupTargetsForGroupRoleroleId string
+
+	ListGroupTargetsForGroupRoleBackup bool
 )
 
 func NewListGroupTargetsForGroupRoleCmd() *cobra.Command {
@@ -308,8 +365,15 @@ func NewListGroupTargetsForGroupRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupTargetsForGroupRoleBackup {
+
+				idParam := ListGroupTargetsForGroupRolegroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -319,6 +383,8 @@ func NewListGroupTargetsForGroupRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListGroupTargetsForGroupRoleroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&ListGroupTargetsForGroupRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -334,6 +400,8 @@ var (
 	AssignGroupTargetToGroupAdminRoleroleId string
 
 	AssignGroupTargetToGroupAdminRoletargetGroupId string
+
+	AssignGroupTargetToGroupAdminRoleBackup bool
 )
 
 func NewAssignGroupTargetToGroupAdminRoleCmd() *cobra.Command {
@@ -357,8 +425,15 @@ func NewAssignGroupTargetToGroupAdminRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignGroupTargetToGroupAdminRoleBackup {
+
+				idParam := AssignGroupTargetToGroupAdminRolegroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -371,6 +446,8 @@ func NewAssignGroupTargetToGroupAdminRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignGroupTargetToGroupAdminRoletargetGroupId, "targetGroupId", "", "", "")
 	cmd.MarkFlagRequired("targetGroupId")
+
+	cmd.Flags().BoolVarP(&AssignGroupTargetToGroupAdminRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -386,6 +463,8 @@ var (
 	UnassignGroupTargetFromGroupAdminRoleroleId string
 
 	UnassignGroupTargetFromGroupAdminRoletargetGroupId string
+
+	UnassignGroupTargetFromGroupAdminRoleBackup bool
 )
 
 func NewUnassignGroupTargetFromGroupAdminRoleCmd() *cobra.Command {
@@ -409,8 +488,15 @@ func NewUnassignGroupTargetFromGroupAdminRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignGroupTargetFromGroupAdminRoleBackup {
+
+				idParam := UnassignGroupTargetFromGroupAdminRolegroupId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -424,6 +510,8 @@ func NewUnassignGroupTargetFromGroupAdminRoleCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UnassignGroupTargetFromGroupAdminRoletargetGroupId, "targetGroupId", "", "", "")
 	cmd.MarkFlagRequired("targetGroupId")
 
+	cmd.Flags().BoolVarP(&UnassignGroupTargetFromGroupAdminRoleBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -436,6 +524,8 @@ var (
 	ListApplicationTargetsForApplicationAdministratorRoleForUseruserId string
 
 	ListApplicationTargetsForApplicationAdministratorRoleForUserroleId string
+
+	ListApplicationTargetsForApplicationAdministratorRoleForUserBackup bool
 )
 
 func NewListApplicationTargetsForApplicationAdministratorRoleForUserCmd() *cobra.Command {
@@ -459,8 +549,15 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForUserCmd() *cobra
 			if err != nil {
 				return err
 			}
+			if ListApplicationTargetsForApplicationAdministratorRoleForUserBackup {
+
+				idParam := ListApplicationTargetsForApplicationAdministratorRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -470,6 +567,8 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForUserCmd() *cobra
 
 	cmd.Flags().StringVarP(&ListApplicationTargetsForApplicationAdministratorRoleForUserroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&ListApplicationTargetsForApplicationAdministratorRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -483,6 +582,8 @@ var (
 	AssignAllAppsAsTargetToRoleForUseruserId string
 
 	AssignAllAppsAsTargetToRoleForUserroleId string
+
+	AssignAllAppsAsTargetToRoleForUserBackup bool
 )
 
 func NewAssignAllAppsAsTargetToRoleForUserCmd() *cobra.Command {
@@ -506,8 +607,15 @@ func NewAssignAllAppsAsTargetToRoleForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignAllAppsAsTargetToRoleForUserBackup {
+
+				idParam := AssignAllAppsAsTargetToRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -517,6 +625,8 @@ func NewAssignAllAppsAsTargetToRoleForUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignAllAppsAsTargetToRoleForUserroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&AssignAllAppsAsTargetToRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -532,6 +642,8 @@ var (
 	AssignAppTargetToAdminRoleForUserroleId string
 
 	AssignAppTargetToAdminRoleForUserappName string
+
+	AssignAppTargetToAdminRoleForUserBackup bool
 )
 
 func NewAssignAppTargetToAdminRoleForUserCmd() *cobra.Command {
@@ -555,8 +667,15 @@ func NewAssignAppTargetToAdminRoleForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignAppTargetToAdminRoleForUserBackup {
+
+				idParam := AssignAppTargetToAdminRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -569,6 +688,8 @@ func NewAssignAppTargetToAdminRoleForUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignAppTargetToAdminRoleForUserappName, "appName", "", "", "")
 	cmd.MarkFlagRequired("appName")
+
+	cmd.Flags().BoolVarP(&AssignAppTargetToAdminRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -584,6 +705,8 @@ var (
 	UnassignAppTargetFromAppAdminRoleForUserroleId string
 
 	UnassignAppTargetFromAppAdminRoleForUserappName string
+
+	UnassignAppTargetFromAppAdminRoleForUserBackup bool
 )
 
 func NewUnassignAppTargetFromAppAdminRoleForUserCmd() *cobra.Command {
@@ -607,8 +730,15 @@ func NewUnassignAppTargetFromAppAdminRoleForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignAppTargetFromAppAdminRoleForUserBackup {
+
+				idParam := UnassignAppTargetFromAppAdminRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -621,6 +751,8 @@ func NewUnassignAppTargetFromAppAdminRoleForUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignAppTargetFromAppAdminRoleForUserappName, "appName", "", "", "")
 	cmd.MarkFlagRequired("appName")
+
+	cmd.Flags().BoolVarP(&UnassignAppTargetFromAppAdminRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -638,6 +770,8 @@ var (
 	AssignAppInstanceTargetToAppAdminRoleForUserappName string
 
 	AssignAppInstanceTargetToAppAdminRoleForUserappId string
+
+	AssignAppInstanceTargetToAppAdminRoleForUserBackup bool
 )
 
 func NewAssignAppInstanceTargetToAppAdminRoleForUserCmd() *cobra.Command {
@@ -661,8 +795,15 @@ func NewAssignAppInstanceTargetToAppAdminRoleForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignAppInstanceTargetToAppAdminRoleForUserBackup {
+
+				idParam := AssignAppInstanceTargetToAppAdminRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -678,6 +819,8 @@ func NewAssignAppInstanceTargetToAppAdminRoleForUserCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignAppInstanceTargetToAppAdminRoleForUserappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&AssignAppInstanceTargetToAppAdminRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -695,6 +838,8 @@ var (
 	UnassignAppInstanceTargetFromAdminRoleForUserappName string
 
 	UnassignAppInstanceTargetFromAdminRoleForUserappId string
+
+	UnassignAppInstanceTargetFromAdminRoleForUserBackup bool
 )
 
 func NewUnassignAppInstanceTargetFromAdminRoleForUserCmd() *cobra.Command {
@@ -718,8 +863,15 @@ func NewUnassignAppInstanceTargetFromAdminRoleForUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignAppInstanceTargetFromAdminRoleForUserBackup {
+
+				idParam := UnassignAppInstanceTargetFromAdminRoleForUseruserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -736,6 +888,8 @@ func NewUnassignAppInstanceTargetFromAdminRoleForUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&UnassignAppInstanceTargetFromAdminRoleForUserappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
 
+	cmd.Flags().BoolVarP(&UnassignAppInstanceTargetFromAdminRoleForUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -748,6 +902,8 @@ var (
 	ListGroupTargetsForRoleuserId string
 
 	ListGroupTargetsForRoleroleId string
+
+	ListGroupTargetsForRoleBackup bool
 )
 
 func NewListGroupTargetsForRoleCmd() *cobra.Command {
@@ -771,8 +927,15 @@ func NewListGroupTargetsForRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListGroupTargetsForRoleBackup {
+
+				idParam := ListGroupTargetsForRoleuserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -782,6 +945,8 @@ func NewListGroupTargetsForRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ListGroupTargetsForRoleroleId, "roleId", "", "", "")
 	cmd.MarkFlagRequired("roleId")
+
+	cmd.Flags().BoolVarP(&ListGroupTargetsForRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -797,6 +962,8 @@ var (
 	AssignGroupTargetToUserRoleroleId string
 
 	AssignGroupTargetToUserRolegroupId string
+
+	AssignGroupTargetToUserRoleBackup bool
 )
 
 func NewAssignGroupTargetToUserRoleCmd() *cobra.Command {
@@ -820,8 +987,15 @@ func NewAssignGroupTargetToUserRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignGroupTargetToUserRoleBackup {
+
+				idParam := AssignGroupTargetToUserRoleuserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -834,6 +1008,8 @@ func NewAssignGroupTargetToUserRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&AssignGroupTargetToUserRolegroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&AssignGroupTargetToUserRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -849,6 +1025,8 @@ var (
 	UnassignGroupTargetFromUserAdminRoleroleId string
 
 	UnassignGroupTargetFromUserAdminRolegroupId string
+
+	UnassignGroupTargetFromUserAdminRoleBackup bool
 )
 
 func NewUnassignGroupTargetFromUserAdminRoleCmd() *cobra.Command {
@@ -872,8 +1050,15 @@ func NewUnassignGroupTargetFromUserAdminRoleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnassignGroupTargetFromUserAdminRoleBackup {
+
+				idParam := UnassignGroupTargetFromUserAdminRoleuserId
+				err := utils.BackupObject(d, "RoleTarget", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -886,6 +1071,8 @@ func NewUnassignGroupTargetFromUserAdminRoleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnassignGroupTargetFromUserAdminRolegroupId, "groupId", "", "", "")
 	cmd.MarkFlagRequired("groupId")
+
+	cmd.Flags().BoolVarP(&UnassignGroupTargetFromUserAdminRoleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

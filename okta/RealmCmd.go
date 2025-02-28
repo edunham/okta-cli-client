@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(RealmCmd)
 }
 
-var CreateRealmdata string
+var (
+	CreateRealmdata string
+
+	CreateRealmBackup bool
+)
 
 func NewCreateRealmCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateRealmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateRealmBackup {
+
+				err := utils.BackupObject(d, "Realm", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateRealmdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateRealmBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateRealmCmd := NewCreateRealmCmd()
 	RealmCmd.AddCommand(CreateRealmCmd)
 }
+
+var ListRealmsBackup bool
 
 func NewListRealmsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListRealmsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRealmsBackup {
+
+				err := utils.BackupObject(d, "Realm", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListRealmsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	RealmCmd.AddCommand(ListRealmsCmd)
 }
 
-var GetRealmrealmId string
+var (
+	GetRealmrealmId string
+
+	GetRealmBackup bool
+)
 
 func NewGetRealmCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetRealmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRealmBackup {
+
+				idParam := GetRealmrealmId
+				err := utils.BackupObject(d, "Realm", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetRealmrealmId, "realmId", "", "", "")
 	cmd.MarkFlagRequired("realmId")
+
+	cmd.Flags().BoolVarP(&GetRealmBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceRealmrealmId string
 
 	ReplaceRealmdata string
+
+	ReplaceRealmBackup bool
 )
 
 func NewReplaceRealmCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceRealmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRealmBackup {
+
+				idParam := ReplaceRealmrealmId
+				err := utils.BackupObject(d, "Realm", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceRealmCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceRealmdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceRealmBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	RealmCmd.AddCommand(ReplaceRealmCmd)
 }
 
-var DeleteRealmrealmId string
+var (
+	DeleteRealmrealmId string
+
+	DeleteRealmBackup bool
+)
 
 func NewDeleteRealmCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteRealmCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteRealmBackup {
+
+				idParam := DeleteRealmrealmId
+				err := utils.BackupObject(d, "Realm", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteRealmrealmId, "realmId", "", "", "")
 	cmd.MarkFlagRequired("realmId")
+
+	cmd.Flags().BoolVarP(&DeleteRealmBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

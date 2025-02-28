@@ -20,6 +20,8 @@ var (
 	GrantConsentToScopeappId string
 
 	GrantConsentToScopedata string
+
+	GrantConsentToScopeBackup bool
 )
 
 func NewGrantConsentToScopeCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewGrantConsentToScopeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GrantConsentToScopeBackup {
+
+				idParam := GrantConsentToScopeappId
+				err := utils.BackupObject(d, "ApplicationGrants", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewGrantConsentToScopeCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&GrantConsentToScopedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&GrantConsentToScopeBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	ApplicationGrantsCmd.AddCommand(GrantConsentToScopeCmd)
 }
 
-var ListScopeConsentGrantsappId string
+var (
+	ListScopeConsentGrantsappId string
+
+	ListScopeConsentGrantsBackup bool
+)
 
 func NewListScopeConsentGrantsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListScopeConsentGrantsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListScopeConsentGrantsBackup {
+
+				idParam := ListScopeConsentGrantsappId
+				err := utils.BackupObject(d, "ApplicationGrants", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListScopeConsentGrantsappId, "appId", "", "", "")
 	cmd.MarkFlagRequired("appId")
+
+	cmd.Flags().BoolVarP(&ListScopeConsentGrantsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetScopeConsentGrantappId string
 
 	GetScopeConsentGrantgrantId string
+
+	GetScopeConsentGrantBackup bool
 )
 
 func NewGetScopeConsentGrantCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetScopeConsentGrantCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetScopeConsentGrantBackup {
+
+				idParam := GetScopeConsentGrantappId
+				err := utils.BackupObject(d, "ApplicationGrants", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetScopeConsentGrantCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetScopeConsentGrantgrantId, "grantId", "", "", "")
 	cmd.MarkFlagRequired("grantId")
+
+	cmd.Flags().BoolVarP(&GetScopeConsentGrantBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -158,6 +193,8 @@ var (
 	RevokeScopeConsentGrantappId string
 
 	RevokeScopeConsentGrantgrantId string
+
+	RevokeScopeConsentGrantBackup bool
 )
 
 func NewRevokeScopeConsentGrantCmd() *cobra.Command {
@@ -181,8 +218,15 @@ func NewRevokeScopeConsentGrantCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeScopeConsentGrantBackup {
+
+				idParam := RevokeScopeConsentGrantappId
+				err := utils.BackupObject(d, "ApplicationGrants", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -192,6 +236,8 @@ func NewRevokeScopeConsentGrantCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&RevokeScopeConsentGrantgrantId, "grantId", "", "", "")
 	cmd.MarkFlagRequired("grantId")
+
+	cmd.Flags().BoolVarP(&RevokeScopeConsentGrantBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

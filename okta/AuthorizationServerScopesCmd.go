@@ -20,6 +20,8 @@ var (
 	CreateOAuth2ScopeauthServerId string
 
 	CreateOAuth2Scopedata string
+
+	CreateOAuth2ScopeBackup bool
 )
 
 func NewCreateOAuth2ScopeCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewCreateOAuth2ScopeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateOAuth2ScopeBackup {
+
+				idParam := CreateOAuth2ScopeauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerScopes", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewCreateOAuth2ScopeCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&CreateOAuth2Scopedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&CreateOAuth2ScopeBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	AuthorizationServerScopesCmd.AddCommand(CreateOAuth2ScopeCmd)
 }
 
-var ListOAuth2ScopesauthServerId string
+var (
+	ListOAuth2ScopesauthServerId string
+
+	ListOAuth2ScopesBackup bool
+)
 
 func NewListOAuth2ScopesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListOAuth2ScopesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListOAuth2ScopesBackup {
+
+				idParam := ListOAuth2ScopesauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerScopes", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListOAuth2ScopesauthServerId, "authServerId", "", "", "")
 	cmd.MarkFlagRequired("authServerId")
+
+	cmd.Flags().BoolVarP(&ListOAuth2ScopesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -111,6 +135,8 @@ var (
 	GetOAuth2ScopeauthServerId string
 
 	GetOAuth2ScopescopeId string
+
+	GetOAuth2ScopeBackup bool
 )
 
 func NewGetOAuth2ScopeCmd() *cobra.Command {
@@ -134,8 +160,15 @@ func NewGetOAuth2ScopeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOAuth2ScopeBackup {
+
+				idParam := GetOAuth2ScopeauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerScopes", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -145,6 +178,8 @@ func NewGetOAuth2ScopeCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetOAuth2ScopescopeId, "scopeId", "", "", "")
 	cmd.MarkFlagRequired("scopeId")
+
+	cmd.Flags().BoolVarP(&GetOAuth2ScopeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -160,6 +195,8 @@ var (
 	ReplaceOAuth2ScopescopeId string
 
 	ReplaceOAuth2Scopedata string
+
+	ReplaceOAuth2ScopeBackup bool
 )
 
 func NewReplaceOAuth2ScopeCmd() *cobra.Command {
@@ -187,8 +224,15 @@ func NewReplaceOAuth2ScopeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceOAuth2ScopeBackup {
+
+				idParam := ReplaceOAuth2ScopeauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerScopes", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -202,6 +246,8 @@ func NewReplaceOAuth2ScopeCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceOAuth2Scopedata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceOAuth2ScopeBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -214,6 +260,8 @@ var (
 	DeleteOAuth2ScopeauthServerId string
 
 	DeleteOAuth2ScopescopeId string
+
+	DeleteOAuth2ScopeBackup bool
 )
 
 func NewDeleteOAuth2ScopeCmd() *cobra.Command {
@@ -237,8 +285,15 @@ func NewDeleteOAuth2ScopeCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteOAuth2ScopeBackup {
+
+				idParam := DeleteOAuth2ScopeauthServerId
+				err := utils.BackupObject(d, "AuthorizationServerScopes", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -248,6 +303,8 @@ func NewDeleteOAuth2ScopeCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&DeleteOAuth2ScopescopeId, "scopeId", "", "", "")
 	cmd.MarkFlagRequired("scopeId")
+
+	cmd.Flags().BoolVarP(&DeleteOAuth2ScopeBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

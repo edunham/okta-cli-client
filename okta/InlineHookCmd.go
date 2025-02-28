@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(InlineHookCmd)
 }
 
-var CreateInlineHookdata string
+var (
+	CreateInlineHookdata string
+
+	CreateInlineHookBackup bool
+)
 
 func NewCreateInlineHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateInlineHookBackup {
+
+				err := utils.BackupObject(d, "InlineHook", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateInlineHookdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateInlineHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateInlineHookCmd := NewCreateInlineHookCmd()
 	InlineHookCmd.AddCommand(CreateInlineHookCmd)
 }
+
+var ListInlineHooksBackup bool
 
 func NewListInlineHooksCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListInlineHooksCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListInlineHooksBackup {
+
+				err := utils.BackupObject(d, "InlineHook", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListInlineHooksBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	InlineHookCmd.AddCommand(ListInlineHooksCmd)
 }
 
-var GetInlineHookinlineHookId string
+var (
+	GetInlineHookinlineHookId string
+
+	GetInlineHookBackup bool
+)
 
 func NewGetInlineHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetInlineHookBackup {
+
+				idParam := GetInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetInlineHookinlineHookId, "inlineHookId", "", "", "")
 	cmd.MarkFlagRequired("inlineHookId")
+
+	cmd.Flags().BoolVarP(&GetInlineHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceInlineHookinlineHookId string
 
 	ReplaceInlineHookdata string
+
+	ReplaceInlineHookBackup bool
 )
 
 func NewReplaceInlineHookCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceInlineHookBackup {
+
+				idParam := ReplaceInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceInlineHookCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceInlineHookdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceInlineHookBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	InlineHookCmd.AddCommand(ReplaceInlineHookCmd)
 }
 
-var DeleteInlineHookinlineHookId string
+var (
+	DeleteInlineHookinlineHookId string
+
+	DeleteInlineHookBackup bool
+)
 
 func NewDeleteInlineHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteInlineHookBackup {
+
+				idParam := DeleteInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteInlineHookinlineHookId, "inlineHookId", "", "", "")
 	cmd.MarkFlagRequired("inlineHookId")
+
+	cmd.Flags().BoolVarP(&DeleteInlineHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -230,6 +289,8 @@ var (
 	ExecuteInlineHookinlineHookId string
 
 	ExecuteInlineHookdata string
+
+	ExecuteInlineHookBackup bool
 )
 
 func NewExecuteInlineHookCmd() *cobra.Command {
@@ -257,8 +318,15 @@ func NewExecuteInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ExecuteInlineHookBackup {
+
+				idParam := ExecuteInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -269,6 +337,8 @@ func NewExecuteInlineHookCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ExecuteInlineHookdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ExecuteInlineHookBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -277,7 +347,11 @@ func init() {
 	InlineHookCmd.AddCommand(ExecuteInlineHookCmd)
 }
 
-var ActivateInlineHookinlineHookId string
+var (
+	ActivateInlineHookinlineHookId string
+
+	ActivateInlineHookBackup bool
+)
 
 func NewActivateInlineHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -300,14 +374,23 @@ func NewActivateInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateInlineHookBackup {
+
+				idParam := ActivateInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateInlineHookinlineHookId, "inlineHookId", "", "", "")
 	cmd.MarkFlagRequired("inlineHookId")
+
+	cmd.Flags().BoolVarP(&ActivateInlineHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -317,7 +400,11 @@ func init() {
 	InlineHookCmd.AddCommand(ActivateInlineHookCmd)
 }
 
-var DeactivateInlineHookinlineHookId string
+var (
+	DeactivateInlineHookinlineHookId string
+
+	DeactivateInlineHookBackup bool
+)
 
 func NewDeactivateInlineHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -340,14 +427,23 @@ func NewDeactivateInlineHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateInlineHookBackup {
+
+				idParam := DeactivateInlineHookinlineHookId
+				err := utils.BackupObject(d, "InlineHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateInlineHookinlineHookId, "inlineHookId", "", "", "")
 	cmd.MarkFlagRequired("inlineHookId")
+
+	cmd.Flags().BoolVarP(&DeactivateInlineHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

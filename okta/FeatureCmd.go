@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(FeatureCmd)
 }
 
+var ListFeaturesBackup bool
+
 func NewListFeaturesCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "lists",
@@ -37,11 +39,19 @@ func NewListFeaturesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListFeaturesBackup {
+
+				err := utils.BackupObject(d, "Feature", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListFeaturesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	FeatureCmd.AddCommand(ListFeaturesCmd)
 }
 
-var GetFeaturefeatureId string
+var (
+	GetFeaturefeatureId string
+
+	GetFeatureBackup bool
+)
 
 func NewGetFeatureCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -74,14 +88,23 @@ func NewGetFeatureCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetFeatureBackup {
+
+				idParam := GetFeaturefeatureId
+				err := utils.BackupObject(d, "Feature", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetFeaturefeatureId, "featureId", "", "", "")
 	cmd.MarkFlagRequired("featureId")
+
+	cmd.Flags().BoolVarP(&GetFeatureBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -91,7 +114,11 @@ func init() {
 	FeatureCmd.AddCommand(GetFeatureCmd)
 }
 
-var ListFeatureDependenciesfeatureId string
+var (
+	ListFeatureDependenciesfeatureId string
+
+	ListFeatureDependenciesBackup bool
+)
 
 func NewListFeatureDependenciesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -114,14 +141,23 @@ func NewListFeatureDependenciesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListFeatureDependenciesBackup {
+
+				idParam := ListFeatureDependenciesfeatureId
+				err := utils.BackupObject(d, "Feature", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListFeatureDependenciesfeatureId, "featureId", "", "", "")
 	cmd.MarkFlagRequired("featureId")
+
+	cmd.Flags().BoolVarP(&ListFeatureDependenciesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -131,7 +167,11 @@ func init() {
 	FeatureCmd.AddCommand(ListFeatureDependenciesCmd)
 }
 
-var ListFeatureDependentsfeatureId string
+var (
+	ListFeatureDependentsfeatureId string
+
+	ListFeatureDependentsBackup bool
+)
 
 func NewListFeatureDependentsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -154,14 +194,23 @@ func NewListFeatureDependentsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListFeatureDependentsBackup {
+
+				idParam := ListFeatureDependentsfeatureId
+				err := utils.BackupObject(d, "Feature", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListFeatureDependentsfeatureId, "featureId", "", "", "")
 	cmd.MarkFlagRequired("featureId")
+
+	cmd.Flags().BoolVarP(&ListFeatureDependentsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -175,6 +224,8 @@ var (
 	UpdateFeatureLifecyclefeatureId string
 
 	UpdateFeatureLifecyclelifecycle string
+
+	UpdateFeatureLifecycleBackup bool
 )
 
 func NewUpdateFeatureLifecycleCmd() *cobra.Command {
@@ -198,8 +249,15 @@ func NewUpdateFeatureLifecycleCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateFeatureLifecycleBackup {
+
+				idParam := UpdateFeatureLifecyclefeatureId
+				err := utils.BackupObject(d, "Feature", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -209,6 +267,8 @@ func NewUpdateFeatureLifecycleCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UpdateFeatureLifecyclelifecycle, "lifecycle", "", "", "")
 	cmd.MarkFlagRequired("lifecycle")
+
+	cmd.Flags().BoolVarP(&UpdateFeatureLifecycleBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

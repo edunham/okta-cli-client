@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(RiskProviderCmd)
 }
 
-var CreateRiskProviderdata string
+var (
+	CreateRiskProviderdata string
+
+	CreateRiskProviderBackup bool
+)
 
 func NewCreateRiskProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateRiskProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateRiskProviderBackup {
+
+				err := utils.BackupObject(d, "RiskProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateRiskProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateRiskProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateRiskProviderCmd := NewCreateRiskProviderCmd()
 	RiskProviderCmd.AddCommand(CreateRiskProviderCmd)
 }
+
+var ListRiskProvidersBackup bool
 
 func NewListRiskProvidersCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListRiskProvidersCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRiskProvidersBackup {
+
+				err := utils.BackupObject(d, "RiskProvider", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListRiskProvidersBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	RiskProviderCmd.AddCommand(ListRiskProvidersCmd)
 }
 
-var GetRiskProviderriskProviderId string
+var (
+	GetRiskProviderriskProviderId string
+
+	GetRiskProviderBackup bool
+)
 
 func NewGetRiskProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetRiskProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRiskProviderBackup {
+
+				idParam := GetRiskProviderriskProviderId
+				err := utils.BackupObject(d, "RiskProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetRiskProviderriskProviderId, "riskProviderId", "", "", "")
 	cmd.MarkFlagRequired("riskProviderId")
+
+	cmd.Flags().BoolVarP(&GetRiskProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceRiskProviderriskProviderId string
 
 	ReplaceRiskProviderdata string
+
+	ReplaceRiskProviderBackup bool
 )
 
 func NewReplaceRiskProviderCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceRiskProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRiskProviderBackup {
+
+				idParam := ReplaceRiskProviderriskProviderId
+				err := utils.BackupObject(d, "RiskProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceRiskProviderCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceRiskProviderdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceRiskProviderBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	RiskProviderCmd.AddCommand(ReplaceRiskProviderCmd)
 }
 
-var DeleteRiskProviderriskProviderId string
+var (
+	DeleteRiskProviderriskProviderId string
+
+	DeleteRiskProviderBackup bool
+)
 
 func NewDeleteRiskProviderCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteRiskProviderCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteRiskProviderBackup {
+
+				idParam := DeleteRiskProviderriskProviderId
+				err := utils.BackupObject(d, "RiskProvider", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteRiskProviderriskProviderId, "riskProviderId", "", "", "")
 	cmd.MarkFlagRequired("riskProviderId")
+
+	cmd.Flags().BoolVarP(&DeleteRiskProviderBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

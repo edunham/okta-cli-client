@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(SystemLogCmd)
 }
 
+var ListLogEventsBackup bool
+
 func NewListLogEventsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "listLogEvents",
@@ -37,11 +39,19 @@ func NewListLogEventsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListLogEventsBackup {
+
+				err := utils.BackupObject(d, "SystemLog", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListLogEventsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(TrustedOriginCmd)
 }
 
-var CreateTrustedOrigindata string
+var (
+	CreateTrustedOrigindata string
+
+	CreateTrustedOriginBackup bool
+)
 
 func NewCreateTrustedOriginCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateTrustedOriginBackup {
+
+				err := utils.BackupObject(d, "TrustedOrigin", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateTrustedOrigindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateTrustedOriginCmd := NewCreateTrustedOriginCmd()
 	TrustedOriginCmd.AddCommand(CreateTrustedOriginCmd)
 }
+
+var ListTrustedOriginsBackup bool
 
 func NewListTrustedOriginsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListTrustedOriginsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListTrustedOriginsBackup {
+
+				err := utils.BackupObject(d, "TrustedOrigin", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListTrustedOriginsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	TrustedOriginCmd.AddCommand(ListTrustedOriginsCmd)
 }
 
-var GetTrustedOrigintrustedOriginId string
+var (
+	GetTrustedOrigintrustedOriginId string
+
+	GetTrustedOriginBackup bool
+)
 
 func NewGetTrustedOriginCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetTrustedOriginBackup {
+
+				idParam := GetTrustedOrigintrustedOriginId
+				err := utils.BackupObject(d, "TrustedOrigin", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetTrustedOrigintrustedOriginId, "trustedOriginId", "", "", "")
 	cmd.MarkFlagRequired("trustedOriginId")
+
+	cmd.Flags().BoolVarP(&GetTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceTrustedOrigintrustedOriginId string
 
 	ReplaceTrustedOrigindata string
+
+	ReplaceTrustedOriginBackup bool
 )
 
 func NewReplaceTrustedOriginCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceTrustedOriginBackup {
+
+				idParam := ReplaceTrustedOrigintrustedOriginId
+				err := utils.BackupObject(d, "TrustedOrigin", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceTrustedOriginCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceTrustedOrigindata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	TrustedOriginCmd.AddCommand(ReplaceTrustedOriginCmd)
 }
 
-var DeleteTrustedOrigintrustedOriginId string
+var (
+	DeleteTrustedOrigintrustedOriginId string
+
+	DeleteTrustedOriginBackup bool
+)
 
 func NewDeleteTrustedOriginCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteTrustedOriginBackup {
+
+				idParam := DeleteTrustedOrigintrustedOriginId
+				err := utils.BackupObject(d, "TrustedOrigin", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteTrustedOrigintrustedOriginId, "trustedOriginId", "", "", "")
 	cmd.MarkFlagRequired("trustedOriginId")
+
+	cmd.Flags().BoolVarP(&DeleteTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	TrustedOriginCmd.AddCommand(DeleteTrustedOriginCmd)
 }
 
-var ActivateTrustedOrigintrustedOriginId string
+var (
+	ActivateTrustedOrigintrustedOriginId string
+
+	ActivateTrustedOriginBackup bool
+)
 
 func NewActivateTrustedOriginCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateTrustedOriginBackup {
+
+				idParam := ActivateTrustedOrigintrustedOriginId
+				err := utils.BackupObject(d, "TrustedOrigin", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateTrustedOrigintrustedOriginId, "trustedOriginId", "", "", "")
 	cmd.MarkFlagRequired("trustedOriginId")
+
+	cmd.Flags().BoolVarP(&ActivateTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	TrustedOriginCmd.AddCommand(ActivateTrustedOriginCmd)
 }
 
-var DeactivateTrustedOrigintrustedOriginId string
+var (
+	DeactivateTrustedOrigintrustedOriginId string
+
+	DeactivateTrustedOriginBackup bool
+)
 
 func NewDeactivateTrustedOriginCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateTrustedOriginCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateTrustedOriginBackup {
+
+				idParam := DeactivateTrustedOrigintrustedOriginId
+				err := utils.BackupObject(d, "TrustedOrigin", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateTrustedOrigintrustedOriginId, "trustedOriginId", "", "", "")
 	cmd.MarkFlagRequired("trustedOriginId")
+
+	cmd.Flags().BoolVarP(&DeactivateTrustedOriginBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

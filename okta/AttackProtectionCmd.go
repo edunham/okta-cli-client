@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(AttackProtectionCmd)
 }
 
+var GetAuthenticatorSettingsBackup bool
+
 func NewGetAuthenticatorSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "getAuthenticatorSettings",
@@ -37,11 +39,19 @@ func NewGetAuthenticatorSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetAuthenticatorSettingsBackup {
+
+				err := utils.BackupObject(d, "AttackProtection", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetAuthenticatorSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	AttackProtectionCmd.AddCommand(GetAuthenticatorSettingsCmd)
 }
 
-var ReplaceAuthenticatorSettingsdata string
+var (
+	ReplaceAuthenticatorSettingsdata string
+
+	ReplaceAuthenticatorSettingsBackup bool
+)
 
 func NewReplaceAuthenticatorSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -78,14 +92,22 @@ func NewReplaceAuthenticatorSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceAuthenticatorSettingsBackup {
+
+				err := utils.BackupObject(d, "AttackProtection", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceAuthenticatorSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceAuthenticatorSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -94,6 +116,8 @@ func init() {
 	ReplaceAuthenticatorSettingsCmd := NewReplaceAuthenticatorSettingsCmd()
 	AttackProtectionCmd.AddCommand(ReplaceAuthenticatorSettingsCmd)
 }
+
+var GetUserLockoutSettingsBackup bool
 
 func NewGetUserLockoutSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -116,11 +140,19 @@ func NewGetUserLockoutSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetUserLockoutSettingsBackup {
+
+				err := utils.BackupObject(d, "AttackProtection", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetUserLockoutSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -130,7 +162,11 @@ func init() {
 	AttackProtectionCmd.AddCommand(GetUserLockoutSettingsCmd)
 }
 
-var ReplaceUserLockoutSettingsdata string
+var (
+	ReplaceUserLockoutSettingsdata string
+
+	ReplaceUserLockoutSettingsBackup bool
+)
 
 func NewReplaceUserLockoutSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -157,14 +193,22 @@ func NewReplaceUserLockoutSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceUserLockoutSettingsBackup {
+
+				err := utils.BackupObject(d, "AttackProtection", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceUserLockoutSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceUserLockoutSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

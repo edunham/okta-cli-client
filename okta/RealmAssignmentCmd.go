@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(RealmAssignmentCmd)
 }
 
-var CreateRealmAssignmentdata string
+var (
+	CreateRealmAssignmentdata string
+
+	CreateRealmAssignmentBackup bool
+)
 
 func NewCreateRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateRealmAssignmentBackup {
+
+				err := utils.BackupObject(d, "RealmAssignment", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateRealmAssignmentdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateRealmAssignmentCmd := NewCreateRealmAssignmentCmd()
 	RealmAssignmentCmd.AddCommand(CreateRealmAssignmentCmd)
 }
+
+var ListRealmAssignmentsBackup bool
 
 func NewListRealmAssignmentsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListRealmAssignmentsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRealmAssignmentsBackup {
+
+				err := utils.BackupObject(d, "RealmAssignment", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListRealmAssignmentsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	RealmAssignmentCmd.AddCommand(ListRealmAssignmentsCmd)
 }
 
-var ExecuteRealmAssignmentdata string
+var (
+	ExecuteRealmAssignmentdata string
+
+	ExecuteRealmAssignmentBackup bool
+)
 
 func NewExecuteRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -122,14 +148,22 @@ func NewExecuteRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ExecuteRealmAssignmentBackup {
+
+				err := utils.BackupObject(d, "RealmAssignment", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ExecuteRealmAssignmentdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ExecuteRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -138,6 +172,8 @@ func init() {
 	ExecuteRealmAssignmentCmd := NewExecuteRealmAssignmentCmd()
 	RealmAssignmentCmd.AddCommand(ExecuteRealmAssignmentCmd)
 }
+
+var ListRealmAssignmentOperationsBackup bool
 
 func NewListRealmAssignmentOperationsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -160,11 +196,19 @@ func NewListRealmAssignmentOperationsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListRealmAssignmentOperationsBackup {
+
+				err := utils.BackupObject(d, "RealmAssignment", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListRealmAssignmentOperationsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -174,7 +218,11 @@ func init() {
 	RealmAssignmentCmd.AddCommand(ListRealmAssignmentOperationsCmd)
 }
 
-var GetRealmAssignmentassignmentId string
+var (
+	GetRealmAssignmentassignmentId string
+
+	GetRealmAssignmentBackup bool
+)
 
 func NewGetRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -197,14 +245,23 @@ func NewGetRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetRealmAssignmentBackup {
+
+				idParam := GetRealmAssignmentassignmentId
+				err := utils.BackupObject(d, "RealmAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetRealmAssignmentassignmentId, "assignmentId", "", "", "")
 	cmd.MarkFlagRequired("assignmentId")
+
+	cmd.Flags().BoolVarP(&GetRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -218,6 +275,8 @@ var (
 	ReplaceRealmAssignmentassignmentId string
 
 	ReplaceRealmAssignmentdata string
+
+	ReplaceRealmAssignmentBackup bool
 )
 
 func NewReplaceRealmAssignmentCmd() *cobra.Command {
@@ -245,8 +304,15 @@ func NewReplaceRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceRealmAssignmentBackup {
+
+				idParam := ReplaceRealmAssignmentassignmentId
+				err := utils.BackupObject(d, "RealmAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -257,6 +323,8 @@ func NewReplaceRealmAssignmentCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceRealmAssignmentdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -265,7 +333,11 @@ func init() {
 	RealmAssignmentCmd.AddCommand(ReplaceRealmAssignmentCmd)
 }
 
-var DeleteRealmAssignmentassignmentId string
+var (
+	DeleteRealmAssignmentassignmentId string
+
+	DeleteRealmAssignmentBackup bool
+)
 
 func NewDeleteRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -288,14 +360,23 @@ func NewDeleteRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteRealmAssignmentBackup {
+
+				idParam := DeleteRealmAssignmentassignmentId
+				err := utils.BackupObject(d, "RealmAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteRealmAssignmentassignmentId, "assignmentId", "", "", "")
 	cmd.MarkFlagRequired("assignmentId")
+
+	cmd.Flags().BoolVarP(&DeleteRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -305,7 +386,11 @@ func init() {
 	RealmAssignmentCmd.AddCommand(DeleteRealmAssignmentCmd)
 }
 
-var ActivateRealmAssignmentassignmentId string
+var (
+	ActivateRealmAssignmentassignmentId string
+
+	ActivateRealmAssignmentBackup bool
+)
 
 func NewActivateRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -328,14 +413,23 @@ func NewActivateRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateRealmAssignmentBackup {
+
+				idParam := ActivateRealmAssignmentassignmentId
+				err := utils.BackupObject(d, "RealmAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateRealmAssignmentassignmentId, "assignmentId", "", "", "")
 	cmd.MarkFlagRequired("assignmentId")
+
+	cmd.Flags().BoolVarP(&ActivateRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -345,7 +439,11 @@ func init() {
 	RealmAssignmentCmd.AddCommand(ActivateRealmAssignmentCmd)
 }
 
-var DeactivateRealmAssignmentassignmentId string
+var (
+	DeactivateRealmAssignmentassignmentId string
+
+	DeactivateRealmAssignmentBackup bool
+)
 
 func NewDeactivateRealmAssignmentCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -368,14 +466,23 @@ func NewDeactivateRealmAssignmentCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateRealmAssignmentBackup {
+
+				idParam := DeactivateRealmAssignmentassignmentId
+				err := utils.BackupObject(d, "RealmAssignment", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateRealmAssignmentassignmentId, "assignmentId", "", "", "")
 	cmd.MarkFlagRequired("assignmentId")
+
+	cmd.Flags().BoolVarP(&DeactivateRealmAssignmentBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

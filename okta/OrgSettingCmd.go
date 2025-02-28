@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(OrgSettingCmd)
 }
 
+var GetWellknownOrgMetadataBackup bool
+
 func NewGetWellknownOrgMetadataCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:  "getWellknownOrgMetadata",
@@ -37,11 +39,19 @@ func NewGetWellknownOrgMetadataCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetWellknownOrgMetadataBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetWellknownOrgMetadataBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -51,7 +61,11 @@ func init() {
 	OrgSettingCmd.AddCommand(GetWellknownOrgMetadataCmd)
 }
 
-var UpdateOrgSettingsdata string
+var (
+	UpdateOrgSettingsdata string
+
+	UpdateOrgSettingsBackup bool
+)
 
 func NewUpdateOrgSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -78,14 +92,22 @@ func NewUpdateOrgSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateOrgSettingsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UpdateOrgSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UpdateOrgSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -94,6 +116,8 @@ func init() {
 	UpdateOrgSettingsCmd := NewUpdateOrgSettingsCmd()
 	OrgSettingCmd.AddCommand(UpdateOrgSettingsCmd)
 }
+
+var GetOrgSettingsBackup bool
 
 func NewGetOrgSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -116,11 +140,19 @@ func NewGetOrgSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgSettingsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOrgSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -130,7 +162,11 @@ func init() {
 	OrgSettingCmd.AddCommand(GetOrgSettingsCmd)
 }
 
-var ReplaceOrgSettingsdata string
+var (
+	ReplaceOrgSettingsdata string
+
+	ReplaceOrgSettingsBackup bool
+)
 
 func NewReplaceOrgSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -157,14 +193,22 @@ func NewReplaceOrgSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceOrgSettingsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ReplaceOrgSettingsdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ReplaceOrgSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -173,6 +217,8 @@ func init() {
 	ReplaceOrgSettingsCmd := NewReplaceOrgSettingsCmd()
 	OrgSettingCmd.AddCommand(ReplaceOrgSettingsCmd)
 }
+
+var GetOrgContactTypesBackup bool
 
 func NewGetOrgContactTypesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -195,11 +241,19 @@ func NewGetOrgContactTypesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgContactTypesBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOrgContactTypesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -209,7 +263,11 @@ func init() {
 	OrgSettingCmd.AddCommand(GetOrgContactTypesCmd)
 }
 
-var GetOrgContactUsercontactType string
+var (
+	GetOrgContactUsercontactType string
+
+	GetOrgContactUserBackup bool
+)
 
 func NewGetOrgContactUserCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -232,14 +290,23 @@ func NewGetOrgContactUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgContactUserBackup {
+
+				idParam := GetOrgContactUsercontactType
+				err := utils.BackupObject(d, "OrgSetting", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetOrgContactUsercontactType, "contactType", "", "", "")
 	cmd.MarkFlagRequired("contactType")
+
+	cmd.Flags().BoolVarP(&GetOrgContactUserBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -253,6 +320,8 @@ var (
 	ReplaceOrgContactUsercontactType string
 
 	ReplaceOrgContactUserdata string
+
+	ReplaceOrgContactUserBackup bool
 )
 
 func NewReplaceOrgContactUserCmd() *cobra.Command {
@@ -280,8 +349,15 @@ func NewReplaceOrgContactUserCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceOrgContactUserBackup {
+
+				idParam := ReplaceOrgContactUsercontactType
+				err := utils.BackupObject(d, "OrgSetting", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -292,6 +368,8 @@ func NewReplaceOrgContactUserCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceOrgContactUserdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceOrgContactUserBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -300,7 +378,11 @@ func init() {
 	OrgSettingCmd.AddCommand(ReplaceOrgContactUserCmd)
 }
 
-var BulkRemoveEmailAddressBouncesdata string
+var (
+	BulkRemoveEmailAddressBouncesdata string
+
+	BulkRemoveEmailAddressBouncesBackup bool
+)
 
 func NewBulkRemoveEmailAddressBouncesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -327,14 +409,22 @@ func NewBulkRemoveEmailAddressBouncesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if BulkRemoveEmailAddressBouncesBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&BulkRemoveEmailAddressBouncesdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&BulkRemoveEmailAddressBouncesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -344,7 +434,11 @@ func init() {
 	OrgSettingCmd.AddCommand(BulkRemoveEmailAddressBouncesCmd)
 }
 
-var UploadOrgLogodata string
+var (
+	UploadOrgLogodata string
+
+	UploadOrgLogoBackup bool
+)
 
 func NewUploadOrgLogoCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -371,14 +465,22 @@ func NewUploadOrgLogoCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UploadOrgLogoBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&UploadOrgLogodata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&UploadOrgLogoBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -387,6 +489,8 @@ func init() {
 	UploadOrgLogoCmd := NewUploadOrgLogoCmd()
 	OrgSettingCmd.AddCommand(UploadOrgLogoCmd)
 }
+
+var UpdateThirdPartyAdminSettingBackup bool
 
 func NewUpdateThirdPartyAdminSettingCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -409,11 +513,19 @@ func NewUpdateThirdPartyAdminSettingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateThirdPartyAdminSettingBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&UpdateThirdPartyAdminSettingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -422,6 +534,8 @@ func init() {
 	UpdateThirdPartyAdminSettingCmd := NewUpdateThirdPartyAdminSettingCmd()
 	OrgSettingCmd.AddCommand(UpdateThirdPartyAdminSettingCmd)
 }
+
+var GetThirdPartyAdminSettingBackup bool
 
 func NewGetThirdPartyAdminSettingCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -444,11 +558,19 @@ func NewGetThirdPartyAdminSettingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetThirdPartyAdminSettingBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetThirdPartyAdminSettingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -457,6 +579,8 @@ func init() {
 	GetThirdPartyAdminSettingCmd := NewGetThirdPartyAdminSettingCmd()
 	OrgSettingCmd.AddCommand(GetThirdPartyAdminSettingCmd)
 }
+
+var GetOrgPreferencesBackup bool
 
 func NewGetOrgPreferencesCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -479,11 +603,19 @@ func NewGetOrgPreferencesCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgPreferencesBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOrgPreferencesBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -492,6 +624,8 @@ func init() {
 	GetOrgPreferencesCmd := NewGetOrgPreferencesCmd()
 	OrgSettingCmd.AddCommand(GetOrgPreferencesCmd)
 }
+
+var UpdateOrgHideOktaUIFooterBackup bool
 
 func NewUpdateOrgHideOktaUIFooterCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -514,11 +648,19 @@ func NewUpdateOrgHideOktaUIFooterCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateOrgHideOktaUIFooterBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&UpdateOrgHideOktaUIFooterBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -527,6 +669,8 @@ func init() {
 	UpdateOrgHideOktaUIFooterCmd := NewUpdateOrgHideOktaUIFooterCmd()
 	OrgSettingCmd.AddCommand(UpdateOrgHideOktaUIFooterCmd)
 }
+
+var UpdateOrgShowOktaUIFooterBackup bool
 
 func NewUpdateOrgShowOktaUIFooterCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -549,11 +693,19 @@ func NewUpdateOrgShowOktaUIFooterCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UpdateOrgShowOktaUIFooterBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&UpdateOrgShowOktaUIFooterBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -562,6 +714,8 @@ func init() {
 	UpdateOrgShowOktaUIFooterCmd := NewUpdateOrgShowOktaUIFooterCmd()
 	OrgSettingCmd.AddCommand(UpdateOrgShowOktaUIFooterCmd)
 }
+
+var GetOktaCommunicationSettingsBackup bool
 
 func NewGetOktaCommunicationSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -584,11 +738,19 @@ func NewGetOktaCommunicationSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOktaCommunicationSettingsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOktaCommunicationSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -597,6 +759,8 @@ func init() {
 	GetOktaCommunicationSettingsCmd := NewGetOktaCommunicationSettingsCmd()
 	OrgSettingCmd.AddCommand(GetOktaCommunicationSettingsCmd)
 }
+
+var OptInUsersToOktaCommunicationEmailsBackup bool
 
 func NewOptInUsersToOktaCommunicationEmailsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -619,11 +783,19 @@ func NewOptInUsersToOktaCommunicationEmailsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if OptInUsersToOktaCommunicationEmailsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&OptInUsersToOktaCommunicationEmailsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -632,6 +804,8 @@ func init() {
 	OptInUsersToOktaCommunicationEmailsCmd := NewOptInUsersToOktaCommunicationEmailsCmd()
 	OrgSettingCmd.AddCommand(OptInUsersToOktaCommunicationEmailsCmd)
 }
+
+var OptOutUsersFromOktaCommunicationEmailsBackup bool
 
 func NewOptOutUsersFromOktaCommunicationEmailsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -654,11 +828,19 @@ func NewOptOutUsersFromOktaCommunicationEmailsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if OptOutUsersFromOktaCommunicationEmailsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&OptOutUsersFromOktaCommunicationEmailsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -667,6 +849,8 @@ func init() {
 	OptOutUsersFromOktaCommunicationEmailsCmd := NewOptOutUsersFromOktaCommunicationEmailsCmd()
 	OrgSettingCmd.AddCommand(OptOutUsersFromOktaCommunicationEmailsCmd)
 }
+
+var GetOrgOktaSupportSettingsBackup bool
 
 func NewGetOrgOktaSupportSettingsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -689,11 +873,19 @@ func NewGetOrgOktaSupportSettingsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetOrgOktaSupportSettingsBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetOrgOktaSupportSettingsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -702,6 +894,8 @@ func init() {
 	GetOrgOktaSupportSettingsCmd := NewGetOrgOktaSupportSettingsCmd()
 	OrgSettingCmd.AddCommand(GetOrgOktaSupportSettingsCmd)
 }
+
+var ExtendOktaSupportBackup bool
 
 func NewExtendOktaSupportCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -724,11 +918,19 @@ func NewExtendOktaSupportCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ExtendOktaSupportBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ExtendOktaSupportBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -737,6 +939,8 @@ func init() {
 	ExtendOktaSupportCmd := NewExtendOktaSupportCmd()
 	OrgSettingCmd.AddCommand(ExtendOktaSupportCmd)
 }
+
+var GrantOktaSupportBackup bool
 
 func NewGrantOktaSupportCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -759,11 +963,19 @@ func NewGrantOktaSupportCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GrantOktaSupportBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GrantOktaSupportBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -772,6 +984,8 @@ func init() {
 	GrantOktaSupportCmd := NewGrantOktaSupportCmd()
 	OrgSettingCmd.AddCommand(GrantOktaSupportCmd)
 }
+
+var RevokeOktaSupportBackup bool
 
 func NewRevokeOktaSupportCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -794,11 +1008,19 @@ func NewRevokeOktaSupportCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if RevokeOktaSupportBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&RevokeOktaSupportBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -807,6 +1029,8 @@ func init() {
 	RevokeOktaSupportCmd := NewRevokeOktaSupportCmd()
 	OrgSettingCmd.AddCommand(RevokeOktaSupportCmd)
 }
+
+var GetClientPrivilegesSettingBackup bool
 
 func NewGetClientPrivilegesSettingCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -829,11 +1053,19 @@ func NewGetClientPrivilegesSettingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetClientPrivilegesSettingBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&GetClientPrivilegesSettingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -843,7 +1075,11 @@ func init() {
 	OrgSettingCmd.AddCommand(GetClientPrivilegesSettingCmd)
 }
 
-var AssignClientPrivilegesSettingdata string
+var (
+	AssignClientPrivilegesSettingdata string
+
+	AssignClientPrivilegesSettingBackup bool
+)
 
 func NewAssignClientPrivilegesSettingCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -870,14 +1106,22 @@ func NewAssignClientPrivilegesSettingCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if AssignClientPrivilegesSettingBackup {
+
+				err := utils.BackupObject(d, "OrgSetting", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&AssignClientPrivilegesSettingdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&AssignClientPrivilegesSettingBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

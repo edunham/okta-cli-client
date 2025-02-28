@@ -16,7 +16,11 @@ func init() {
 	rootCmd.AddCommand(EventHookCmd)
 }
 
-var CreateEventHookdata string
+var (
+	CreateEventHookdata string
+
+	CreateEventHookBackup bool
+)
 
 func NewCreateEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -43,14 +47,22 @@ func NewCreateEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if CreateEventHookBackup {
+
+				err := utils.BackupObject(d, "EventHook", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&CreateEventHookdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&CreateEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -59,6 +71,8 @@ func init() {
 	CreateEventHookCmd := NewCreateEventHookCmd()
 	EventHookCmd.AddCommand(CreateEventHookCmd)
 }
+
+var ListEventHooksBackup bool
 
 func NewListEventHooksCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -81,11 +95,19 @@ func NewListEventHooksCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListEventHooksBackup {
+
+				err := utils.BackupObject(d, "EventHook", "hasNoIdParam")
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVarP(&ListEventHooksBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -95,7 +117,11 @@ func init() {
 	EventHookCmd.AddCommand(ListEventHooksCmd)
 }
 
-var GetEventHookeventHookId string
+var (
+	GetEventHookeventHookId string
+
+	GetEventHookBackup bool
+)
 
 func NewGetEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -118,14 +144,23 @@ func NewGetEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetEventHookBackup {
+
+				idParam := GetEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&GetEventHookeventHookId, "eventHookId", "", "", "")
 	cmd.MarkFlagRequired("eventHookId")
+
+	cmd.Flags().BoolVarP(&GetEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -139,6 +174,8 @@ var (
 	ReplaceEventHookeventHookId string
 
 	ReplaceEventHookdata string
+
+	ReplaceEventHookBackup bool
 )
 
 func NewReplaceEventHookCmd() *cobra.Command {
@@ -166,8 +203,15 @@ func NewReplaceEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ReplaceEventHookBackup {
+
+				idParam := ReplaceEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -178,6 +222,8 @@ func NewReplaceEventHookCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&ReplaceEventHookdata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&ReplaceEventHookBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -186,7 +232,11 @@ func init() {
 	EventHookCmd.AddCommand(ReplaceEventHookCmd)
 }
 
-var DeleteEventHookeventHookId string
+var (
+	DeleteEventHookeventHookId string
+
+	DeleteEventHookBackup bool
+)
 
 func NewDeleteEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -209,14 +259,23 @@ func NewDeleteEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeleteEventHookBackup {
+
+				idParam := DeleteEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeleteEventHookeventHookId, "eventHookId", "", "", "")
 	cmd.MarkFlagRequired("eventHookId")
+
+	cmd.Flags().BoolVarP(&DeleteEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -226,7 +285,11 @@ func init() {
 	EventHookCmd.AddCommand(DeleteEventHookCmd)
 }
 
-var ActivateEventHookeventHookId string
+var (
+	ActivateEventHookeventHookId string
+
+	ActivateEventHookBackup bool
+)
 
 func NewActivateEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -249,14 +312,23 @@ func NewActivateEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateEventHookBackup {
+
+				idParam := ActivateEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ActivateEventHookeventHookId, "eventHookId", "", "", "")
 	cmd.MarkFlagRequired("eventHookId")
+
+	cmd.Flags().BoolVarP(&ActivateEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -266,7 +338,11 @@ func init() {
 	EventHookCmd.AddCommand(ActivateEventHookCmd)
 }
 
-var DeactivateEventHookeventHookId string
+var (
+	DeactivateEventHookeventHookId string
+
+	DeactivateEventHookBackup bool
+)
 
 func NewDeactivateEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -289,14 +365,23 @@ func NewDeactivateEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if DeactivateEventHookBackup {
+
+				idParam := DeactivateEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&DeactivateEventHookeventHookId, "eventHookId", "", "", "")
 	cmd.MarkFlagRequired("eventHookId")
+
+	cmd.Flags().BoolVarP(&DeactivateEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -306,7 +391,11 @@ func init() {
 	EventHookCmd.AddCommand(DeactivateEventHookCmd)
 }
 
-var VerifyEventHookeventHookId string
+var (
+	VerifyEventHookeventHookId string
+
+	VerifyEventHookBackup bool
+)
 
 func NewVerifyEventHookCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -329,14 +418,23 @@ func NewVerifyEventHookCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if VerifyEventHookBackup {
+
+				idParam := VerifyEventHookeventHookId
+				err := utils.BackupObject(d, "EventHook", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&VerifyEventHookeventHookId, "eventHookId", "", "", "")
 	cmd.MarkFlagRequired("eventHookId")
+
+	cmd.Flags().BoolVarP(&VerifyEventHookBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }

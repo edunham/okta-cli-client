@@ -20,6 +20,8 @@ var (
 	EnrollFactoruserId string
 
 	EnrollFactordata string
+
+	EnrollFactorBackup bool
 )
 
 func NewEnrollFactorCmd() *cobra.Command {
@@ -47,8 +49,15 @@ func NewEnrollFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if EnrollFactorBackup {
+
+				idParam := EnrollFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -59,6 +68,8 @@ func NewEnrollFactorCmd() *cobra.Command {
 	cmd.Flags().StringVarP(&EnrollFactordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
 
+	cmd.Flags().BoolVarP(&EnrollFactorBackup, "backup", "b", false, "Backup the object to a file")
+
 	return cmd
 }
 
@@ -67,7 +78,11 @@ func init() {
 	UserFactorCmd.AddCommand(EnrollFactorCmd)
 }
 
-var ListFactorsuserId string
+var (
+	ListFactorsuserId string
+
+	ListFactorsBackup bool
+)
 
 func NewListFactorsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -90,14 +105,23 @@ func NewListFactorsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListFactorsBackup {
+
+				idParam := ListFactorsuserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListFactorsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListFactorsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -107,7 +131,11 @@ func init() {
 	UserFactorCmd.AddCommand(ListFactorsCmd)
 }
 
-var ListSupportedFactorsuserId string
+var (
+	ListSupportedFactorsuserId string
+
+	ListSupportedFactorsBackup bool
+)
 
 func NewListSupportedFactorsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -130,14 +158,23 @@ func NewListSupportedFactorsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListSupportedFactorsBackup {
+
+				idParam := ListSupportedFactorsuserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListSupportedFactorsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListSupportedFactorsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -147,7 +184,11 @@ func init() {
 	UserFactorCmd.AddCommand(ListSupportedFactorsCmd)
 }
 
-var ListSupportedSecurityQuestionsuserId string
+var (
+	ListSupportedSecurityQuestionsuserId string
+
+	ListSupportedSecurityQuestionsBackup bool
+)
 
 func NewListSupportedSecurityQuestionsCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -170,14 +211,23 @@ func NewListSupportedSecurityQuestionsCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ListSupportedSecurityQuestionsBackup {
+
+				idParam := ListSupportedSecurityQuestionsuserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
 
 	cmd.Flags().StringVarP(&ListSupportedSecurityQuestionsuserId, "userId", "", "", "")
 	cmd.MarkFlagRequired("userId")
+
+	cmd.Flags().BoolVarP(&ListSupportedSecurityQuestionsBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -191,6 +241,8 @@ var (
 	GetFactoruserId string
 
 	GetFactorfactorId string
+
+	GetFactorBackup bool
 )
 
 func NewGetFactorCmd() *cobra.Command {
@@ -214,8 +266,15 @@ func NewGetFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetFactorBackup {
+
+				idParam := GetFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -225,6 +284,8 @@ func NewGetFactorCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetFactorfactorId, "factorId", "", "", "")
 	cmd.MarkFlagRequired("factorId")
+
+	cmd.Flags().BoolVarP(&GetFactorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -238,6 +299,8 @@ var (
 	UnenrollFactoruserId string
 
 	UnenrollFactorfactorId string
+
+	UnenrollFactorBackup bool
 )
 
 func NewUnenrollFactorCmd() *cobra.Command {
@@ -261,8 +324,15 @@ func NewUnenrollFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if UnenrollFactorBackup {
+
+				idParam := UnenrollFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -272,6 +342,8 @@ func NewUnenrollFactorCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&UnenrollFactorfactorId, "factorId", "", "", "")
 	cmd.MarkFlagRequired("factorId")
+
+	cmd.Flags().BoolVarP(&UnenrollFactorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -287,6 +359,8 @@ var (
 	ActivateFactorfactorId string
 
 	ActivateFactordata string
+
+	ActivateFactorBackup bool
 )
 
 func NewActivateFactorCmd() *cobra.Command {
@@ -314,8 +388,15 @@ func NewActivateFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ActivateFactorBackup {
+
+				idParam := ActivateFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -328,6 +409,8 @@ func NewActivateFactorCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ActivateFactordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ActivateFactorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -343,6 +426,8 @@ var (
 	ResendEnrollFactorfactorId string
 
 	ResendEnrollFactordata string
+
+	ResendEnrollFactorBackup bool
 )
 
 func NewResendEnrollFactorCmd() *cobra.Command {
@@ -370,8 +455,15 @@ func NewResendEnrollFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if ResendEnrollFactorBackup {
+
+				idParam := ResendEnrollFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -384,6 +476,8 @@ func NewResendEnrollFactorCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&ResendEnrollFactordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&ResendEnrollFactorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -399,6 +493,8 @@ var (
 	GetFactorTransactionStatusfactorId string
 
 	GetFactorTransactionStatustransactionId string
+
+	GetFactorTransactionStatusBackup bool
 )
 
 func NewGetFactorTransactionStatusCmd() *cobra.Command {
@@ -422,8 +518,15 @@ func NewGetFactorTransactionStatusCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if GetFactorTransactionStatusBackup {
+
+				idParam := GetFactorTransactionStatususerId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -436,6 +539,8 @@ func NewGetFactorTransactionStatusCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&GetFactorTransactionStatustransactionId, "transactionId", "", "", "")
 	cmd.MarkFlagRequired("transactionId")
+
+	cmd.Flags().BoolVarP(&GetFactorTransactionStatusBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
@@ -451,6 +556,8 @@ var (
 	VerifyFactorfactorId string
 
 	VerifyFactordata string
+
+	VerifyFactorBackup bool
 )
 
 func NewVerifyFactorCmd() *cobra.Command {
@@ -478,8 +585,15 @@ func NewVerifyFactorCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
+			if VerifyFactorBackup {
+
+				idParam := VerifyFactoruserId
+				err := utils.BackupObject(d, "UserFactor", idParam)
+				if err != nil {
+					return err
+				}
+			}
 			utils.PrettyPrintByte(d)
-			// cmd.Println(string(d))
 			return nil
 		},
 	}
@@ -492,6 +606,8 @@ func NewVerifyFactorCmd() *cobra.Command {
 
 	cmd.Flags().StringVarP(&VerifyFactordata, "data", "", "", "")
 	cmd.MarkFlagRequired("data")
+
+	cmd.Flags().BoolVarP(&VerifyFactorBackup, "backup", "b", false, "Backup the object to a file")
 
 	return cmd
 }
