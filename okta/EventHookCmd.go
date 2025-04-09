@@ -235,7 +235,7 @@ func NewListEventHooksCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListEventHooksBackupDir, "eventhooks")
+				dirPath := filepath.Join(ListEventHooksBackupDir, "eventhook", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetEventHookCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEventHookBackupDir, "eventhooks")
-
+				dirPath := filepath.Join(GetEventHookBackupDir, "eventhook", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -235,7 +235,7 @@ func NewListCaptchaInstancesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListCaptchaInstancesBackupDir, "captchas")
+				dirPath := filepath.Join(ListCaptchaInstancesBackupDir, "captcha", "listCaptchaInstances")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -403,8 +403,7 @@ func NewGetCaptchaInstanceCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCaptchaInstanceBackupDir, "captchas")
-
+				dirPath := filepath.Join(GetCaptchaInstanceBackupDir, "captcha", "getCaptchaInstance")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -596,8 +595,7 @@ func NewGetOrgCaptchaSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgCaptchaSettingsBackupDir, "captchas")
-
+				dirPath := filepath.Join(GetOrgCaptchaSettingsBackupDir, "captcha", "getOrgCaptchaSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

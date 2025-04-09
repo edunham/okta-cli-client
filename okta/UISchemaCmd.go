@@ -235,7 +235,7 @@ func NewListUISchemasCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUISchemasBackupDir, "uischemas")
+				dirPath := filepath.Join(ListUISchemasBackupDir, "uischema", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetUISchemaCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUISchemaBackupDir, "uischemas")
-
+				dirPath := filepath.Join(GetUISchemaBackupDir, "uischema", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

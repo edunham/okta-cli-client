@@ -159,7 +159,7 @@ func NewListAuthorizationServerKeysCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAuthorizationServerKeysBackupDir, "authorizationserverkeyss")
+				dirPath := filepath.Join(ListAuthorizationServerKeysBackupDir, "authorizationserverkeys", "list")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

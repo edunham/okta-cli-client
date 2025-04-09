@@ -219,7 +219,7 @@ func NewListApplicationUsersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListApplicationUsersBackupDir, "applicationuserss")
+				dirPath := filepath.Join(ListApplicationUsersBackupDir, "applicationusers", "list")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -397,8 +397,7 @@ func NewGetApplicationUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetApplicationUserBackupDir, "applicationuserss")
-
+				dirPath := filepath.Join(GetApplicationUserBackupDir, "applicationusers", "getApplicationUser")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

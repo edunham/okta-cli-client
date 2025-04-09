@@ -159,7 +159,7 @@ func NewListOAuth2TokensForApplicationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListOAuth2TokensForApplicationBackupDir, "applicationtokenss")
+				dirPath := filepath.Join(ListOAuth2TokensForApplicationBackupDir, "applicationtokens", "listOAuth2TokensForApplication")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -323,8 +323,7 @@ func NewGetOAuth2TokenForApplicationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOAuth2TokenForApplicationBackupDir, "applicationtokenss")
-
+				dirPath := filepath.Join(GetOAuth2TokenForApplicationBackupDir, "applicationtokens", "getOAuth2TokenForApplication")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

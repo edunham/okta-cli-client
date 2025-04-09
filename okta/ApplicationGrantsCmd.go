@@ -219,7 +219,7 @@ func NewListScopeConsentGrantsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListScopeConsentGrantsBackupDir, "applicationgrantss")
+				dirPath := filepath.Join(ListScopeConsentGrantsBackupDir, "applicationgrants", "listScopeConsentGrants")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -332,8 +332,7 @@ func NewGetScopeConsentGrantCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetScopeConsentGrantBackupDir, "applicationgrantss")
-
+				dirPath := filepath.Join(GetScopeConsentGrantBackupDir, "applicationgrants", "getScopeConsentGrant")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

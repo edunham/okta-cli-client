@@ -157,7 +157,7 @@ func NewListAgentPoolsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAgentPoolsBackupDir, "agentpoolss")
+				dirPath := filepath.Join(ListAgentPoolsBackupDir, "agentpools", "list")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -445,7 +445,7 @@ func NewListAgentPoolsUpdatesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAgentPoolsUpdatesBackupDir, "agentpoolss")
+				dirPath := filepath.Join(ListAgentPoolsUpdatesBackupDir, "agentpools", "listUpdates")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -616,8 +616,7 @@ func NewGetAgentPoolsUpdateSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAgentPoolsUpdateSettingsBackupDir, "agentpoolss")
-
+				dirPath := filepath.Join(GetAgentPoolsUpdateSettingsBackupDir, "agentpools", "getUpdateSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -767,8 +766,7 @@ func NewGetAgentPoolsUpdateInstanceCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAgentPoolsUpdateInstanceBackupDir, "agentpoolss")
-
+				dirPath := filepath.Join(GetAgentPoolsUpdateInstanceBackupDir, "agentpools", "getUpdateInstance")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

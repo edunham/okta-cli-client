@@ -37,7 +37,7 @@ func init() {
 		var configSetters []sdk.ConfigSetter
 		configSetters = append(configSetters, sdk.WithCache(false))
 
-		//this is probably not the right way to pass config settings to the sdk!
+		// this is probably not the right way to pass config settings to the sdk!
 		if cfgFile != "" {
 			fmt.Printf("Using custom config file: %s\n", cfgFile)
 			yamlConfig, err := os.ReadFile(cfgFile)

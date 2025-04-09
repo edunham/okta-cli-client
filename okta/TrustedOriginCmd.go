@@ -235,7 +235,7 @@ func NewListTrustedOriginsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListTrustedOriginsBackupDir, "trustedorigins")
+				dirPath := filepath.Join(ListTrustedOriginsBackupDir, "trustedorigin", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetTrustedOriginCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetTrustedOriginBackupDir, "trustedorigins")
-
+				dirPath := filepath.Join(GetTrustedOriginBackupDir, "trustedorigin", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

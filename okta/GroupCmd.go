@@ -235,7 +235,7 @@ func NewListGroupsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupsBackupDir, "groups")
+				dirPath := filepath.Join(ListGroupsBackupDir, "group", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -516,7 +516,7 @@ func NewListGroupRulesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupRulesBackupDir, "groups")
+				dirPath := filepath.Join(ListGroupRulesBackupDir, "group", "listRules")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -624,8 +624,7 @@ func NewGetGroupRuleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetGroupRuleBackupDir, "groups")
-
+				dirPath := filepath.Join(GetGroupRuleBackupDir, "group", "getRule")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -921,8 +920,7 @@ func NewGetGroupCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetGroupBackupDir, "groups")
-
+				dirPath := filepath.Join(GetGroupBackupDir, "group", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1213,7 +1211,7 @@ func NewListAssignedApplicationsForGroupCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAssignedApplicationsForGroupBackupDir, "groups")
+				dirPath := filepath.Join(ListAssignedApplicationsForGroupBackupDir, "group", "listAssignedApplicationsFor")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1421,7 +1419,7 @@ func NewListGroupUsersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupUsersBackupDir, "groups")
+				dirPath := filepath.Join(ListGroupUsersBackupDir, "group", "listUsers")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

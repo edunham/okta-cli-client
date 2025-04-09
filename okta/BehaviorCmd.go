@@ -235,7 +235,7 @@ func NewListBehaviorDetectionRulesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListBehaviorDetectionRulesBackupDir, "behaviors")
+				dirPath := filepath.Join(ListBehaviorDetectionRulesBackupDir, "behavior", "listDetectionRules")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetBehaviorDetectionRuleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetBehaviorDetectionRuleBackupDir, "behaviors")
-
+				dirPath := filepath.Join(GetBehaviorDetectionRuleBackupDir, "behavior", "getDetectionRule")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

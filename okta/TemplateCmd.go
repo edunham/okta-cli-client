@@ -235,7 +235,7 @@ func NewListSmsTemplatesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListSmsTemplatesBackupDir, "templates")
+				dirPath := filepath.Join(ListSmsTemplatesBackupDir, "template", "listSmss")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -403,8 +403,7 @@ func NewGetSmsTemplateCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetSmsTemplateBackupDir, "templates")
-
+				dirPath := filepath.Join(GetSmsTemplateBackupDir, "template", "getSms")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

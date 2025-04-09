@@ -157,7 +157,7 @@ func NewListLogEventsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListLogEventsBackupDir, "systemlogs")
+				dirPath := filepath.Join(ListLogEventsBackupDir, "systemlog", "listLogEvents")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

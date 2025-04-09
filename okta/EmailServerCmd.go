@@ -235,7 +235,7 @@ func NewListEmailServersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListEmailServersBackupDir, "emailservers")
+				dirPath := filepath.Join(ListEmailServersBackupDir, "emailserver", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetEmailServerCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailServerBackupDir, "emailservers")
-
+				dirPath := filepath.Join(GetEmailServerBackupDir, "emailserver", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -159,7 +159,7 @@ func NewListApplicationGroupAssignmentsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListApplicationGroupAssignmentsBackupDir, "applicationgroupss")
+				dirPath := filepath.Join(ListApplicationGroupAssignmentsBackupDir, "applicationgroups", "listApplicationGroupAssignments")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -272,8 +272,7 @@ func NewGetApplicationGroupAssignmentCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetApplicationGroupAssignmentBackupDir, "applicationgroupss")
-
+				dirPath := filepath.Join(GetApplicationGroupAssignmentBackupDir, "applicationgroups", "getApplicationGroupAssignment")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

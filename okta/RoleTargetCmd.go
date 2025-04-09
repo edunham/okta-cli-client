@@ -161,7 +161,7 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForGroupCmd() *cobr
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListApplicationTargetsForApplicationAdministratorRoleForGroupBackupDir, "roletargets")
+				dirPath := filepath.Join(ListApplicationTargetsForApplicationAdministratorRoleForGroupBackupDir, "roletarget", "listApplicationTargetsForApplicationAdministratorRoleForGroup")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -628,7 +628,7 @@ func NewListGroupTargetsForGroupRoleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupTargetsForGroupRoleBackupDir, "roletargets")
+				dirPath := filepath.Join(ListGroupTargetsForGroupRoleBackupDir, "roletarget", "listGroupTargetsForGroupRole")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -963,7 +963,7 @@ func NewListApplicationTargetsForApplicationAdministratorRoleForUserCmd() *cobra
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListApplicationTargetsForApplicationAdministratorRoleForUserBackupDir, "roletargets")
+				dirPath := filepath.Join(ListApplicationTargetsForApplicationAdministratorRoleForUserBackupDir, "roletarget", "listApplicationTargetsForApplicationAdministratorRoleForUser")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1486,7 +1486,7 @@ func NewListGroupTargetsForRoleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupTargetsForRoleBackupDir, "roletargets")
+				dirPath := filepath.Join(ListGroupTargetsForRoleBackupDir, "roletarget", "listGroupTargetsForRole")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

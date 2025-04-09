@@ -235,7 +235,7 @@ func NewListIdentityProvidersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListIdentityProvidersBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListIdentityProvidersBackupDir, "identityprovider", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -516,7 +516,7 @@ func NewListIdentityProviderKeysCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListIdentityProviderKeysBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListIdentityProviderKeysBackupDir, "identityprovider", "listKeys")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -624,8 +624,7 @@ func NewGetIdentityProviderKeyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetIdentityProviderKeyBackupDir, "identityproviders")
-
+				dirPath := filepath.Join(GetIdentityProviderKeyBackupDir, "identityprovider", "getKey")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -759,8 +758,7 @@ func NewGetIdentityProviderCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetIdentityProviderBackupDir, "identityproviders")
-
+				dirPath := filepath.Join(GetIdentityProviderBackupDir, "identityprovider", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1111,7 +1109,7 @@ func NewListCsrsForIdentityProviderCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListCsrsForIdentityProviderBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListCsrsForIdentityProviderBackupDir, "identityprovider", "listCsrsFor")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1224,8 +1222,7 @@ func NewGetCsrForIdentityProviderCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCsrForIdentityProviderBackupDir, "identityproviders")
-
+				dirPath := filepath.Join(GetCsrForIdentityProviderBackupDir, "identityprovider", "getCsrFor")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1529,7 +1526,7 @@ func NewListIdentityProviderSigningKeysCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListIdentityProviderSigningKeysBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListIdentityProviderSigningKeysBackupDir, "identityprovider", "listSigningKeys")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1693,8 +1690,7 @@ func NewGetIdentityProviderSigningKeyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetIdentityProviderSigningKeyBackupDir, "identityproviders")
-
+				dirPath := filepath.Join(GetIdentityProviderSigningKeyBackupDir, "identityprovider", "getSigningKey")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2035,7 +2031,7 @@ func NewListIdentityProviderApplicationUsersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListIdentityProviderApplicationUsersBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListIdentityProviderApplicationUsersBackupDir, "identityprovider", "listApplicationUsers")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2213,8 +2209,7 @@ func NewGetIdentityProviderApplicationUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetIdentityProviderApplicationUserBackupDir, "identityproviders")
-
+				dirPath := filepath.Join(GetIdentityProviderApplicationUserBackupDir, "identityprovider", "getApplicationUser")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2455,7 +2450,7 @@ func NewListSocialAuthTokensCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListSocialAuthTokensBackupDir, "identityproviders")
+				dirPath := filepath.Join(ListSocialAuthTokensBackupDir, "identityprovider", "listSocialAuthTokens")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

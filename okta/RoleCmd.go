@@ -235,7 +235,7 @@ func NewListRolesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRolesBackupDir, "roles")
+				dirPath := filepath.Join(ListRolesBackupDir, "role", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetRoleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRoleBackupDir, "roles")
-
+				dirPath := filepath.Join(GetRoleBackupDir, "role", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -635,7 +634,7 @@ func NewListRolePermissionsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRolePermissionsBackupDir, "roles")
+				dirPath := filepath.Join(ListRolePermissionsBackupDir, "role", "listPermissions")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -836,8 +835,7 @@ func NewGetRolePermissionCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRolePermissionBackupDir, "roles")
-
+				dirPath := filepath.Join(GetRolePermissionBackupDir, "role", "getPermission")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -60,8 +60,7 @@ func NewGetWellKnownAppAuthenticatorConfigurationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetWellKnownAppAuthenticatorConfigurationBackupDir, "authenticators")
-
+				dirPath := filepath.Join(GetWellKnownAppAuthenticatorConfigurationBackupDir, "authenticator", "getWellKnownAppConfiguration")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -313,7 +312,7 @@ func NewListAuthenticatorsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAuthenticatorsBackupDir, "authenticators")
+				dirPath := filepath.Join(ListAuthenticatorsBackupDir, "authenticator", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -421,8 +420,7 @@ func NewGetAuthenticatorCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAuthenticatorBackupDir, "authenticators")
-
+				dirPath := filepath.Join(GetAuthenticatorBackupDir, "authenticator", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -764,7 +762,7 @@ func NewListAuthenticatorMethodsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAuthenticatorMethodsBackupDir, "authenticators")
+				dirPath := filepath.Join(ListAuthenticatorMethodsBackupDir, "authenticator", "listMethods")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -877,8 +875,7 @@ func NewGetAuthenticatorMethodCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAuthenticatorMethodBackupDir, "authenticators")
-
+				dirPath := filepath.Join(GetAuthenticatorMethodBackupDir, "authenticator", "getMethod")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

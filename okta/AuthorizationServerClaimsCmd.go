@@ -242,7 +242,7 @@ func NewListOAuth2ClaimsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListOAuth2ClaimsBackupDir, "authorizationserverclaimss")
+				dirPath := filepath.Join(ListOAuth2ClaimsBackupDir, "authorizationserverclaims", "listOAuth2Claims")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -355,8 +355,7 @@ func NewGetOAuth2ClaimCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOAuth2ClaimBackupDir, "authorizationserverclaimss")
-
+				dirPath := filepath.Join(GetOAuth2ClaimBackupDir, "authorizationserverclaims", "getOAuth2Claim")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

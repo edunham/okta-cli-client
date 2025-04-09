@@ -235,7 +235,7 @@ func NewListUsersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUsersBackupDir, "users")
+				dirPath := filepath.Join(ListUsersBackupDir, "user", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -403,8 +403,7 @@ func NewGetUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUserBackupDir, "users")
-
+				dirPath := filepath.Join(GetUserBackupDir, "user", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -695,7 +694,7 @@ func NewListAppLinksCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAppLinksBackupDir, "users")
+				dirPath := filepath.Join(ListAppLinksBackupDir, "user", "listAppLinks")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -903,7 +902,7 @@ func NewListUserBlocksCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUserBlocksBackupDir, "users")
+				dirPath := filepath.Join(ListUserBlocksBackupDir, "user", "listBlocks")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1111,7 +1110,7 @@ func NewListUserClientsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUserClientsBackupDir, "users")
+				dirPath := filepath.Join(ListUserClientsBackupDir, "user", "listClients")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1321,7 +1320,7 @@ func NewListGrantsForUserAndClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGrantsForUserAndClientBackupDir, "users")
+				dirPath := filepath.Join(ListGrantsForUserAndClientBackupDir, "user", "listGrantsForAndClient")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1590,7 +1589,7 @@ func NewListRefreshTokensForUserAndClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRefreshTokensForUserAndClientBackupDir, "users")
+				dirPath := filepath.Join(ListRefreshTokensForUserAndClientBackupDir, "user", "listRefreshTokensForAndClient")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1764,8 +1763,7 @@ func NewGetRefreshTokenForUserAndClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRefreshTokenForUserAndClientBackupDir, "users")
-
+				dirPath := filepath.Join(GetRefreshTokenForUserAndClientBackupDir, "user", "getRefreshTokenForAndClient")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2243,7 +2241,7 @@ func NewListUserGrantsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUserGrantsBackupDir, "users")
+				dirPath := filepath.Join(ListUserGrantsBackupDir, "user", "listGrants")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2407,8 +2405,7 @@ func NewGetUserGrantCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUserGrantBackupDir, "users")
-
+				dirPath := filepath.Join(GetUserGrantBackupDir, "user", "getGrant")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2647,7 +2644,7 @@ func NewListUserGroupsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUserGroupsBackupDir, "users")
+				dirPath := filepath.Join(ListUserGroupsBackupDir, "user", "listGroups")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2855,7 +2852,7 @@ func NewListUserIdentityProvidersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUserIdentityProvidersBackupDir, "users")
+				dirPath := filepath.Join(ListUserIdentityProvidersBackupDir, "user", "listIdentityProviders")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -3636,7 +3633,7 @@ func NewListLinkedObjectsForUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListLinkedObjectsForUserBackupDir, "users")
+				dirPath := filepath.Join(ListLinkedObjectsForUserBackupDir, "user", "listLinkedObjectsFor")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

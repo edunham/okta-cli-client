@@ -235,7 +235,7 @@ func NewListBrandsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListBrandsBackupDir, "customizations")
+				dirPath := filepath.Join(ListBrandsBackupDir, "customization", "listBrands")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetBrandCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetBrandBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetBrandBackupDir, "customization", "getBrand")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -635,7 +634,7 @@ func NewListBrandDomainsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListBrandDomainsBackupDir, "customizations")
+				dirPath := filepath.Join(ListBrandDomainsBackupDir, "customization", "listBrandDomains")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -746,8 +745,7 @@ func NewGetErrorPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetErrorPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetErrorPageBackupDir, "customization", "getErrorPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -830,8 +828,7 @@ func NewGetCustomizedErrorPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCustomizedErrorPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetCustomizedErrorPageBackupDir, "customization", "getCustomizedErrorPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1025,8 +1022,7 @@ func NewGetDefaultErrorPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetDefaultErrorPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetDefaultErrorPageBackupDir, "customization", "getDefaultErrorPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1109,8 +1105,7 @@ func NewGetPreviewErrorPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPreviewErrorPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetPreviewErrorPageBackupDir, "customization", "getPreviewErrorPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1304,8 +1299,7 @@ func NewGetSignInPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetSignInPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetSignInPageBackupDir, "customization", "getSignInPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1388,8 +1382,7 @@ func NewGetCustomizedSignInPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCustomizedSignInPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetCustomizedSignInPageBackupDir, "customization", "getCustomizedSignInPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1583,8 +1576,7 @@ func NewGetDefaultSignInPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetDefaultSignInPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetDefaultSignInPageBackupDir, "customization", "getDefaultSignInPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1667,8 +1659,7 @@ func NewGetPreviewSignInPageCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPreviewSignInPageBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetPreviewSignInPageBackupDir, "customization", "getPreviewSignInPage")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1959,7 +1950,7 @@ func NewListAllSignInWidgetVersionsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAllSignInWidgetVersionsBackupDir, "customizations")
+				dirPath := filepath.Join(ListAllSignInWidgetVersionsBackupDir, "customization", "listAllSignInWidgetVersions")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2070,8 +2061,7 @@ func NewGetSignOutPageSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetSignOutPageSettingsBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetSignOutPageSettingsBackupDir, "customization", "getSignOutPageSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2311,7 +2301,7 @@ func NewListEmailTemplatesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListEmailTemplatesBackupDir, "customizations")
+				dirPath := filepath.Join(ListEmailTemplatesBackupDir, "customization", "listEmailTemplates")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2424,8 +2414,7 @@ func NewGetEmailTemplateCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailTemplateBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetEmailTemplateBackupDir, "customization", "getEmailTemplate")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -2698,7 +2687,7 @@ func NewListEmailCustomizationsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListEmailCustomizationsBackupDir, "customizations")
+				dirPath := filepath.Join(ListEmailCustomizationsBackupDir, "customization", "listEmails")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -2872,8 +2861,7 @@ func NewGetEmailCustomizationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailCustomizationBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetEmailCustomizationBackupDir, "customization", "getEmail")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -3097,8 +3085,7 @@ func NewGetCustomizationPreviewCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCustomizationPreviewBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetCustomizationPreviewBackupDir, "customization", "getPreview")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -3189,8 +3176,7 @@ func NewGetEmailDefaultContentCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailDefaultContentBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetEmailDefaultContentBackupDir, "customization", "getEmailDefaultContent")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -3278,8 +3264,7 @@ func NewGetEmailDefaultPreviewCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailDefaultPreviewBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetEmailDefaultPreviewBackupDir, "customization", "getEmailDefaultPreview")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -3367,8 +3352,7 @@ func NewGetEmailSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetEmailSettingsBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetEmailSettingsBackupDir, "customization", "getEmailSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -3672,7 +3656,7 @@ func NewListBrandThemesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListBrandThemesBackupDir, "customizations")
+				dirPath := filepath.Join(ListBrandThemesBackupDir, "customization", "listBrandThemes")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -3785,8 +3769,7 @@ func NewGetBrandThemeCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetBrandThemeBackupDir, "customizations")
-
+				dirPath := filepath.Join(GetBrandThemeBackupDir, "customization", "getBrandTheme")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

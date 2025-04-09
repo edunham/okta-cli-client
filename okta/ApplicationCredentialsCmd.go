@@ -219,7 +219,7 @@ func NewListCsrsForApplicationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListCsrsForApplicationBackupDir, "applicationcredentialss")
+				dirPath := filepath.Join(ListCsrsForApplicationBackupDir, "applicationcredentials", "listCsrsForApplication")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -332,8 +332,7 @@ func NewGetCsrForApplicationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCsrForApplicationBackupDir, "applicationcredentialss")
-
+				dirPath := filepath.Join(GetCsrForApplicationBackupDir, "applicationcredentials", "getCsrForApplication")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -637,7 +636,7 @@ func NewListApplicationKeysCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListApplicationKeysBackupDir, "applicationcredentialss")
+				dirPath := filepath.Join(ListApplicationKeysBackupDir, "applicationcredentials", "listApplicationKeys")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -801,8 +800,7 @@ func NewGetApplicationKeyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetApplicationKeyBackupDir, "applicationcredentialss")
-
+				dirPath := filepath.Join(GetApplicationKeyBackupDir, "applicationcredentials", "getApplicationKey")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -157,7 +157,7 @@ func NewListProfileMappingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListProfileMappingsBackupDir, "profilemappings")
+				dirPath := filepath.Join(ListProfileMappingsBackupDir, "profilemapping", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -325,8 +325,7 @@ func NewGetProfileMappingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetProfileMappingBackupDir, "profilemappings")
-
+				dirPath := filepath.Join(GetProfileMappingBackupDir, "profilemapping", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

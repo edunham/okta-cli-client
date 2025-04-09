@@ -58,8 +58,7 @@ func NewGetFirstPartyAppSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetFirstPartyAppSettingsBackupDir, "applicationoktaapplicationsettingss")
-
+				dirPath := filepath.Join(GetFirstPartyAppSettingsBackupDir, "applicationoktaapplicationsettings", "getFirstPartyAppSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

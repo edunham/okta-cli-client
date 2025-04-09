@@ -157,7 +157,7 @@ func NewListFeaturesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListFeaturesBackupDir, "features")
+				dirPath := filepath.Join(ListFeaturesBackupDir, "feature", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -265,8 +265,7 @@ func NewGetFeatureCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetFeatureBackupDir, "features")
-
+				dirPath := filepath.Join(GetFeatureBackupDir, "feature", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -446,7 +445,7 @@ func NewListFeatureDependenciesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListFeatureDependenciesBackupDir, "features")
+				dirPath := filepath.Join(ListFeatureDependenciesBackupDir, "feature", "listDependencies")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -654,7 +653,7 @@ func NewListFeatureDependentsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListFeatureDependentsBackupDir, "features")
+				dirPath := filepath.Join(ListFeatureDependentsBackupDir, "feature", "listDependents")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

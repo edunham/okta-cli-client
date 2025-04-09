@@ -235,7 +235,7 @@ func NewListAuthorizationServersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAuthorizationServersBackupDir, "authorizationservers")
+				dirPath := filepath.Join(ListAuthorizationServersBackupDir, "authorizationserver", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetAuthorizationServerCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAuthorizationServerBackupDir, "authorizationservers")
-
+				dirPath := filepath.Join(GetAuthorizationServerBackupDir, "authorizationserver", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

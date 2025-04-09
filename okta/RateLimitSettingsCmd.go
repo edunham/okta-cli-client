@@ -56,8 +56,7 @@ func NewGetRateLimitSettingsAdminNotificationsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRateLimitSettingsAdminNotificationsBackupDir, "ratelimitsettingss")
-
+				dirPath := filepath.Join(GetRateLimitSettingsAdminNotificationsBackupDir, "ratelimitsettings", "getAdminNotifications")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -189,8 +188,7 @@ func NewGetRateLimitSettingsPerClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRateLimitSettingsPerClientBackupDir, "ratelimitsettingss")
-
+				dirPath := filepath.Join(GetRateLimitSettingsPerClientBackupDir, "ratelimitsettings", "getPerClient")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -322,8 +320,7 @@ func NewGetRateLimitSettingsWarningThresholdCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRateLimitSettingsWarningThresholdBackupDir, "ratelimitsettingss")
-
+				dirPath := filepath.Join(GetRateLimitSettingsWarningThresholdBackupDir, "ratelimitsettings", "getWarningThreshold")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -56,8 +56,7 @@ func NewGetAuthenticatorSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetAuthenticatorSettingsBackupDir, "attackprotections")
-
+				dirPath := filepath.Join(GetAuthenticatorSettingsBackupDir, "attackprotection", "getAuthenticatorSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -189,8 +188,7 @@ func NewGetUserLockoutSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUserLockoutSettingsBackupDir, "attackprotections")
-
+				dirPath := filepath.Join(GetUserLockoutSettingsBackupDir, "attackprotection", "getUserLockoutSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -224,7 +224,7 @@ func NewListIdentitySourceSessionsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListIdentitySourceSessionsBackupDir, "identitysources")
+				dirPath := filepath.Join(ListIdentitySourceSessionsBackupDir, "identitysource", "listSessions")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -337,8 +337,7 @@ func NewGetIdentitySourceSessionCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetIdentitySourceSessionBackupDir, "identitysources")
-
+				dirPath := filepath.Join(GetIdentitySourceSessionBackupDir, "identitysource", "getSession")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

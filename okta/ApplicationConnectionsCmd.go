@@ -118,8 +118,7 @@ func NewGetDefaultProvisioningConnectionForApplicationCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetDefaultProvisioningConnectionForApplicationBackupDir, "applicationconnectionss")
-
+				dirPath := filepath.Join(GetDefaultProvisioningConnectionForApplicationBackupDir, "applicationconnections", "getDefaultProvisioningConnectionForApplication")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

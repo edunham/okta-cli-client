@@ -219,7 +219,7 @@ func NewListGroupAssignedRolesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListGroupAssignedRolesBackupDir, "roleassignments")
+				dirPath := filepath.Join(ListGroupAssignedRolesBackupDir, "roleassignment", "listGroupAssignedRoles")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -332,8 +332,7 @@ func NewGetGroupAssignedRoleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetGroupAssignedRoleBackupDir, "roleassignments")
-
+				dirPath := filepath.Join(GetGroupAssignedRoleBackupDir, "roleassignment", "getGroupAssignedRole")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -570,7 +569,7 @@ func NewListUsersWithRoleAssignmentsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListUsersWithRoleAssignmentsBackupDir, "roleassignments")
+				dirPath := filepath.Join(ListUsersWithRoleAssignmentsBackupDir, "roleassignment", "listUsersWiths")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -835,7 +834,7 @@ func NewListAssignedRolesForUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListAssignedRolesForUserBackupDir, "roleassignments")
+				dirPath := filepath.Join(ListAssignedRolesForUserBackupDir, "roleassignment", "listAssignedRolesForUser")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -948,8 +947,7 @@ func NewGetUserAssignedRoleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUserAssignedRoleBackupDir, "roleassignments")
-
+				dirPath := filepath.Join(GetUserAssignedRoleBackupDir, "roleassignment", "getUserAssignedRole")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

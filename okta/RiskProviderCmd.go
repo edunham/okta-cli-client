@@ -235,7 +235,7 @@ func NewListRiskProvidersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRiskProvidersBackupDir, "riskproviders")
+				dirPath := filepath.Join(ListRiskProvidersBackupDir, "riskprovider", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetRiskProviderCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRiskProviderBackupDir, "riskproviders")
-
+				dirPath := filepath.Join(GetRiskProviderBackupDir, "riskprovider", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

@@ -134,8 +134,7 @@ func NewGetCurrentSessionCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetCurrentSessionBackupDir, "sessions")
-
+				dirPath := filepath.Join(GetCurrentSessionBackupDir, "session", "getCurrent")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -302,8 +301,7 @@ func NewGetSessionCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetSessionBackupDir, "sessions")
-
+				dirPath := filepath.Join(GetSessionBackupDir, "session", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

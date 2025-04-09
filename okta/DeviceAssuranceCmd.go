@@ -235,7 +235,7 @@ func NewListDeviceAssurancePoliciesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListDeviceAssurancePoliciesBackupDir, "deviceassurances")
+				dirPath := filepath.Join(ListDeviceAssurancePoliciesBackupDir, "deviceassurance", "listPolicies")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetDeviceAssurancePolicyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetDeviceAssurancePolicyBackupDir, "deviceassurances")
-
+				dirPath := filepath.Join(GetDeviceAssurancePolicyBackupDir, "deviceassurance", "getPolicy")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

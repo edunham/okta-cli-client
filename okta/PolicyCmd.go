@@ -235,7 +235,7 @@ func NewListPoliciesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPoliciesBackupDir, "policys")
+				dirPath := filepath.Join(ListPoliciesBackupDir, "policy", "listPolicies")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -421,8 +421,7 @@ func NewGetPolicyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPolicyBackupDir, "policys")
-
+				dirPath := filepath.Join(GetPolicyBackupDir, "policy", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -713,7 +712,7 @@ func NewListPolicyAppsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPolicyAppsBackupDir, "policys")
+				dirPath := filepath.Join(ListPolicyAppsBackupDir, "policy", "listApps")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1134,7 +1133,7 @@ func NewListPolicyMappingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPolicyMappingsBackupDir, "policys")
+				dirPath := filepath.Join(ListPolicyMappingsBackupDir, "policy", "listMappings")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1247,8 +1246,7 @@ func NewGetPolicyMappingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPolicyMappingBackupDir, "policys")
-
+				dirPath := filepath.Join(GetPolicyMappingBackupDir, "policy", "getMapping")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1570,7 +1568,7 @@ func NewListPolicyRulesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPolicyRulesBackupDir, "policys")
+				dirPath := filepath.Join(ListPolicyRulesBackupDir, "policy", "listRules")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1683,8 +1681,7 @@ func NewGetPolicyRuleCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPolicyRuleBackupDir, "policys")
-
+				dirPath := filepath.Join(GetPolicyRuleBackupDir, "policy", "getRule")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

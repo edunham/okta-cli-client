@@ -56,8 +56,7 @@ func NewGetWellknownOrgMetadataCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetWellknownOrgMetadataBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetWellknownOrgMetadataBackupDir, "orgsetting", "getWellknownOrgMetadata")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -189,8 +188,7 @@ func NewGetOrgSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgSettingsBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOrgSettingsBackupDir, "orgsetting", "gets")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -322,8 +320,7 @@ func NewGetOrgContactTypesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgContactTypesBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOrgContactTypesBackupDir, "orgsetting", "getOrgContactTypes")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -402,8 +399,7 @@ func NewGetOrgContactUserCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgContactUserBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOrgContactUserBackupDir, "orgsetting", "getOrgContactUser")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -698,8 +694,7 @@ func NewGetThirdPartyAdminSettingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetThirdPartyAdminSettingBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetThirdPartyAdminSettingBackupDir, "orgsetting", "getThirdPartyAdminSetting")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -776,8 +771,7 @@ func NewGetOrgPreferencesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgPreferencesBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOrgPreferencesBackupDir, "orgsetting", "getOrgPreferences")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -942,8 +936,7 @@ func NewGetOktaCommunicationSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOktaCommunicationSettingsBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOktaCommunicationSettingsBackupDir, "orgsetting", "getOktaCommunicationSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1108,8 +1101,7 @@ func NewGetOrgOktaSupportSettingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetOrgOktaSupportSettingsBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetOrgOktaSupportSettingsBackupDir, "orgsetting", "getOrgOktaSupportSettings")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1318,8 +1310,7 @@ func NewGetClientPrivilegesSettingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetClientPrivilegesSettingBackupDir, "orgsettings")
-
+				dirPath := filepath.Join(GetClientPrivilegesSettingBackupDir, "orgsetting", "getClientPrivilegesSetting")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

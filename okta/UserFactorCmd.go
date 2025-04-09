@@ -219,7 +219,7 @@ func NewListFactorsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListFactorsBackupDir, "userfactors")
+				dirPath := filepath.Join(ListFactorsBackupDir, "userfactor", "listFactors")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -427,7 +427,7 @@ func NewListSupportedFactorsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListSupportedFactorsBackupDir, "userfactors")
+				dirPath := filepath.Join(ListSupportedFactorsBackupDir, "userfactor", "listSupportedFactors")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -635,7 +635,7 @@ func NewListSupportedSecurityQuestionsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListSupportedSecurityQuestionsBackupDir, "userfactors")
+				dirPath := filepath.Join(ListSupportedSecurityQuestionsBackupDir, "userfactor", "listSupportedSecurityQuestions")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -748,8 +748,7 @@ func NewGetFactorCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetFactorBackupDir, "userfactors")
-
+				dirPath := filepath.Join(GetFactorBackupDir, "userfactor", "getFactor")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1025,8 +1024,7 @@ func NewGetFactorTransactionStatusCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetFactorTransactionStatusBackupDir, "userfactors")
-
+				dirPath := filepath.Join(GetFactorTransactionStatusBackupDir, "userfactor", "getFactorTransactionStatus")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

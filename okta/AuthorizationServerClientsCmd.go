@@ -159,7 +159,7 @@ func NewListOAuth2ClientsForAuthorizationServerCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListOAuth2ClientsForAuthorizationServerBackupDir, "authorizationserverclientss")
+				dirPath := filepath.Join(ListOAuth2ClientsForAuthorizationServerBackupDir, "authorizationserverclients", "listOAuth2ClientsForAuthorizationServer")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -369,7 +369,7 @@ func NewListRefreshTokensForAuthorizationServerAndClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRefreshTokensForAuthorizationServerAndClientBackupDir, "authorizationserverclientss")
+				dirPath := filepath.Join(ListRefreshTokensForAuthorizationServerAndClientBackupDir, "authorizationserverclients", "listRefreshTokensForAuthorizationServerAndClient")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -543,8 +543,7 @@ func NewGetRefreshTokenForAuthorizationServerAndClientCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRefreshTokenForAuthorizationServerAndClientBackupDir, "authorizationserverclientss")
-
+				dirPath := filepath.Join(GetRefreshTokenForAuthorizationServerAndClientBackupDir, "authorizationserverclients", "getRefreshTokenForAuthorizationServerAndClient")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

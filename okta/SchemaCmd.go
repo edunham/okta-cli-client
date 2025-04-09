@@ -122,8 +122,7 @@ func NewGetApplicationUserSchemaCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetApplicationUserSchemaBackupDir, "schemas")
-
+				dirPath := filepath.Join(GetApplicationUserSchemaBackupDir, "schema", "getApplicationUser")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -259,8 +258,7 @@ func NewGetGroupSchemaCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetGroupSchemaBackupDir, "schemas")
-
+				dirPath := filepath.Join(GetGroupSchemaBackupDir, "schema", "getGroup")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -434,7 +432,7 @@ func NewListLogStreamSchemasCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListLogStreamSchemasBackupDir, "schemas")
+				dirPath := filepath.Join(ListLogStreamSchemasBackupDir, "schema", "listLogStreams")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -542,8 +540,7 @@ func NewGetLogStreamSchemaCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetLogStreamSchemaBackupDir, "schemas")
-
+				dirPath := filepath.Join(GetLogStreamSchemaBackupDir, "schema", "getLogStream")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -686,8 +683,7 @@ func NewGetUserSchemaCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetUserSchemaBackupDir, "schemas")
-
+				dirPath := filepath.Join(GetUserSchemaBackupDir, "schema", "getUser")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

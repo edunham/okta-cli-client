@@ -157,7 +157,7 @@ func NewListDevicesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListDevicesBackupDir, "devices")
+				dirPath := filepath.Join(ListDevicesBackupDir, "device", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -265,8 +265,7 @@ func NewGetDeviceCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetDeviceBackupDir, "devices")
-
+				dirPath := filepath.Join(GetDeviceBackupDir, "device", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -701,7 +700,7 @@ func NewListDeviceUsersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListDeviceUsersBackupDir, "devices")
+				dirPath := filepath.Join(ListDeviceUsersBackupDir, "device", "listUsers")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

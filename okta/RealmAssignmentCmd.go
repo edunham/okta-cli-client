@@ -235,7 +235,7 @@ func NewListRealmAssignmentsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRealmAssignmentsBackupDir, "realmassignments")
+				dirPath := filepath.Join(ListRealmAssignmentsBackupDir, "realmassignment", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -493,7 +493,7 @@ func NewListRealmAssignmentOperationsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListRealmAssignmentOperationsBackupDir, "realmassignments")
+				dirPath := filepath.Join(ListRealmAssignmentOperationsBackupDir, "realmassignment", "listOperations")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -601,8 +601,7 @@ func NewGetRealmAssignmentCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetRealmAssignmentBackupDir, "realmassignments")
-
+				dirPath := filepath.Join(GetRealmAssignmentBackupDir, "realmassignment", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

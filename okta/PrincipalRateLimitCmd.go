@@ -235,7 +235,7 @@ func NewListPrincipalRateLimitEntitiesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPrincipalRateLimitEntitiesBackupDir, "principalratelimits")
+				dirPath := filepath.Join(ListPrincipalRateLimitEntitiesBackupDir, "principalratelimit", "listEntities")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetPrincipalRateLimitEntityCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPrincipalRateLimitEntityBackupDir, "principalratelimits")
-
+				dirPath := filepath.Join(GetPrincipalRateLimitEntityBackupDir, "principalratelimit", "getEntity")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

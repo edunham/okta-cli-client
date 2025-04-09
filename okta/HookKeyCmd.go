@@ -235,7 +235,7 @@ func NewListHookKeysCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListHookKeysBackupDir, "hookkeys")
+				dirPath := filepath.Join(ListHookKeysBackupDir, "hookkey", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetPublicKeyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPublicKeyBackupDir, "hookkeys")
-
+				dirPath := filepath.Join(GetPublicKeyBackupDir, "hookkey", "getPublicKey")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -427,8 +426,7 @@ func NewGetHookKeyCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetHookKeyBackupDir, "hookkeys")
-
+				dirPath := filepath.Join(GetHookKeyBackupDir, "hookkey", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

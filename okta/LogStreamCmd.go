@@ -235,7 +235,7 @@ func NewListLogStreamsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListLogStreamsBackupDir, "logstreams")
+				dirPath := filepath.Join(ListLogStreamsBackupDir, "logstream", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetLogStreamCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetLogStreamBackupDir, "logstreams")
-
+				dirPath := filepath.Join(GetLogStreamBackupDir, "logstream", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}

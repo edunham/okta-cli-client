@@ -235,7 +235,7 @@ func NewListResourceSetsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListResourceSetsBackupDir, "resourcesets")
+				dirPath := filepath.Join(ListResourceSetsBackupDir, "resourceset", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetResourceSetCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetResourceSetBackupDir, "resourcesets")
-
+				dirPath := filepath.Join(GetResourceSetBackupDir, "resourceset", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -718,7 +717,7 @@ func NewListBindingsCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListBindingsBackupDir, "resourcesets")
+				dirPath := filepath.Join(ListBindingsBackupDir, "resourceset", "listBindings")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -831,8 +830,7 @@ func NewGetBindingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetBindingBackupDir, "resourcesets")
-
+				dirPath := filepath.Join(GetBindingBackupDir, "resourceset", "getBinding")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1073,7 +1071,7 @@ func NewListMembersOfBindingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListMembersOfBindingBackupDir, "resourcesets")
+				dirPath := filepath.Join(ListMembersOfBindingBackupDir, "resourceset", "listMembersOfBinding")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -1256,8 +1254,7 @@ func NewGetMemberOfBindingCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetMemberOfBindingBackupDir, "resourcesets")
-
+				dirPath := filepath.Join(GetMemberOfBindingBackupDir, "resourceset", "getMemberOfBinding")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
@@ -1504,7 +1501,7 @@ func NewListResourceSetResourcesCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListResourceSetResourcesBackupDir, "resourcesets")
+				dirPath := filepath.Join(ListResourceSetResourcesBackupDir, "resourceset", "listResources")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)

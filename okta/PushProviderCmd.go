@@ -235,7 +235,7 @@ func NewListPushProvidersCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("batch-backup") {
-				dirPath := filepath.Join(ListPushProvidersBackupDir, "pushproviders")
+				dirPath := filepath.Join(ListPushProvidersBackupDir, "pushprovider", "lists")
 
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
@@ -343,8 +343,7 @@ func NewGetPushProviderCmd() *cobra.Command {
 			}
 
 			if cmd.Flags().Changed("backup") {
-				dirPath := filepath.Join(GetPushProviderBackupDir, "pushproviders")
-
+				dirPath := filepath.Join(GetPushProviderBackupDir, "pushprovider", "get")
 				if err := os.MkdirAll(dirPath, 0o755); err != nil {
 					return fmt.Errorf("failed to create backup directory: %w", err)
 				}
